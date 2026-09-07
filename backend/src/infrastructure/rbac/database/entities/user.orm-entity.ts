@@ -28,7 +28,13 @@ export class UserMapper {
       region: user.region
         ? { id: user.region.id, name: user.region.name }
         : null,
-      
+      zone: user.zone ? { id: user.zone.id, name: user.zone.name } : null,
+      woreda: user.woreda
+        ? { id: user.woreda.id, name: user.woreda.name }
+        : null,
+      kebele: user.kebele
+        ? { id: user.kebele.id, name: user.kebele.name }
+        : null,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };
@@ -55,5 +61,7 @@ export const USER_INCLUDE = {
     },
   },
   region: { select: { id: true, name: true } },
- 
+  zone: { select: { id: true, name: true } },
+  woreda: { select: { id: true, name: true } },
+  kebele: { select: { id: true, name: true } },
 } as const;

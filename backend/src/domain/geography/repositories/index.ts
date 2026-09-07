@@ -1,0 +1,1 @@
+export { IRegionRepository } from './region.repository';

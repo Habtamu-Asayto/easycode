@@ -1,4 +1,4 @@
-import { PermissionEntity } from '../entities';
+import { PermissionEntity } from '../entities/index.js';
 
 export interface IPermissionRepository {
   findAll(query: {

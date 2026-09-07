@@ -1,3 +1,4 @@
+
 import {
   Controller,
   Get,
@@ -7,19 +8,19 @@ import {
   Param,
   Query,
   Body,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
 import {
   GeographyQuerySchema,
   CreateRegionSchema,
   UpdateRegionSchema,
-} from '../../../application/geography/dto';
+} from "../../../application/geography/dto";
 
 import type {
   GeographyQueryDto,
   CreateRegionDto,
   UpdateRegionDto,
-} from '../../../application/geography/dto';
+} from "../../../application/geography/dto";
 
 import {
   GetRegionsUseCase,
@@ -28,12 +29,11 @@ import {
   UpdateRegionUseCase,
   DeleteRegionUseCase,
   LookupRegionsUseCase,
-} from '../../../application/geography/use-cases';
+} from "../../../application/geography/use-cases";
 
-import { ZodValidationPipe } from '../../../shared/pipes/zod-validation.pipe';
-import { ApiBody, ApiParam } from '@nestjs/swagger';
+import { ZodValidationPipe } from "../../../shared/pipes/zod-validation.pipe";
 
-@Controller('regions')
+@Controller("regions")
 export class RegionController {
   constructor(
     private readonly getRegions: GetRegionsUseCase,
@@ -52,32 +52,17 @@ export class RegionController {
     return this.getRegions.execute(query);
   }
 
-  @Get('lookup')
+  @Get("lookup")
   lookup() {
     return this.lookupRegions.execute();
   }
 
+  @Get(":id")
+  findOne(@Param("id") id: string) {
+    return this.getRegion.execute(id);
+  }
+
   @Post()
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        name: {
-          type: 'string',
-          example: 'Amhara',
-        },
-        code: {
-          type: 'string',
-          example: 'AM',
-        },
-        isActive: {
-          type: 'boolean',
-          example: true,
-        },
-      },
-      required: ['name', 'code'],
-    },
-  })
   create(
     @Body(new ZodValidationPipe(CreateRegionSchema))
     dto: CreateRegionDto,
@@ -85,48 +70,17 @@ export class RegionController {
     return this.createRegion.execute(dto);
   }
 
-  @Put(':id')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        name: {
-          type: 'string',
-          example: 'Amhara Region',
-        },
-        code: {
-          type: 'string',
-          example: 'AM',
-        },
-        isActive: {
-          type: 'boolean',
-          example: true,
-        },
-      },
-    },
-  })
+  @Put(":id")
   update(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body(new ZodValidationPipe(UpdateRegionSchema))
     dto: UpdateRegionDto,
   ) {
     return this.updateRegion.execute(id, dto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.getRegion.execute(id);
-  }
-
-  @Delete(':id')
-  @ApiParam({
-    name: 'id',
-    type: 'string',
-    format: 'uuid',
-    example: '221a2244-1d7c-484d-b0c3-67fe7160d19d',
-    description: 'Region UUID',
-  })
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.deleteRegion.execute(id);
   }
 }

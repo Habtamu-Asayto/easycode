@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+
+import { Module } from "@nestjs/common";
 
 import {
   GetRegionsUseCase,
@@ -7,15 +8,15 @@ import {
   UpdateRegionUseCase,
   DeleteRegionUseCase,
   LookupRegionsUseCase,
-} from '../../application/geography/use-cases';
+} from "../../application/geography/use-cases";
 
-import { PrismaService } from '../../infrastructure/database/prisma/prisma.service';
+import { PrismaService } from "../../infrastructure/database/prisma/prisma.service";
 
-import { PrismaRegionRepository } from '../../infrastructure/geography/database/repositories/region.repository.impl';
+import { PrismaRegionRepository } from "../../infrastructure/geography/database/repositories/region.repository.impl";
 
-import { RegionController } from './controllers/region.controller';
+import { RegionController } from "./controllers/region.controller";
 
-import { GEOGRAPHY_TOKENS } from '../../shared/constants';
+import { GEOGRAPHY_TOKENS } from "../../shared/constants";
 
 @Module({
   controllers: [RegionController],

@@ -1,20 +1,15 @@
-// import { Injectable, Inject, NotFoundException } from '@nestjs/common';
-import {
-  Injectable,
-  Inject,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
 
-import { GEOGRAPHY_TOKENS } from '../../../shared/constants';
+import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 
-import { IRegionRepository } from '../../../domain/geography/repositories/region.repository';
+import { GEOGRAPHY_TOKENS } from "../../../shared/constants";
 
-import { RegionMapper } from '../../../infrastructure/geography/database/entities';
+import { IRegionRepository } from "../../../domain/geography/repositories/region.repository";
 
-import { PaginationUtil } from '../../../shared/utils';
+import { RegionMapper } from "../../../infrastructure/geography/database/entities";
 
-import { CreateRegionDto, UpdateRegionDto, GeographyQueryDto } from '../dto';
+import { PaginationUtil } from "../../../shared/utils";
+
+import { CreateRegionDto, UpdateRegionDto, GeographyQueryDto } from "../dto";
 
 @Injectable()
 export class GetRegionsUseCase {
@@ -44,7 +39,7 @@ export class GetRegionUseCase {
     const region = await this.regionRepo.findById(id);
 
     if (!region) {
-      throw new NotFoundException('Region not found');
+      throw new NotFoundException("Region not found");
     }
 
     return RegionMapper.toResponseDto(region);
@@ -62,7 +57,7 @@ export class CreateRegionUseCase {
     const existing = await this.regionRepo.findByCode(dto.code);
 
     if (existing) {
-      throw new ConflictException('Region code already exists');
+      throw new Error("Region code already exists");
     }
 
     const region = await this.regionRepo.create(dto);
@@ -82,14 +77,14 @@ export class UpdateRegionUseCase {
     const existing = await this.regionRepo.findById(id);
 
     if (!existing) {
-      throw new NotFoundException('Region not found');
+      throw new NotFoundException("Region not found");
     }
 
     if (dto.code && dto.code !== existing.code) {
       const codeExists = await this.regionRepo.findByCode(dto.code);
 
       if (codeExists) {
-        throw new Error('Region code already exists');
+        throw new Error("Region code already exists");
       }
     }
 
@@ -110,7 +105,7 @@ export class DeleteRegionUseCase {
     const existing = await this.regionRepo.findById(id);
 
     if (!existing) {
-      throw new NotFoundException('Region not found');
+      throw new NotFoundException("Region not found");
     }
 
     await this.regionRepo.softDelete(id);

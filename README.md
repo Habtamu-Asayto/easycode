@@ -592,7 +592,7 @@ npm install @nestjs/config
 
 - Load .env environments by updating app.module.ts into
 
-```bash
+```bash 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
@@ -757,7 +757,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 - also add below before app.listen():
 
-```
+```bash
 const swaggerConfig = new DocumentBuilder()
   .setTitle('N3 Learning API')
   .setDescription('Learning project API')
@@ -785,17 +785,17 @@ docker compose version
 
 - Create it on root folder, and add :
 
-```
+```bash
 services:
   postgres:
     image: postgres:16
-    container_name: n2p-learning
+    container_name: easycode
     restart: unless-stopped
 
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: n2p_db
+      POSTGRES_DB: easy_db
 
     ports:
       - "5432:5432"
@@ -825,7 +825,7 @@ docker compose up -d
 - Verify PostgreSQL and can inspect the logs:
 
 ```
-docker logs n2p-learning
+docker logs easycode
 ```
 
 ### Introduce & Prisma Setup
@@ -834,7 +834,7 @@ docker logs n2p-learning
 
 - Instead of manually writing SQL(SELECT \* FROM users WHERE id = 1;) everywhere, we can eventually write TypeScript like:
 
-```
+```bash
 prisma.user.findUnique({
   where: {
     id: 1,
@@ -879,7 +879,7 @@ Remove-Item -Recurse -Force prisma\migrations
 
 - on prisma.config.ts
 
-```
+```bash
   import "dotenv/config";
   import { defineConfig } from "prisma/config";
 
@@ -1349,6 +1349,55 @@ export class PrismaService
 }
 ```
 
+
+### Add some utils for pagination on shared folder
+
+```
+src/shared/utils/index.ts
+```
+
+```bash
+
+
+import * as bcrypt from 'bcrypt';
+import { RBAC_CONSTANTS } from '../constants';
+
+export class PasswordUtil {
+  static async hash(password: string): Promise<string> {
+    return bcrypt.hash(password, RBAC_CONSTANTS.PASSWORD.SALT_ROUNDS);
+  }
+
+  static async compare(password: string, hashedPassword: string): Promise<boolean> {
+    return bcrypt.compare(password, hashedPassword);
+  } 
+}
+
+export class PaginationUtil {
+  static calculateSkip(page: number, limit: number): number {
+    return (page - 1) * limit;
+  }
+
+  static buildMeta(page: number, limit: number, total: number) {
+    const totalPages = Math.ceil(total / limit);
+    return {
+      page,
+      limit,
+      total,
+      totalPages,
+      hasNext: page < totalPages,
+      hasPrevious: page > 1,
+    };
+  }
+}
+
+export class StringUtil {
+  static generatePermissionName(module: string, action: string): string {
+    return `${module}:${action}`;
+  }
+}
+
+
+```
 - Who will provide the implementation?
 
   ### It is infrastructure,
@@ -1361,11 +1410,13 @@ export class PrismaService
   ```
 
 ```typescript
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../../../database/prisma/prisma.service";
-import { IRegionRepository } from "../../../../domain/geography/repositories/region.repository";
-import { RegionEntity } from "../../../../domain/geography/entities/region.entity";
-import { PaginationUtil } from "../../../../shared/utils";
+
+import { Injectable } from '@nestjs/common';
+import { Prisma } from '../../../../generated/prisma/client';
+import { PrismaService } from '../../../database/prisma/prisma.service';
+import { IRegionRepository } from '../../../../domain/geography/repositories/region.repository';
+import { RegionEntity } from '../../../../domain/geography/entities/region.entity';
+import { PaginationUtil } from '../../../../shared/utils';
 
 @Injectable()
 export class PrismaRegionRepository implements IRegionRepository {
@@ -1375,14 +1426,14 @@ export class PrismaRegionRepository implements IRegionRepository {
     page: number;
     limit: number;
     sortBy: string;
-    sortOrder: "asc" | "desc";
+    sortOrder: 'asc' | 'desc';
     search?: string;
     isActive?: boolean;
   }): Promise<{
     items: RegionEntity[];
     total: number;
   }> {
-    const where: any = {
+    const where: Prisma.RegionWhereInput = {
       ...this.prisma.softDeleteFilter(),
     };
 
@@ -1391,13 +1442,13 @@ export class PrismaRegionRepository implements IRegionRepository {
         {
           name: {
             contains: query.search,
-            mode: "insensitive",
+            mode: 'insensitive',
           },
         },
         {
           code: {
             contains: query.search,
-            mode: "insensitive",
+            mode: 'insensitive',
           },
         },
       ];
@@ -1407,7 +1458,10 @@ export class PrismaRegionRepository implements IRegionRepository {
       where.isActive = query.isActive;
     }
 
-    const skip = PaginationUtil.calculateSkip(query.page, query.limit);
+    const skip = PaginationUtil.calculateSkip(
+      query.page,
+      query.limit,
+    );
 
     const [items, total] = await Promise.all([
       this.prisma.region.findMany({
@@ -1486,7 +1540,10 @@ export class PrismaRegionRepository implements IRegionRepository {
     return region as RegionEntity;
   }
 
-  async softDelete(id: string, userId?: string): Promise<void> {
+  async softDelete(
+    id: string,
+    userId?: string,
+  ): Promise<void> {
     await this.prisma.region.update({
       where: {
         id,
@@ -1498,102 +1555,230 @@ export class PrismaRegionRepository implements IRegionRepository {
     });
   }
 
-  async lookup(): Promise<Pick<RegionEntity, "id" | "name" | "code">[]> {
+  async lookup(): Promise<
+    Pick<RegionEntity, 'id' | 'name' | 'code'>[]
+  > {
     return this.prisma.region.findMany({
+      where: {
+        isActive: true,
+        ...this.prisma.softDeleteFilter(),
+      },
       select: {
         id: true,
         name: true,
         code: true,
       },
       orderBy: {
-        name: "asc",
+        name: 'asc',
       },
     });
   }
 }
 ```
 
-### Now Application
-
-- Create:
+### Create a provider
 
 ```
-src/application/geography/use-cases/region.usecases.ts    The add:
+src/presentation/geography/providers/geography.providers.ts
 ```
 
-```typescript
-import { RegionEntity } from "../../../domain/geography/entities/region.entity";
-import { IRegionRepository } from "../../../domain/geography/repositories/region.repository";
+```bash
 
-export interface CreateRegionInput {
-  name: string;
-  code: string;
-  isActive?: boolean;
+import { Provider } from '@nestjs/common';
+import { GEOGRAPHY_TOKENS, REPOSITORY_TOKENS } from '../../../shared/constants';
+
+// Infrastructure repository implementations
+import {
+  PrismaRegionRepository, 
+} from '../../../infrastructure/geography/database/repositories'; 
+
+// Region use cases
+import {
+  GetRegionsUseCase,
+  GetRegionUseCase,
+  CreateRegionUseCase,
+  UpdateRegionUseCase,
+  DeleteRegionUseCase,
+  LookupRegionsUseCase,
+} from '../../../application/geography/use-cases';
+ 
+ 
+/**
+ * Repository providers — binds domain interfaces to infrastructure implementations.
+ * This is the key DI configuration that enables Clean Architecture's dependency inversion.
+ */
+export const repositoryProviders: Provider[] = [
+  {
+    provide: GEOGRAPHY_TOKENS.REGION_REPOSITORY,
+    useClass: PrismaRegionRepository,
+  },
+    
+];
+
+/**
+ * All use case providers for the Geography module.
+ */
+export const useCaseProviders: Provider[] = [
+  // Regions
+  GetRegionsUseCase,
+  GetRegionUseCase,
+  CreateRegionUseCase,
+  UpdateRegionUseCase,
+  DeleteRegionUseCase,
+  LookupRegionsUseCase,
+  
+];
+
+
+```
+
+- decorators are created on rbac folder, even if it will created on rbac section
+
+- interface folder is also created on shared  folder
+
+### Controller
+
+```
+backend/src/presentation/geography/controllers/region.controller.ts
+
+```
+- Temporary until rbac created
+
+```bash 
+
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Query,
+  Body,
+} from '@nestjs/common';
+
+import {
+  GeographyQuerySchema,
+  CreateRegionSchema,
+  UpdateRegionSchema,
+} from '../../../application/geography/dto';
+
+import type {
+  GeographyQueryDto,
+  CreateRegionDto,
+  UpdateRegionDto,
+} from '../../../application/geography/dto';
+
+import {
+  GetRegionsUseCase,
+  GetRegionUseCase,
+  CreateRegionUseCase,
+  UpdateRegionUseCase,
+  DeleteRegionUseCase,
+  LookupRegionsUseCase,
+} from '../../../application/geography/use-cases';
+
+import { ZodValidationPipe } from '../../../shared/pipes/zod-validation.pipe';
+import { ApiBody, ApiParam } from '@nestjs/swagger';
+
+@Controller('regions')
+export class RegionController {
+  constructor(
+    private readonly getRegions: GetRegionsUseCase,
+    private readonly getRegion: GetRegionUseCase,
+    private readonly createRegion: CreateRegionUseCase,
+    private readonly updateRegion: UpdateRegionUseCase,
+    private readonly deleteRegion: DeleteRegionUseCase,
+    private readonly lookupRegions: LookupRegionsUseCase,
+  ) {}
+
+  @Get()
+  findAll(
+    @Query(new ZodValidationPipe(GeographyQuerySchema))
+    query: GeographyQueryDto,
+  ) {
+    return this.getRegions.execute(query);
+  }
+
+  @Get('lookup')
+  lookup() {
+    return this.lookupRegions.execute();
+  }
+
+  @Post()
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Amhara',
+        },
+        code: {
+          type: 'string',
+          example: 'AM',
+        },
+        isActive: {
+          type: 'boolean',
+          example: true,
+        },
+      },
+      required: ['name', 'code'],
+    },
+  })
+  create(
+    @Body(new ZodValidationPipe(CreateRegionSchema))
+    dto: CreateRegionDto,
+  ) {
+    return this.createRegion.execute(dto);
+  }
+
+  @Put(':id')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Amhara Region',
+        },
+        code: {
+          type: 'string',
+          example: 'AM',
+        },
+        isActive: {
+          type: 'boolean',
+          example: true,
+        },
+      },
+    },
+  })
+  update(
+    @Param('id') id: string,
+    @Body(new ZodValidationPipe(UpdateRegionSchema))
+    dto: UpdateRegionDto,
+  ) {
+    return this.updateRegion.execute(id, dto);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.getRegion.execute(id);
+  }
+
+  @Delete(':id')
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+    format: 'uuid',
+    example: '221a2244-1d7c-484d-b0c3-67fe7160d19d',
+    description: 'Region UUID',
+  })
+  remove(@Param('id') id: string) {
+    return this.deleteRegion.execute(id);
+  }
 }
 
-export interface UpdateRegionInput {
-  name?: string;
-  code?: string;
-  isActive?: boolean;
-}
-
-export interface FindRegionsInput {
-  page: number;
-  limit: number;
-  sortBy: string;
-  sortOrder: "asc" | "desc";
-  search?: string;
-  isActive?: boolean;
-}
-
-export class RegionUseCases {
-  constructor(private readonly regionRepository: IRegionRepository) {}
-
-  async create(
-    data: CreateRegionInput,
-    userId?: string,
-  ): Promise<RegionEntity> {
-    const existingRegion = await this.regionRepository.findByCode(data.code);
-
-    if (existingRegion) {
-      throw new Error("Region code already exists");
-    }
-
-    return this.regionRepository.create(data, userId);
-  }
-
-  async findById(id: string): Promise<RegionEntity | null> {
-    return this.regionRepository.findById(id);
-  }
-
-  async findAll(query: FindRegionsInput) {
-    return this.regionRepository.findAll(query);
-  }
-
-  async update(
-    id: string,
-    data: UpdateRegionInput,
-    userId?: string,
-  ): Promise<RegionEntity> {
-    if (data.code) {
-      const existingRegion = await this.regionRepository.findByCode(data.code);
-
-      if (existingRegion && existingRegion.id !== id) {
-        throw new Error("Region code already exists");
-      }
-    }
-
-    return this.regionRepository.update(id, data, userId);
-  }
-
-  async softDelete(id: string, userId?: string): Promise<void> {
-    return this.regionRepository.softDelete(id, userId);
-  }
-
-  async lookup() {
-    return this.regionRepository.lookup();
-  }
-}
 ```
 
 ### Create the Geography module
@@ -1603,36 +1788,58 @@ export class RegionUseCases {
 ```
 backend/src/presentation/geography/geography.module.ts
 ```
+- Temporary until rbac
 
 ```typescript
-import { Module } from "@nestjs/common";
-import { RegionUseCases } from "../../application/geography/use-cases/region.usecases";
-import { IRegionRepository } from "../../domain/geography/repositories/region.repository";
-import { PrismaRegionRepository } from "../../infrastructure/geography/database/repositories/region.repository.impl";
-import { PrismaService } from "../../infrastructure/database/prisma/prisma.service";
+import { Module } from '@nestjs/common';
 
-export const REGION_REPOSITORY = Symbol("REGION_REPOSITORY");
+import {
+  GetRegionsUseCase,
+  GetRegionUseCase,
+  CreateRegionUseCase,
+  UpdateRegionUseCase,
+  DeleteRegionUseCase,
+  LookupRegionsUseCase,
+} from '../../application/geography/use-cases';
+
+import { PrismaService } from '../../infrastructure/database/prisma/prisma.service';
+
+import { PrismaRegionRepository } from '../../infrastructure/geography/database/repositories/region.repository.impl';
+
+import { RegionController } from './controllers/region.controller';
+
+import { GEOGRAPHY_TOKENS } from '../../shared/constants';
 
 @Module({
+  controllers: [RegionController],
+
   providers: [
     PrismaService,
 
     {
-      provide: REGION_REPOSITORY,
+      provide: GEOGRAPHY_TOKENS.REGION_REPOSITORY,
       useClass: PrismaRegionRepository,
     },
 
-    {
-      provide: RegionUseCases,
-      useFactory: (regionRepository: IRegionRepository) => {
-        return new RegionUseCases(regionRepository);
-      },
-      inject: [REGION_REPOSITORY],
-    },
+    GetRegionsUseCase,
+    GetRegionUseCase,
+    CreateRegionUseCase,
+    UpdateRegionUseCase,
+    DeleteRegionUseCase,
+    LookupRegionsUseCase,
   ],
-  exports: [RegionUseCases],
+
+  exports: [
+    GetRegionsUseCase,
+    GetRegionUseCase,
+    CreateRegionUseCase,
+    UpdateRegionUseCase,
+    DeleteRegionUseCase,
+    LookupRegionsUseCase,
+  ],
 })
 export class GeographyModule {}
+
 ```
 
 ### Register GeographyModule to app.module.ts
@@ -1892,6 +2099,7 @@ export class RegionController {
 ### Geography module now
 
 ```typescript
+
 import { Module } from "@nestjs/common";
 
 import { RegionUseCases } from "../../application/geography/use-cases/region.usecases";
@@ -1939,6 +2147,7 @@ npm run start
 ### Update region.usecases.ts on application controller
 
 ```typescript
+
 import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 
 import { IRegionRepository } from "../../../domain/geography/repositories/region.repository";
@@ -2130,6 +2339,7 @@ backend/src/application/geography/use-cases/region.usecases.ts
 ```
 
 ```typescript
+
 import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 
 import { GEOGRAPHY_TOKENS } from "../../../shared/constants";
@@ -2287,6 +2497,7 @@ backend/src/presentation/geography/geography.module.ts
 ```
 
 ```typescript
+
 import { Module } from "@nestjs/common";
 
 import {
@@ -2344,6 +2555,7 @@ backend/src/presentation/geography/controllers/region.controller.ts
 ```
 
 ```typescript
+
 import {
   Controller,
   Get,
@@ -2526,7 +2738,7 @@ Download
 
 ### Verify the database
 
-docker exec -it n2p-learning psql -U postgres -d n2p_db
+docker exec -it easycode psql -U postgres -d easy_db
 
 then run below sql:
 
@@ -2931,7 +3143,7 @@ lib/
 frontend/src/domain/geography/entities/index.ts and Add:
 
 ```
-
+ 
 ```bash
 export interface RegionResponse {
   id: string;

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
 
 export function PageLoader() {
   return (
@@ -10,11 +10,7 @@ export function PageLoader() {
   );
 }
 
-export function InlineLoader({
-  text = 'Loading...',
-}: {
-  text?: string;
-}) {
+export function InlineLoader({ text = "Loading..." }: { text?: string }) {
   return (
     <div className="flex items-center gap-2 text-sm text-muted-foreground">
       <Loader2 className="h-4 w-4 animate-spin text-primary" />
@@ -36,22 +32,13 @@ export function EmptyState({
 }) {
   return (
     <div className="flex h-full min-h-[300px] flex-col items-center justify-center gap-3 text-center">
-      {Icon && (
-        <Icon className="h-12 w-12 text-muted-foreground/30" />
-      )}
-
+      {Icon && <Icon className="h-12 w-12 text-muted-foreground/30" />}
       <div>
-        <h3 className="text-sm font-medium text-foreground">
-          {title}
-        </h3>
-
+        <h3 className="text-sm font-medium text-foreground">{title}</h3>
         {description && (
-          <p className="mt-1 text-xs text-muted-foreground">
-            {description}
-          </p>
+          <p className="mt-1 text-xs text-muted-foreground">{description}</p>
         )}
       </div>
-
       {action}
     </div>
   );

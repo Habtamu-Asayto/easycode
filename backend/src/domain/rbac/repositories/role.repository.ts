@@ -1,4 +1,4 @@
-import { RoleEntity } from '../entities';
+import { RoleEntity } from '../entities/index.js';
 
 export interface IRoleRepository {
   findAll(query: {

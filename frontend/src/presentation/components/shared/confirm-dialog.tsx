@@ -1,6 +1,4 @@
-'use client';
-
-import { Loader2 } from 'lucide-react';
+"use client";
 
 import {
   AlertDialog,
@@ -11,20 +9,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/presentation/components/ui/alert-dialog';
+} from "@/presentation/components/ui/alert-dialog";
 
 interface ConfirmDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-
-  title?: string;
-  description?: string;
-
+  title: string;
+  description: string;
   confirmLabel?: string;
   cancelLabel?: string;
-
-  variant?: 'default' | 'destructive';
-
+  variant?: "default" | "destructive";
   onConfirm: () => void;
   loading?: boolean;
 }
@@ -32,48 +26,35 @@ interface ConfirmDialogProps {
 export function ConfirmDialog({
   open,
   onOpenChange,
-  title = 'Are you sure?',
-  description = 'This action cannot be undone.',
-  confirmLabel = 'Confirm',
-  cancelLabel = 'Cancel',
-  variant = 'default',
+  title,
+  description,
+  confirmLabel = "Confirm",
+  cancelLabel = "Cancel",
+  variant = "default",
   onConfirm,
   loading = false,
 }: ConfirmDialogProps) {
   return (
-    <AlertDialog
-      open={open}
-      onOpenChange={onOpenChange}
-    >
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            {title}
-          </AlertDialogTitle>
-
-          <AlertDialogDescription>
-            {description}
-          </AlertDialogDescription>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
-
         <AlertDialogFooter>
           <AlertDialogCancel disabled={loading}>
             {cancelLabel}
           </AlertDialogCancel>
-
           <AlertDialogAction
+            onClick={onConfirm}
             disabled={loading}
-            variant={variant}
-            onClick={(event) => {
-              event.preventDefault();
-              onConfirm();
-            }}
+            className={
+              variant === "destructive"
+                ? "bg-destructive text-white hover:bg-destructive/90"
+                : ""
+            }
           >
-            {loading && (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            )}
-
-            {confirmLabel}
+            {loading ? "Processing..." : confirmLabel}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

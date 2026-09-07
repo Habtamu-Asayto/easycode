@@ -27,7 +27,7 @@ async function bootstrap() {
 
   // Swagger Configuration
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('N3 Learning API')
+    .setTitle('Next, Nest and Postgresql Learning API')
     .setDescription('Learning project API')
     .setVersion('1.0')
     .build();
@@ -37,7 +37,7 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
 
   app.enableCors({
-    origin: 'http://localhost:3016',
+    origin: 'http://localhost:3000',
     credentials: true,
   });
 

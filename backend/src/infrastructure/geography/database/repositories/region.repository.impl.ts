@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '../../../../generated/prisma/client';
 import { PrismaService } from '../../../database/prisma/prisma.service';
 import { IRegionRepository } from '../../../../domain/geography/repositories/region.repository';
 import { RegionEntity } from '../../../../domain/geography/entities/region.entity';
@@ -19,7 +20,7 @@ export class PrismaRegionRepository implements IRegionRepository {
     items: RegionEntity[];
     total: number;
   }> {
-    const where: any = {
+    const where: Prisma.RegionWhereInput = {
       ...this.prisma.softDeleteFilter(),
     };
 
@@ -44,7 +45,10 @@ export class PrismaRegionRepository implements IRegionRepository {
       where.isActive = query.isActive;
     }
 
-    const skip = PaginationUtil.calculateSkip(query.page, query.limit);
+    const skip = PaginationUtil.calculateSkip(
+      query.page,
+      query.limit,
+    );
 
     const [items, total] = await Promise.all([
       this.prisma.region.findMany({
@@ -90,20 +94,20 @@ export class PrismaRegionRepository implements IRegionRepository {
   }
 
   async create(
-  data: Partial<RegionEntity>,
-  userId?: string,
-): Promise<RegionEntity> {
-  const region = await this.prisma.region.create({
-    data: {
-      name: data.name!,
-      code: data.code!,
-      isActive: data.isActive ?? true,
-      ...this.prisma.auditCreate(userId),
-    },
-  });
+    data: Partial<RegionEntity>,
+    userId?: string,
+  ): Promise<RegionEntity> {
+    const region = await this.prisma.region.create({
+      data: {
+        name: data.name!,
+        code: data.code!,
+        isActive: data.isActive ?? true,
+        ...this.prisma.auditCreate(userId),
+      },
+    });
 
-  return region as RegionEntity;
-}
+    return region as RegionEntity;
+  }
 
   async update(
     id: string,
@@ -123,7 +127,10 @@ export class PrismaRegionRepository implements IRegionRepository {
     return region as RegionEntity;
   }
 
-  async softDelete(id: string, userId?: string): Promise<void> {
+  async softDelete(
+    id: string,
+    userId?: string,
+  ): Promise<void> {
     await this.prisma.region.update({
       where: {
         id,
@@ -135,8 +142,14 @@ export class PrismaRegionRepository implements IRegionRepository {
     });
   }
 
-  async lookup(): Promise<Pick<RegionEntity, 'id' | 'name' | 'code'>[]> {
+  async lookup(): Promise<
+    Pick<RegionEntity, 'id' | 'name' | 'code'>[]
+  > {
     return this.prisma.region.findMany({
+      where: {
+        isActive: true,
+        ...this.prisma.softDeleteFilter(),
+      },
       select: {
         id: true,
         name: true,

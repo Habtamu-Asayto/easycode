@@ -1,50 +1,25 @@
 export class ApiResponseDto<T = any> {
-  success!: boolean;
-  message!: string;
+  success: boolean;
+  message: string;
   data?: T;
   errors?: any;
-  timestamp!: string;
+  timestamp: string;
 
   constructor(partial: Partial<ApiResponseDto<T>>) {
     Object.assign(this, partial);
     this.timestamp = new Date().toISOString();
   }
 
-  static success<T>(
-    data: T,
-    message = 'Success',
-  ): ApiResponseDto<T> {
-    return new ApiResponseDto({
-      success: true,
-      message,
-      data,
-    });
+  static success<T>(data: T, message = 'Success'): ApiResponseDto<T> {
+    return new ApiResponseDto({ success: true, message, data });
   }
 
-  static error(
-    message: string,
-    errors?: any,
-  ): ApiResponseDto {
-    return new ApiResponseDto({
-      success: false,
-      message,
-      errors,
-    });
+  static error(message: string, errors?: any): ApiResponseDto {
+    return new ApiResponseDto({ success: false, message, errors });
   }
 
-  static paginated<T>(
-    data: T[],
-    meta: {
-      page: number;
-      limit: number;
-      total: number;
-    },
-    message = 'Success',
-  ) {
-    const totalPages = Math.ceil(
-      meta.total / meta.limit,
-    );
-
+  static paginated<T>(data: T[], meta: { page: number; limit: number; total: number }, message = 'Success') {
+    const totalPages = Math.ceil(meta.total / meta.limit);
     return new ApiResponseDto({
       success: true,
       message,

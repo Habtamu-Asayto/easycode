@@ -5,3 +5,4 @@ export const GEOGRAPHY_TOKENS = {
   WOREDA_REPOSITORY: Symbol('IWoredaRepository'),
   KEBELE_REPOSITORY: Symbol('IKebeleRepository'),
 } as const;
+  

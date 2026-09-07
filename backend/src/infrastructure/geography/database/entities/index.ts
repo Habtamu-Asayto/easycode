@@ -1,0 +1,1 @@
+export { RegionMapper } from './region.orm-entity';

@@ -1,0 +1,1 @@
+export { PrismaRegionRepository } from './region.repository.impl';

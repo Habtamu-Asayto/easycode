@@ -114,7 +114,7 @@ export default function LoginForm2() {
         {/* Header */}{" "}
         <header className=" relative z-10 flex items-center justify-between opacity-0 animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_50ms_forwards] ">
           {" "}
-          <div className="flex items-center gap-3" aria-label="FMS home">
+          <div className="flex items-center gap-3" aria-label="NNPP home">
             {" "}
             <span className=" grid size-10 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-[0_0_25px_oklch(0.78_0.16_195_/_0.25)] animate-[logo-float_4s_ease-in-out_infinite] ">
               {" "}
@@ -122,7 +122,7 @@ export default function LoginForm2() {
             </span>{" "}
             <span className="font-mono text-sm font-bold tracking-[0.3em]">
               {" "}
-              FMS{" "}
+              NNPP{" "}
             </span>{" "}
           </div>{" "}
           <span className=" flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground ">

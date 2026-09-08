@@ -674,3 +674,9 @@ frontend/src/infrastructure/rbac/api/.....
 ```
 frontend/src/presentation/hooks/rbac/region.hooks.ts
 ```
+
+## Auth related  
+
+```
+src/infrastructure/rbac/auth.config.ts
+```

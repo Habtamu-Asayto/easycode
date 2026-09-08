@@ -1,4 +1,3 @@
- 
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
@@ -20,7 +19,7 @@ import {
 } from "@/presentation/components/ui/dropdown-menu";
 import {
   Tooltip,
-  TooltipContent,
+  TooltipContent, 
   TooltipTrigger,
 } from "@/presentation/components/ui/tooltip";
 
@@ -72,8 +71,7 @@ export function AppSidebar() {
 
   const renderNavLink = (item: NavItem) => {
     const isActive =
-      pathname === item.href ||
-      pathname.startsWith(`${item.href}/`);
+      pathname === item.href || pathname.startsWith(`${item.href}/`);
 
     const Icon = item.icon;
 
@@ -82,9 +80,7 @@ export function AppSidebar() {
         href={item.href}
         className={cn(
           "relative flex items-center rounded transition-colors duration-100",
-          isCollapsed
-            ? "justify-center w-11 h-11 mx-auto"
-            : "gap-3 px-3 py-2",
+          isCollapsed ? "justify-center w-11 h-11 mx-auto" : "gap-3 px-3 py-2",
           isActive
             ? "bg-accent text-primary font-semibold"
             : "text-foreground/70 hover:bg-accent hover:text-foreground",
@@ -98,9 +94,7 @@ export function AppSidebar() {
         />
 
         {!isCollapsed && (
-          <span className="text-[13px] truncate">
-            {item.label}
-          </span>
+          <span className="text-[13px] truncate">{item.label}</span>
         )}
       </Link>
     );
@@ -158,9 +152,7 @@ export function AppSidebar() {
               <div key={cat.label}>
                 {showHeader && !isCollapsed && (
                   <button
-                    onClick={() =>
-                      cat.collapsible && toggleCategory(cat.label)
-                    }
+                    onClick={() => cat.collapsible && toggleCategory(cat.label)}
                     className={cn(
                       "flex w-full items-center pt-4 pb-1 px-3",
                       cat.collapsible && "cursor-pointer group",
@@ -193,9 +185,7 @@ export function AppSidebar() {
                     <li key={item.href}>
                       {isCollapsed ? (
                         <Tooltip>
-                          <TooltipTrigger
-                            render={<span className="block" />}
-                          />
+                          <TooltipTrigger render={<span className="block" />} />
 
                           <TooltipContent side="right" sideOffset={8}>
                             {item.label}
@@ -259,9 +249,7 @@ export function AppSidebar() {
                 {user?.firstName} {user?.lastName}
               </p>
 
-              <p className="text-xs text-muted-foreground">
-                {user?.email}
-              </p>
+              <p className="text-xs text-muted-foreground">{user?.email}</p>
             </div>
 
             <DropdownMenuSeparator />

@@ -1,21 +1,46 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
+import type { ElementType, ReactNode } from "react";
+import { LoaderCircle } from "lucide-react";
 
-export function PageLoader() {
+const loaderMotion = "motion-safe:animate-spin";
+
+export function PageLoader({
+  text = "Smart Sooner", 
+}: {
+  text?: string;
+}) {
   return (
-    <div className="flex h-full min-h-[400px] items-center justify-center">
-      <Loader2 className="h-7 w-7 animate-spin text-primary" />
+    <div
+      className="flex min-h-[400px] flex-col items-center justify-center gap-5 px-6 text-center"
+      role="status"
+      aria-live="polite"
+    >
+      <div className="relative flex size-16 items-center justify-center rounded-2xl border border-border/80 bg-card shadow-sm">
+        <span className="absolute inset-0 rounded-2xl bg-primary/5 motion-safe:animate-pulse" />
+        <LoaderCircle className={`relative size-7 text-primary ${loaderMotion}`} />
+      </div>
+      <div className="space-y-2">
+        <p className="text-sm font-medium text-foreground">{text}</p>
+        <div className="mx-auto h-1 w-32 overflow-hidden rounded-full bg-muted">
+          <div className="h-full w-1/2 rounded-full bg-primary motion-safe:animate-[loading_1.4s_ease-in-out_infinite]" />
+        </div>
+        <span className="sr-only">Please wait while the page loads.</span>
+      </div>
     </div>
   );
 }
 
-export function InlineLoader({ text = "Loading..." }: { text?: string }) {
+export function InlineLoader({ text = "Smart Sooner" }: { text?: string }) {
   return (
-    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-      <Loader2 className="h-4 w-4 animate-spin text-primary" />
+    <span
+      className="inline-flex items-center gap-2 text-sm text-muted-foreground"
+      role="status"
+      aria-live="polite"
+    >
+      <LoaderCircle className={`size-4 text-primary ${loaderMotion}`} aria-hidden="true" />
       <span>{text}</span>
-    </div>
+    </span>
   );
 }
 
@@ -25,21 +50,24 @@ export function EmptyState({
   description,
   action,
 }: {
-  icon?: React.ElementType;
+  icon?: ElementType;
   title: string;
   description?: string;
-  action?: React.ReactNode;
+  action?: ReactNode;
 }) {
   return (
-    <div className="flex h-full min-h-[300px] flex-col items-center justify-center gap-3 text-center">
-      {Icon && <Icon className="h-12 w-12 text-muted-foreground/30" />}
-      <div>
-        <h3 className="text-sm font-medium text-foreground">{title}</h3>
-        {description && (
-          <p className="mt-1 text-xs text-muted-foreground">{description}</p>
-        )}
+    <div className="flex min-h-[300px] flex-col items-center justify-center gap-4 px-6 text-center">
+      {Icon && (
+        <div className="flex size-14 items-center justify-center rounded-2xl border border-border/80 bg-muted/40 shadow-sm">
+          <Icon className="size-6 text-muted-foreground" aria-hidden="true" />
+        </div>
+      )}
+      <div className="max-w-sm space-y-1.5">
+        <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+        {description && <p className="text-sm leading-6 text-muted-foreground">{description}</p>}
       </div>
-      {action}
+      {action && <div className="pt-1">{action}</div>}
     </div>
   );
 }
+

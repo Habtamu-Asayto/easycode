@@ -57,6 +57,7 @@ async function refreshAccessToken(token: JWT): Promise<JWT> {
     if (!response.ok) throw new Error("Refresh failed");
 
     const data = await response.json();
+    console.log("LOGIN RESPONSE:", JSON.stringify(data, null, 2));
     const refreshedData = data.data;
 
     return {
@@ -97,7 +98,7 @@ export const authConfig: NextAuthConfig = {
           }
 
           const data = await response.json();
-          const { accessToken, refreshToken, user } = data.data;
+          const { accessToken, refreshToken, user } = data;
 
           return {
             id: user.id,

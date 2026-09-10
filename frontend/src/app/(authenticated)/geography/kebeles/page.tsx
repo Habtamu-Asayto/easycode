@@ -4,25 +4,16 @@ import { useCallback } from "react";
 
 import { GeographyHierarchySelector } from "@/presentation/components/shared/geography-hierarchy-selector";
 
-import { kebelesApi, woredasApi } from "@/infrastructure/geography/api";
+import { kebelesApi } from "@/infrastructure/geography/api";
 import {
   CrudPage,
   StatusBadge,
-  MasterDataFormDialog,
-  SearchableRelationSelector,
+  MasterDataFormDialog, 
 } from "@/presentation/components/shared";
 import type { ColumnDef, StatDef } from "@/presentation/components/shared";
 import type { KebeleResponse } from "@/domain/geography/entities";
-import { Badge } from "@/presentation/components/ui/badge";
-import { Label } from "@/presentation/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/presentation/components/ui/select";
-import { Home, Check, X, Database, MapPin } from "lucide-react";
+import { Badge } from "@/presentation/components/ui/badge"; 
+import { Home, Check, X, Database  } from "lucide-react";
 
 const columns: ColumnDef<KebeleResponse>[] = [
   {

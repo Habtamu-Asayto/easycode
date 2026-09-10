@@ -47,7 +47,7 @@ export interface StatDef {
   icon: React.ComponentType<{ className?: string }>;
   iconBg: string;
   iconColor: string;
-}
+} 
 
 interface CrudPageConfig<T extends { id: string; isActive: boolean }> {
   /** Page title */

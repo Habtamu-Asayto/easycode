@@ -63,8 +63,8 @@ export default function RolesPage() {
   });
 
   const stats = useMemo(() => {
-    if (!data?.data) return { total: 0, system: 0, active: 0, totalPerms: 0 };
-    const roles = data.data;
+    if (!data?.items) return { total: 0, system: 0, active: 0, totalPerms: 0 };
+    const roles = data.items;
     return {
       total: data.meta?.total ?? roles.length,
       system: roles.filter((r) => r.isSystem).length,
@@ -174,14 +174,14 @@ export default function RolesPage() {
           className="w-72"
         />
         <span className="ml-auto text-xs text-muted-foreground">
-          Showing {data?.data?.length ?? 0} of {stats.total} records
+          Showing {data?.items?.length ?? 0} of {stats.total} records
         </span>
       </div>
 
       {/* Content */}
       {isLoading ? (
         <PageLoader />
-      ) : !data?.data?.length ? (
+      ) : !data?.items?.length ? (
         <EmptyState
           icon={Shield}
           title="No roles found"
@@ -230,7 +230,7 @@ export default function RolesPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.data.map((role) => (
+                {data.items.map((role) => (
                   <TableRow key={role.id} className="group hover:bg-muted/50">
                     <TableCell>
                       <div className="flex items-center gap-2">

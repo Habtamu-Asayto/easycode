@@ -9306,3 +9306,6 @@ Re-run seeds: `npx ts-node prisma/seeds/seed.ts`
 Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -All
 
 bcdedit /set hypervisorlaunchtype auto
+
+
+Remove-Item -Recurse -Force .next

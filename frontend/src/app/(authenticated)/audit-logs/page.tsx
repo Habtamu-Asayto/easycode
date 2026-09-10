@@ -65,14 +65,14 @@ export default function AuditLogsPage() {
   });
 
   const stats = useMemo(() => {
-    if (!data?.data)
+    if (!data?.items)
       return {
         total: 0,
         users: 0,
         entities: new Set<string>(),
         actions: new Set<string>(),
       };
-    const logs = data.data;
+    const logs = data.items;
     return {
       total: data.meta?.total ?? logs.length,
       users: new Set(logs.map((l) => l.userId)).size,
@@ -200,14 +200,14 @@ export default function AuditLogsPage() {
           </SelectContent>
         </Select>
         <span className="ml-auto text-xs text-muted-foreground">
-          Showing {data?.data?.length ?? 0} of {stats.total} records
+          Showing {data?.items?.length ?? 0} of {stats.total} records
         </span>
       </div>
 
       {/* ── Content ─────────────────────────────────────────────────────── */}
       {isLoading ? (
         <PageLoader />
-      ) : !data?.data?.length ? (
+      ) : !data?.items?.length ? (
         <EmptyState
           icon={FileText}
           title="No audit logs found"
@@ -240,7 +240,7 @@ export default function AuditLogsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.data.map((log) => (
+                {data.items.map((log) => (
                   <TableRow key={log.id} className="group hover:bg-muted/50">
                     <TableCell className="whitespace-nowrap text-sm text-muted-foreground">
                       {format(new Date(log.createdAt), "MMM d, yyyy HH:mm:ss")}

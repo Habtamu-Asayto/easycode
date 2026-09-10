@@ -44,17 +44,17 @@ export default function PermissionsPage() {
   });
 
   const filtered = useMemo(() => {
-    if (!data?.data) return [];
-    if (!search) return data.data;
+    if (!data?.items) return [];
+    if (!search) return data.items;
     const s = search.toLowerCase();
-    return data.data.filter(
+    return data.items.filter(
       (p) =>
         p.name.toLowerCase().includes(s) ||
         p.module.toLowerCase().includes(s) ||
         p.action.toLowerCase().includes(s) ||
         p.description?.toLowerCase().includes(s),
     );
-  }, [data?.data, search]);
+  }, [data, search]);
 
   const grouped = useMemo(() => {
     const groups: Record<string, PermissionResponse[]> = {};
@@ -66,15 +66,15 @@ export default function PermissionsPage() {
   }, [filtered]);
 
   const permStats = useMemo(() => {
-    if (!data?.data) return { total: 0, active: 0, inactive: 0, modules: 0 };
-    const perms = data.data;
+    if (!data?.items) return { total: 0, active: 0, inactive: 0, modules: 0 };
+    const perms = data.items;
     return {
       total: perms.length,
       active: perms.filter((p) => p.isActive).length,
       inactive: perms.filter((p) => !p.isActive).length,
       modules: new Set(perms.map((p) => p.module)).size,
     };
-  }, [data?.data]);
+  }, [data]);
 
   return (
     <div className="p-6 space-y-6">

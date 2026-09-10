@@ -373,7 +373,7 @@ export function UserFormDialog({
             <Label>Roles</Label>
             <ScrollArea className="h-36 rounded-md border p-3">
               <div className="space-y-2">
-                {rolesData?.data?.map((role) => (
+                {rolesData?.items?.map((role) => (
                   <label
                     key={role.id}
                     className="flex items-center gap-2 rounded p-1.5 hover:bg-accent cursor-pointer"

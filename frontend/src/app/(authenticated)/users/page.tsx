@@ -66,8 +66,8 @@ export default function UsersPage() {
   });
 
   const stats = useMemo(() => {
-    if (!data?.data) return { total: 0, active: 0, inactive: 0, locked: 0 };
-    const users = data.data;
+    if (!data?.items) return { total: 0, active: 0, inactive: 0, locked: 0 };
+    const users = data.items;
     return {
       total: data.meta?.total ?? users.length,
       active: users.filter((u) => u.isActive && !u.isLocked).length,
@@ -193,14 +193,14 @@ export default function UsersPage() {
           className="w-72"
         />
         <span className="ml-auto text-xs text-muted-foreground">
-          Showing {data?.data?.length ?? 0} of {stats.total} records
+          Showing {data?.items?.length ?? 0} of {stats.total} records
         </span>
       </div>
 
       {/* Content */}
       {isLoading ? (
         <PageLoader />
-      ) : !data?.data?.length ? (
+      ) : !data?.items?.length ? (
         <EmptyState
           icon={Users}
           title="No users found"
@@ -243,7 +243,7 @@ export default function UsersPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.data.map((user) => (
+                {data.items.map((user) => (
                   <TableRow key={user.id} className="group hover:bg-muted/50">
                     <TableCell>
                       <div className="flex items-center gap-3">

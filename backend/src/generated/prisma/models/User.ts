@@ -50,6 +50,9 @@ export type UserMinAggregateOutputType = {
   failedLoginAttempts: number | null
   passwordChangedAt: Date | null
   regionId: string | null
+  zoneId: string | null
+  woredaId: string | null
+  kebeleId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -73,6 +76,9 @@ export type UserMaxAggregateOutputType = {
   failedLoginAttempts: number | null
   passwordChangedAt: Date | null
   regionId: string | null
+  zoneId: string | null
+  woredaId: string | null
+  kebeleId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -96,6 +102,9 @@ export type UserCountAggregateOutputType = {
   failedLoginAttempts: number
   passwordChangedAt: number
   regionId: number
+  zoneId: number
+  woredaId: number
+  kebeleId: number
   createdAt: number
   updatedAt: number
   deletedAt: number
@@ -129,6 +138,9 @@ export type UserMinAggregateInputType = {
   failedLoginAttempts?: true
   passwordChangedAt?: true
   regionId?: true
+  zoneId?: true
+  woredaId?: true
+  kebeleId?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -152,6 +164,9 @@ export type UserMaxAggregateInputType = {
   failedLoginAttempts?: true
   passwordChangedAt?: true
   regionId?: true
+  zoneId?: true
+  woredaId?: true
+  kebeleId?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -175,6 +190,9 @@ export type UserCountAggregateInputType = {
   failedLoginAttempts?: true
   passwordChangedAt?: true
   regionId?: true
+  zoneId?: true
+  woredaId?: true
+  kebeleId?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -285,6 +303,9 @@ export type UserGroupByOutputType = {
   failedLoginAttempts: number
   passwordChangedAt: Date | null
   regionId: string | null
+  zoneId: string | null
+  woredaId: string | null
+  kebeleId: string | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -331,6 +352,9 @@ export type UserWhereInput = {
   failedLoginAttempts?: Prisma.IntFilter<"User"> | number
   passwordChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   regionId?: Prisma.UuidNullableFilter<"User"> | string | null
+  zoneId?: Prisma.UuidNullableFilter<"User"> | string | null
+  woredaId?: Prisma.UuidNullableFilter<"User"> | string | null
+  kebeleId?: Prisma.UuidNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -340,6 +364,9 @@ export type UserWhereInput = {
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
+  zone?: Prisma.XOR<Prisma.ZoneNullableScalarRelationFilter, Prisma.ZoneWhereInput> | null
+  woreda?: Prisma.XOR<Prisma.WoredaNullableScalarRelationFilter, Prisma.WoredaWhereInput> | null
+  kebele?: Prisma.XOR<Prisma.KebeleNullableScalarRelationFilter, Prisma.KebeleWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -358,6 +385,9 @@ export type UserOrderByWithRelationInput = {
   failedLoginAttempts?: Prisma.SortOrder
   passwordChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   regionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  zoneId?: Prisma.SortOrderInput | Prisma.SortOrder
+  woredaId?: Prisma.SortOrderInput | Prisma.SortOrder
+  kebeleId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -367,6 +397,9 @@ export type UserOrderByWithRelationInput = {
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   region?: Prisma.RegionOrderByWithRelationInput
+  zone?: Prisma.ZoneOrderByWithRelationInput
+  woreda?: Prisma.WoredaOrderByWithRelationInput
+  kebele?: Prisma.KebeleOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -388,6 +421,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   failedLoginAttempts?: Prisma.IntFilter<"User"> | number
   passwordChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   regionId?: Prisma.UuidNullableFilter<"User"> | string | null
+  zoneId?: Prisma.UuidNullableFilter<"User"> | string | null
+  woredaId?: Prisma.UuidNullableFilter<"User"> | string | null
+  kebeleId?: Prisma.UuidNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -397,6 +433,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
+  zone?: Prisma.XOR<Prisma.ZoneNullableScalarRelationFilter, Prisma.ZoneWhereInput> | null
+  woreda?: Prisma.XOR<Prisma.WoredaNullableScalarRelationFilter, Prisma.WoredaWhereInput> | null
+  kebele?: Prisma.XOR<Prisma.KebeleNullableScalarRelationFilter, Prisma.KebeleWhereInput> | null
 }, "id" | "email" | "username" | "mobileNumber">
 
 export type UserOrderByWithAggregationInput = {
@@ -415,6 +454,9 @@ export type UserOrderByWithAggregationInput = {
   failedLoginAttempts?: Prisma.SortOrder
   passwordChangedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   regionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  zoneId?: Prisma.SortOrderInput | Prisma.SortOrder
+  woredaId?: Prisma.SortOrderInput | Prisma.SortOrder
+  kebeleId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -446,6 +488,9 @@ export type UserScalarWhereWithAggregatesInput = {
   failedLoginAttempts?: Prisma.IntWithAggregatesFilter<"User"> | number
   passwordChangedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   regionId?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
+  zoneId?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
+  woredaId?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
+  kebeleId?: Prisma.UuidNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -477,6 +522,9 @@ export type UserCreateInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   region?: Prisma.RegionCreateNestedOneWithoutUsersInput
+  zone?: Prisma.ZoneCreateNestedOneWithoutUsersInput
+  woreda?: Prisma.WoredaCreateNestedOneWithoutUsersInput
+  kebele?: Prisma.KebeleCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -495,6 +543,9 @@ export type UserUncheckedCreateInput = {
   failedLoginAttempts?: number
   passwordChangedAt?: Date | string | null
   regionId?: string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -529,6 +580,9 @@ export type UserUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   region?: Prisma.RegionUpdateOneWithoutUsersNestedInput
+  zone?: Prisma.ZoneUpdateOneWithoutUsersNestedInput
+  woreda?: Prisma.WoredaUpdateOneWithoutUsersNestedInput
+  kebele?: Prisma.KebeleUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -547,6 +601,9 @@ export type UserUncheckedUpdateInput = {
   failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -573,6 +630,9 @@ export type UserCreateManyInput = {
   failedLoginAttempts?: number
   passwordChangedAt?: Date | string | null
   regionId?: string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -618,6 +678,9 @@ export type UserUncheckedUpdateManyInput = {
   failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -641,6 +704,9 @@ export type UserCountOrderByAggregateInput = {
   failedLoginAttempts?: Prisma.SortOrder
   passwordChangedAt?: Prisma.SortOrder
   regionId?: Prisma.SortOrder
+  zoneId?: Prisma.SortOrder
+  woredaId?: Prisma.SortOrder
+  kebeleId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -668,6 +734,9 @@ export type UserMaxOrderByAggregateInput = {
   failedLoginAttempts?: Prisma.SortOrder
   passwordChangedAt?: Prisma.SortOrder
   regionId?: Prisma.SortOrder
+  zoneId?: Prisma.SortOrder
+  woredaId?: Prisma.SortOrder
+  kebeleId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -691,6 +760,9 @@ export type UserMinOrderByAggregateInput = {
   failedLoginAttempts?: Prisma.SortOrder
   passwordChangedAt?: Prisma.SortOrder
   regionId?: Prisma.SortOrder
+  zoneId?: Prisma.SortOrder
+  woredaId?: Prisma.SortOrder
+  kebeleId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -836,6 +908,132 @@ export type UserUncheckedUpdateManyWithoutRegionNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedManyWithoutZoneInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutZoneInput, Prisma.UserUncheckedCreateWithoutZoneInput> | Prisma.UserCreateWithoutZoneInput[] | Prisma.UserUncheckedCreateWithoutZoneInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutZoneInput | Prisma.UserCreateOrConnectWithoutZoneInput[]
+  createMany?: Prisma.UserCreateManyZoneInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutZoneInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutZoneInput, Prisma.UserUncheckedCreateWithoutZoneInput> | Prisma.UserCreateWithoutZoneInput[] | Prisma.UserUncheckedCreateWithoutZoneInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutZoneInput | Prisma.UserCreateOrConnectWithoutZoneInput[]
+  createMany?: Prisma.UserCreateManyZoneInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutZoneNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutZoneInput, Prisma.UserUncheckedCreateWithoutZoneInput> | Prisma.UserCreateWithoutZoneInput[] | Prisma.UserUncheckedCreateWithoutZoneInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutZoneInput | Prisma.UserCreateOrConnectWithoutZoneInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutZoneInput | Prisma.UserUpsertWithWhereUniqueWithoutZoneInput[]
+  createMany?: Prisma.UserCreateManyZoneInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutZoneInput | Prisma.UserUpdateWithWhereUniqueWithoutZoneInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutZoneInput | Prisma.UserUpdateManyWithWhereWithoutZoneInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutZoneNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutZoneInput, Prisma.UserUncheckedCreateWithoutZoneInput> | Prisma.UserCreateWithoutZoneInput[] | Prisma.UserUncheckedCreateWithoutZoneInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutZoneInput | Prisma.UserCreateOrConnectWithoutZoneInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutZoneInput | Prisma.UserUpsertWithWhereUniqueWithoutZoneInput[]
+  createMany?: Prisma.UserCreateManyZoneInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutZoneInput | Prisma.UserUpdateWithWhereUniqueWithoutZoneInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutZoneInput | Prisma.UserUpdateManyWithWhereWithoutZoneInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutWoredaInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWoredaInput, Prisma.UserUncheckedCreateWithoutWoredaInput> | Prisma.UserCreateWithoutWoredaInput[] | Prisma.UserUncheckedCreateWithoutWoredaInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWoredaInput | Prisma.UserCreateOrConnectWithoutWoredaInput[]
+  createMany?: Prisma.UserCreateManyWoredaInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutWoredaInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWoredaInput, Prisma.UserUncheckedCreateWithoutWoredaInput> | Prisma.UserCreateWithoutWoredaInput[] | Prisma.UserUncheckedCreateWithoutWoredaInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWoredaInput | Prisma.UserCreateOrConnectWithoutWoredaInput[]
+  createMany?: Prisma.UserCreateManyWoredaInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutWoredaNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWoredaInput, Prisma.UserUncheckedCreateWithoutWoredaInput> | Prisma.UserCreateWithoutWoredaInput[] | Prisma.UserUncheckedCreateWithoutWoredaInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWoredaInput | Prisma.UserCreateOrConnectWithoutWoredaInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutWoredaInput | Prisma.UserUpsertWithWhereUniqueWithoutWoredaInput[]
+  createMany?: Prisma.UserCreateManyWoredaInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutWoredaInput | Prisma.UserUpdateWithWhereUniqueWithoutWoredaInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutWoredaInput | Prisma.UserUpdateManyWithWhereWithoutWoredaInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutWoredaNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutWoredaInput, Prisma.UserUncheckedCreateWithoutWoredaInput> | Prisma.UserCreateWithoutWoredaInput[] | Prisma.UserUncheckedCreateWithoutWoredaInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutWoredaInput | Prisma.UserCreateOrConnectWithoutWoredaInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutWoredaInput | Prisma.UserUpsertWithWhereUniqueWithoutWoredaInput[]
+  createMany?: Prisma.UserCreateManyWoredaInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutWoredaInput | Prisma.UserUpdateWithWhereUniqueWithoutWoredaInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutWoredaInput | Prisma.UserUpdateManyWithWhereWithoutWoredaInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedManyWithoutKebeleInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutKebeleInput, Prisma.UserUncheckedCreateWithoutKebeleInput> | Prisma.UserCreateWithoutKebeleInput[] | Prisma.UserUncheckedCreateWithoutKebeleInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutKebeleInput | Prisma.UserCreateOrConnectWithoutKebeleInput[]
+  createMany?: Prisma.UserCreateManyKebeleInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutKebeleInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutKebeleInput, Prisma.UserUncheckedCreateWithoutKebeleInput> | Prisma.UserCreateWithoutKebeleInput[] | Prisma.UserUncheckedCreateWithoutKebeleInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutKebeleInput | Prisma.UserCreateOrConnectWithoutKebeleInput[]
+  createMany?: Prisma.UserCreateManyKebeleInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutKebeleNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutKebeleInput, Prisma.UserUncheckedCreateWithoutKebeleInput> | Prisma.UserCreateWithoutKebeleInput[] | Prisma.UserUncheckedCreateWithoutKebeleInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutKebeleInput | Prisma.UserCreateOrConnectWithoutKebeleInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutKebeleInput | Prisma.UserUpsertWithWhereUniqueWithoutKebeleInput[]
+  createMany?: Prisma.UserCreateManyKebeleInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutKebeleInput | Prisma.UserUpdateWithWhereUniqueWithoutKebeleInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutKebeleInput | Prisma.UserUpdateManyWithWhereWithoutKebeleInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutKebeleNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutKebeleInput, Prisma.UserUncheckedCreateWithoutKebeleInput> | Prisma.UserCreateWithoutKebeleInput[] | Prisma.UserUncheckedCreateWithoutKebeleInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutKebeleInput | Prisma.UserCreateOrConnectWithoutKebeleInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutKebeleInput | Prisma.UserUpsertWithWhereUniqueWithoutKebeleInput[]
+  createMany?: Prisma.UserCreateManyKebeleInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutKebeleInput | Prisma.UserUpdateWithWhereUniqueWithoutKebeleInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutKebeleInput | Prisma.UserUpdateManyWithWhereWithoutKebeleInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserCreateWithoutUserRolesInput = {
   id?: string
   email: string
@@ -859,6 +1057,9 @@ export type UserCreateWithoutUserRolesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   region?: Prisma.RegionCreateNestedOneWithoutUsersInput
+  zone?: Prisma.ZoneCreateNestedOneWithoutUsersInput
+  woreda?: Prisma.WoredaCreateNestedOneWithoutUsersInput
+  kebele?: Prisma.KebeleCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -877,6 +1078,9 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   failedLoginAttempts?: number
   passwordChangedAt?: Date | string | null
   regionId?: string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -925,6 +1129,9 @@ export type UserUpdateWithoutUserRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   region?: Prisma.RegionUpdateOneWithoutUsersNestedInput
+  zone?: Prisma.ZoneUpdateOneWithoutUsersNestedInput
+  woreda?: Prisma.WoredaUpdateOneWithoutUsersNestedInput
+  kebele?: Prisma.KebeleUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -943,6 +1150,9 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -975,6 +1185,9 @@ export type UserCreateWithoutRefreshTokensInput = {
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   region?: Prisma.RegionCreateNestedOneWithoutUsersInput
+  zone?: Prisma.ZoneCreateNestedOneWithoutUsersInput
+  woreda?: Prisma.WoredaCreateNestedOneWithoutUsersInput
+  kebele?: Prisma.KebeleCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -993,6 +1206,9 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   failedLoginAttempts?: number
   passwordChangedAt?: Date | string | null
   regionId?: string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1041,6 +1257,9 @@ export type UserUpdateWithoutRefreshTokensInput = {
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   region?: Prisma.RegionUpdateOneWithoutUsersNestedInput
+  zone?: Prisma.ZoneUpdateOneWithoutUsersNestedInput
+  woreda?: Prisma.WoredaUpdateOneWithoutUsersNestedInput
+  kebele?: Prisma.KebeleUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -1059,6 +1278,9 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1091,6 +1313,9 @@ export type UserCreateWithoutAuditLogsInput = {
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   region?: Prisma.RegionCreateNestedOneWithoutUsersInput
+  zone?: Prisma.ZoneCreateNestedOneWithoutUsersInput
+  woreda?: Prisma.WoredaCreateNestedOneWithoutUsersInput
+  kebele?: Prisma.KebeleCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -1109,6 +1334,9 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   failedLoginAttempts?: number
   passwordChangedAt?: Date | string | null
   regionId?: string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1157,6 +1385,9 @@ export type UserUpdateWithoutAuditLogsInput = {
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   region?: Prisma.RegionUpdateOneWithoutUsersNestedInput
+  zone?: Prisma.ZoneUpdateOneWithoutUsersNestedInput
+  woreda?: Prisma.WoredaUpdateOneWithoutUsersNestedInput
+  kebele?: Prisma.KebeleUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -1175,6 +1406,9 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1207,6 +1441,9 @@ export type UserCreateWithoutRegionInput = {
   userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  zone?: Prisma.ZoneCreateNestedOneWithoutUsersInput
+  woreda?: Prisma.WoredaCreateNestedOneWithoutUsersInput
+  kebele?: Prisma.KebeleCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutRegionInput = {
@@ -1224,6 +1461,9 @@ export type UserUncheckedCreateWithoutRegionInput = {
   lastLoginAt?: Date | string | null
   failedLoginAttempts?: number
   passwordChangedAt?: Date | string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1279,11 +1519,260 @@ export type UserScalarWhereInput = {
   failedLoginAttempts?: Prisma.IntFilter<"User"> | number
   passwordChangedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   regionId?: Prisma.UuidNullableFilter<"User"> | string | null
+  zoneId?: Prisma.UuidNullableFilter<"User"> | string | null
+  woredaId?: Prisma.UuidNullableFilter<"User"> | string | null
+  kebeleId?: Prisma.UuidNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdBy?: Prisma.UuidNullableFilter<"User"> | string | null
   updatedBy?: Prisma.UuidNullableFilter<"User"> | string | null
+}
+
+export type UserCreateWithoutZoneInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  region?: Prisma.RegionCreateNestedOneWithoutUsersInput
+  woreda?: Prisma.WoredaCreateNestedOneWithoutUsersInput
+  kebele?: Prisma.KebeleCreateNestedOneWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutZoneInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  regionId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutZoneInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutZoneInput, Prisma.UserUncheckedCreateWithoutZoneInput>
+}
+
+export type UserCreateManyZoneInputEnvelope = {
+  data: Prisma.UserCreateManyZoneInput | Prisma.UserCreateManyZoneInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutZoneInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutZoneInput, Prisma.UserUncheckedUpdateWithoutZoneInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutZoneInput, Prisma.UserUncheckedCreateWithoutZoneInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutZoneInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutZoneInput, Prisma.UserUncheckedUpdateWithoutZoneInput>
+}
+
+export type UserUpdateManyWithWhereWithoutZoneInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutZoneInput>
+}
+
+export type UserCreateWithoutWoredaInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  region?: Prisma.RegionCreateNestedOneWithoutUsersInput
+  zone?: Prisma.ZoneCreateNestedOneWithoutUsersInput
+  kebele?: Prisma.KebeleCreateNestedOneWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutWoredaInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  regionId?: string | null
+  zoneId?: string | null
+  kebeleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutWoredaInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutWoredaInput, Prisma.UserUncheckedCreateWithoutWoredaInput>
+}
+
+export type UserCreateManyWoredaInputEnvelope = {
+  data: Prisma.UserCreateManyWoredaInput | Prisma.UserCreateManyWoredaInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutWoredaInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutWoredaInput, Prisma.UserUncheckedUpdateWithoutWoredaInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutWoredaInput, Prisma.UserUncheckedCreateWithoutWoredaInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutWoredaInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutWoredaInput, Prisma.UserUncheckedUpdateWithoutWoredaInput>
+}
+
+export type UserUpdateManyWithWhereWithoutWoredaInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutWoredaInput>
+}
+
+export type UserCreateWithoutKebeleInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  region?: Prisma.RegionCreateNestedOneWithoutUsersInput
+  zone?: Prisma.ZoneCreateNestedOneWithoutUsersInput
+  woreda?: Prisma.WoredaCreateNestedOneWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutKebeleInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  regionId?: string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutKebeleInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutKebeleInput, Prisma.UserUncheckedCreateWithoutKebeleInput>
+}
+
+export type UserCreateManyKebeleInputEnvelope = {
+  data: Prisma.UserCreateManyKebeleInput | Prisma.UserCreateManyKebeleInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutKebeleInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutKebeleInput, Prisma.UserUncheckedUpdateWithoutKebeleInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutKebeleInput, Prisma.UserUncheckedCreateWithoutKebeleInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutKebeleInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutKebeleInput, Prisma.UserUncheckedUpdateWithoutKebeleInput>
+}
+
+export type UserUpdateManyWithWhereWithoutKebeleInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutKebeleInput>
 }
 
 export type UserCreateManyRegionInput = {
@@ -1301,6 +1790,9 @@ export type UserCreateManyRegionInput = {
   lastLoginAt?: Date | string | null
   failedLoginAttempts?: number
   passwordChangedAt?: Date | string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -1331,6 +1823,9 @@ export type UserUpdateWithoutRegionInput = {
   userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  zone?: Prisma.ZoneUpdateOneWithoutUsersNestedInput
+  woreda?: Prisma.WoredaUpdateOneWithoutUsersNestedInput
+  kebele?: Prisma.KebeleUpdateOneWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRegionInput = {
@@ -1348,6 +1843,9 @@ export type UserUncheckedUpdateWithoutRegionInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1373,6 +1871,327 @@ export type UserUncheckedUpdateManyWithoutRegionInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UserCreateManyZoneInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  regionId?: string | null
+  woredaId?: string | null
+  kebeleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+}
+
+export type UserUpdateWithoutZoneInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  region?: Prisma.RegionUpdateOneWithoutUsersNestedInput
+  woreda?: Prisma.WoredaUpdateOneWithoutUsersNestedInput
+  kebele?: Prisma.KebeleUpdateOneWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutZoneInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutZoneInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UserCreateManyWoredaInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  regionId?: string | null
+  zoneId?: string | null
+  kebeleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+}
+
+export type UserUpdateWithoutWoredaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  region?: Prisma.RegionUpdateOneWithoutUsersNestedInput
+  zone?: Prisma.ZoneUpdateOneWithoutUsersNestedInput
+  kebele?: Prisma.KebeleUpdateOneWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutWoredaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutWoredaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  kebeleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UserCreateManyKebeleInput = {
+  id?: string
+  email: string
+  username: string
+  mobileNumber?: string | null
+  password: string
+  firstName: string
+  lastName: string
+  phone?: string | null
+  avatar?: string | null
+  isActive?: boolean
+  isLocked?: boolean
+  lastLoginAt?: Date | string | null
+  failedLoginAttempts?: number
+  passwordChangedAt?: Date | string | null
+  regionId?: string | null
+  zoneId?: string | null
+  woredaId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+}
+
+export type UserUpdateWithoutKebeleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  region?: Prisma.RegionUpdateOneWithoutUsersNestedInput
+  zone?: Prisma.ZoneUpdateOneWithoutUsersNestedInput
+  woreda?: Prisma.WoredaUpdateOneWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutKebeleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutKebeleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  passwordChangedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woredaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1445,6 +2264,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   failedLoginAttempts?: boolean
   passwordChangedAt?: boolean
   regionId?: boolean
+  zoneId?: boolean
+  woredaId?: boolean
+  kebeleId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1454,6 +2276,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   region?: boolean | Prisma.User$regionArgs<ExtArgs>
+  zone?: boolean | Prisma.User$zoneArgs<ExtArgs>
+  woreda?: boolean | Prisma.User$woredaArgs<ExtArgs>
+  kebele?: boolean | Prisma.User$kebeleArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1473,12 +2298,18 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   failedLoginAttempts?: boolean
   passwordChangedAt?: boolean
   regionId?: boolean
+  zoneId?: boolean
+  woredaId?: boolean
+  kebeleId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
   createdBy?: boolean
   updatedBy?: boolean
   region?: boolean | Prisma.User$regionArgs<ExtArgs>
+  zone?: boolean | Prisma.User$zoneArgs<ExtArgs>
+  woreda?: boolean | Prisma.User$woredaArgs<ExtArgs>
+  kebele?: boolean | Prisma.User$kebeleArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1497,12 +2328,18 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   failedLoginAttempts?: boolean
   passwordChangedAt?: boolean
   regionId?: boolean
+  zoneId?: boolean
+  woredaId?: boolean
+  kebeleId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
   createdBy?: boolean
   updatedBy?: boolean
   region?: boolean | Prisma.User$regionArgs<ExtArgs>
+  zone?: boolean | Prisma.User$zoneArgs<ExtArgs>
+  woreda?: boolean | Prisma.User$woredaArgs<ExtArgs>
+  kebele?: boolean | Prisma.User$kebeleArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1521,6 +2358,9 @@ export type UserSelectScalar = {
   failedLoginAttempts?: boolean
   passwordChangedAt?: boolean
   regionId?: boolean
+  zoneId?: boolean
+  woredaId?: boolean
+  kebeleId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1528,19 +2368,28 @@ export type UserSelectScalar = {
   updatedBy?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "mobileNumber" | "password" | "firstName" | "lastName" | "phone" | "avatar" | "isActive" | "isLocked" | "lastLoginAt" | "failedLoginAttempts" | "passwordChangedAt" | "regionId" | "createdAt" | "updatedAt" | "deletedAt" | "createdBy" | "updatedBy", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "mobileNumber" | "password" | "firstName" | "lastName" | "phone" | "avatar" | "isActive" | "isLocked" | "lastLoginAt" | "failedLoginAttempts" | "passwordChangedAt" | "regionId" | "zoneId" | "woredaId" | "kebeleId" | "createdAt" | "updatedAt" | "deletedAt" | "createdBy" | "updatedBy", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userRoles?: boolean | Prisma.User$userRolesArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   region?: boolean | Prisma.User$regionArgs<ExtArgs>
+  zone?: boolean | Prisma.User$zoneArgs<ExtArgs>
+  woreda?: boolean | Prisma.User$woredaArgs<ExtArgs>
+  kebele?: boolean | Prisma.User$kebeleArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   region?: boolean | Prisma.User$regionArgs<ExtArgs>
+  zone?: boolean | Prisma.User$zoneArgs<ExtArgs>
+  woreda?: boolean | Prisma.User$woredaArgs<ExtArgs>
+  kebele?: boolean | Prisma.User$kebeleArgs<ExtArgs>
 }
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   region?: boolean | Prisma.User$regionArgs<ExtArgs>
+  zone?: boolean | Prisma.User$zoneArgs<ExtArgs>
+  woreda?: boolean | Prisma.User$woredaArgs<ExtArgs>
+  kebele?: boolean | Prisma.User$kebeleArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1550,6 +2399,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     region: Prisma.$RegionPayload<ExtArgs> | null
+    zone: Prisma.$ZonePayload<ExtArgs> | null
+    woreda: Prisma.$WoredaPayload<ExtArgs> | null
+    kebele: Prisma.$KebelePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1567,6 +2419,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     failedLoginAttempts: number
     passwordChangedAt: Date | null
     regionId: string | null
+    zoneId: string | null
+    woredaId: string | null
+    kebeleId: string | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -1970,6 +2825,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   region<T extends Prisma.User$regionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$regionArgs<ExtArgs>>): Prisma.Prisma__RegionClient<runtime.Types.Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  zone<T extends Prisma.User$zoneArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$zoneArgs<ExtArgs>>): Prisma.Prisma__ZoneClient<runtime.Types.Result.GetResult<Prisma.$ZonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  woreda<T extends Prisma.User$woredaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$woredaArgs<ExtArgs>>): Prisma.Prisma__WoredaClient<runtime.Types.Result.GetResult<Prisma.$WoredaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  kebele<T extends Prisma.User$kebeleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$kebeleArgs<ExtArgs>>): Prisma.Prisma__KebeleClient<runtime.Types.Result.GetResult<Prisma.$KebelePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2014,6 +2872,9 @@ export interface UserFieldRefs {
   readonly failedLoginAttempts: Prisma.FieldRef<"User", 'Int'>
   readonly passwordChangedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly regionId: Prisma.FieldRef<"User", 'String'>
+  readonly zoneId: Prisma.FieldRef<"User", 'String'>
+  readonly woredaId: Prisma.FieldRef<"User", 'String'>
+  readonly kebeleId: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -2508,6 +3369,63 @@ export type User$regionArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   include?: Prisma.RegionInclude<ExtArgs> | null
   where?: Prisma.RegionWhereInput
+}
+
+/**
+ * User.zone
+ */
+export type User$zoneArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Zone
+   */
+  select?: Prisma.ZoneSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Zone
+   */
+  omit?: Prisma.ZoneOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZoneInclude<ExtArgs> | null
+  where?: Prisma.ZoneWhereInput
+}
+
+/**
+ * User.woreda
+ */
+export type User$woredaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Woreda
+   */
+  select?: Prisma.WoredaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Woreda
+   */
+  omit?: Prisma.WoredaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WoredaInclude<ExtArgs> | null
+  where?: Prisma.WoredaWhereInput
+}
+
+/**
+ * User.kebele
+ */
+export type User$kebeleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Kebele
+   */
+  select?: Prisma.KebeleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Kebele
+   */
+  omit?: Prisma.KebeleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.KebeleInclude<ExtArgs> | null
+  where?: Prisma.KebeleWhereInput
 }
 
 /**

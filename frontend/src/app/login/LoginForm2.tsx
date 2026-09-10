@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/presentation/components/ui/button";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -65,11 +66,12 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        setError(
+        const message =
           result.error === "CredentialsSignin"
             ? "Invalid email or password"
-            : result.error,
-        );
+            : result.error;
+
+        toast.error("Invalid Username or Password");
 
         return;
       }
@@ -402,7 +404,7 @@ export default function LoginPage() {
                 shadow-[0_30px_80px_oklch(0.28_0.04_250_/_0.10),0_0_0_1px_oklch(0.55_0.08_250_/_0.04)]
                 transition-transform duration-200
                 will-change-transform
-              " 
+              "
             >
               <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 {/* Email */}

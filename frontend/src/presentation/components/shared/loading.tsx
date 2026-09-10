@@ -4,8 +4,53 @@ import { Loader2, LoaderCircle, ShieldCheck } from "lucide-react";
 
 export function PageLoader() {
   return (
-    <div className="flex h-full min-h-[400px] items-center justify-center">
-      <Loader2 className="h-7 w-7 animate-spin text-primary" />
+    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
+      <div className="flex flex-col items-center gap-5">
+        <div className="relative flex size-16 items-center justify-center">
+          <div className="absolute inset-0 animate-ping rounded-2xl bg-primary/10" />
+
+          <div className="relative flex size-16 items-center justify-center rounded-2xl border bg-card shadow-sm">
+            <Loader2 className="size-7 animate-spin text-primary" />
+          </div>
+        </div>
+
+        <div className="space-y-1 text-center">
+          <p className="text-sm font-medium">Loading dashboard</p>
+          <p className="text-xs text-muted-foreground">
+            Preparing your workspace...
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function PageLoader2() {
+  return (
+    <div className="min-h-[calc(100vh-4rem)] p-6">
+      <div className="mx-auto max-w-7xl space-y-6">
+        {/* Header */}
+        <div className="space-y-3">
+          <div className="h-8 w-56 animate-pulse rounded-lg bg-muted" />
+          <div className="h-4 w-80 animate-pulse rounded-md bg-muted" />
+        </div>
+
+        {/* Stats */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-32 animate-pulse rounded-2xl border bg-card"
+            />
+          ))}
+        </div>
+
+        {/* Main content */}
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="h-80 animate-pulse rounded-2xl border bg-card lg:col-span-2" />
+          <div className="h-80 animate-pulse rounded-2xl border bg-card" />
+        </div>
+      </div>
     </div>
   );
 }

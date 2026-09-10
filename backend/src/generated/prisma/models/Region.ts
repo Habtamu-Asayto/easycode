@@ -212,8 +212,9 @@ export type RegionWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Region"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Region"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Region"> | Date | string | null
-  createdBy?: Prisma.StringNullableFilter<"Region"> | string | null
-  updatedBy?: Prisma.StringNullableFilter<"Region"> | string | null
+  createdBy?: Prisma.UuidNullableFilter<"Region"> | string | null
+  updatedBy?: Prisma.UuidNullableFilter<"Region"> | string | null
+  zones?: Prisma.ZoneListRelationFilter
   users?: Prisma.UserListRelationFilter
 }
 
@@ -227,24 +228,26 @@ export type RegionOrderByWithRelationInput = {
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  zones?: Prisma.ZoneOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type RegionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   code?: string
   AND?: Prisma.RegionWhereInput | Prisma.RegionWhereInput[]
   OR?: Prisma.RegionWhereInput[]
   NOT?: Prisma.RegionWhereInput | Prisma.RegionWhereInput[]
-  name?: Prisma.StringFilter<"Region"> | string
   isActive?: Prisma.BoolFilter<"Region"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Region"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Region"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Region"> | Date | string | null
-  createdBy?: Prisma.StringNullableFilter<"Region"> | string | null
-  updatedBy?: Prisma.StringNullableFilter<"Region"> | string | null
+  createdBy?: Prisma.UuidNullableFilter<"Region"> | string | null
+  updatedBy?: Prisma.UuidNullableFilter<"Region"> | string | null
+  zones?: Prisma.ZoneListRelationFilter
   users?: Prisma.UserListRelationFilter
-}, "id" | "code">
+}, "id" | "name" | "code">
 
 export type RegionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -272,8 +275,8 @@ export type RegionScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Region"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Region"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Region"> | Date | string | null
-  createdBy?: Prisma.StringNullableWithAggregatesFilter<"Region"> | string | null
-  updatedBy?: Prisma.StringNullableWithAggregatesFilter<"Region"> | string | null
+  createdBy?: Prisma.UuidNullableWithAggregatesFilter<"Region"> | string | null
+  updatedBy?: Prisma.UuidNullableWithAggregatesFilter<"Region"> | string | null
 }
 
 export type RegionCreateInput = {
@@ -286,6 +289,7 @@ export type RegionCreateInput = {
   deletedAt?: Date | string | null
   createdBy?: string | null
   updatedBy?: string | null
+  zones?: Prisma.ZoneCreateNestedManyWithoutRegionInput
   users?: Prisma.UserCreateNestedManyWithoutRegionInput
 }
 
@@ -299,6 +303,7 @@ export type RegionUncheckedCreateInput = {
   deletedAt?: Date | string | null
   createdBy?: string | null
   updatedBy?: string | null
+  zones?: Prisma.ZoneUncheckedCreateNestedManyWithoutRegionInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutRegionInput
 }
 
@@ -312,6 +317,7 @@ export type RegionUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zones?: Prisma.ZoneUpdateManyWithoutRegionNestedInput
   users?: Prisma.UserUpdateManyWithoutRegionNestedInput
 }
 
@@ -325,6 +331,7 @@ export type RegionUncheckedUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zones?: Prisma.ZoneUncheckedUpdateManyWithoutRegionNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutRegionNestedInput
 }
 
@@ -405,6 +412,11 @@ export type RegionMinOrderByAggregateInput = {
   updatedBy?: Prisma.SortOrder
 }
 
+export type RegionScalarRelationFilter = {
+  is?: Prisma.RegionWhereInput
+  isNot?: Prisma.RegionWhereInput
+}
+
 export type RegionCreateNestedOneWithoutUsersInput = {
   create?: Prisma.XOR<Prisma.RegionCreateWithoutUsersInput, Prisma.RegionUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.RegionCreateOrConnectWithoutUsersInput
@@ -421,6 +433,20 @@ export type RegionUpdateOneWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RegionUpdateToOneWithWhereWithoutUsersInput, Prisma.RegionUpdateWithoutUsersInput>, Prisma.RegionUncheckedUpdateWithoutUsersInput>
 }
 
+export type RegionCreateNestedOneWithoutZonesInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutZonesInput, Prisma.RegionUncheckedCreateWithoutZonesInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutZonesInput
+  connect?: Prisma.RegionWhereUniqueInput
+}
+
+export type RegionUpdateOneRequiredWithoutZonesNestedInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutZonesInput, Prisma.RegionUncheckedCreateWithoutZonesInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutZonesInput
+  upsert?: Prisma.RegionUpsertWithoutZonesInput
+  connect?: Prisma.RegionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegionUpdateToOneWithWhereWithoutZonesInput, Prisma.RegionUpdateWithoutZonesInput>, Prisma.RegionUncheckedUpdateWithoutZonesInput>
+}
+
 export type RegionCreateWithoutUsersInput = {
   id?: string
   name: string
@@ -431,6 +457,7 @@ export type RegionCreateWithoutUsersInput = {
   deletedAt?: Date | string | null
   createdBy?: string | null
   updatedBy?: string | null
+  zones?: Prisma.ZoneCreateNestedManyWithoutRegionInput
 }
 
 export type RegionUncheckedCreateWithoutUsersInput = {
@@ -443,6 +470,7 @@ export type RegionUncheckedCreateWithoutUsersInput = {
   deletedAt?: Date | string | null
   createdBy?: string | null
   updatedBy?: string | null
+  zones?: Prisma.ZoneUncheckedCreateNestedManyWithoutRegionInput
 }
 
 export type RegionCreateOrConnectWithoutUsersInput = {
@@ -471,6 +499,7 @@ export type RegionUpdateWithoutUsersInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zones?: Prisma.ZoneUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionUncheckedUpdateWithoutUsersInput = {
@@ -483,6 +512,75 @@ export type RegionUncheckedUpdateWithoutUsersInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zones?: Prisma.ZoneUncheckedUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionCreateWithoutZonesInput = {
+  id?: string
+  name: string
+  code: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  users?: Prisma.UserCreateNestedManyWithoutRegionInput
+}
+
+export type RegionUncheckedCreateWithoutZonesInput = {
+  id?: string
+  name: string
+  code: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdBy?: string | null
+  updatedBy?: string | null
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutRegionInput
+}
+
+export type RegionCreateOrConnectWithoutZonesInput = {
+  where: Prisma.RegionWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegionCreateWithoutZonesInput, Prisma.RegionUncheckedCreateWithoutZonesInput>
+}
+
+export type RegionUpsertWithoutZonesInput = {
+  update: Prisma.XOR<Prisma.RegionUpdateWithoutZonesInput, Prisma.RegionUncheckedUpdateWithoutZonesInput>
+  create: Prisma.XOR<Prisma.RegionCreateWithoutZonesInput, Prisma.RegionUncheckedCreateWithoutZonesInput>
+  where?: Prisma.RegionWhereInput
+}
+
+export type RegionUpdateToOneWithWhereWithoutZonesInput = {
+  where?: Prisma.RegionWhereInput
+  data: Prisma.XOR<Prisma.RegionUpdateWithoutZonesInput, Prisma.RegionUncheckedUpdateWithoutZonesInput>
+}
+
+export type RegionUpdateWithoutZonesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  users?: Prisma.UserUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionUncheckedUpdateWithoutZonesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  users?: Prisma.UserUncheckedUpdateManyWithoutRegionNestedInput
 }
 
 
@@ -491,10 +589,12 @@ export type RegionUncheckedUpdateWithoutUsersInput = {
  */
 
 export type RegionCountOutputType = {
+  zones: number
   users: number
 }
 
 export type RegionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  zones?: boolean | RegionCountOutputTypeCountZonesArgs
   users?: boolean | RegionCountOutputTypeCountUsersArgs
 }
 
@@ -506,6 +606,13 @@ export type RegionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the RegionCountOutputType
    */
   select?: Prisma.RegionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RegionCountOutputType without action
+ */
+export type RegionCountOutputTypeCountZonesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ZoneWhereInput
 }
 
 /**
@@ -526,6 +633,7 @@ export type RegionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   deletedAt?: boolean
   createdBy?: boolean
   updatedBy?: boolean
+  zones?: boolean | Prisma.Region$zonesArgs<ExtArgs>
   users?: boolean | Prisma.Region$usersArgs<ExtArgs>
   _count?: boolean | Prisma.RegionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["region"]>
@@ -568,6 +676,7 @@ export type RegionSelectScalar = {
 
 export type RegionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "isActive" | "createdAt" | "updatedAt" | "deletedAt" | "createdBy" | "updatedBy", ExtArgs["result"]["region"]>
 export type RegionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  zones?: boolean | Prisma.Region$zonesArgs<ExtArgs>
   users?: boolean | Prisma.Region$usersArgs<ExtArgs>
   _count?: boolean | Prisma.RegionCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -577,6 +686,7 @@ export type RegionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $RegionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Region"
   objects: {
+    zones: Prisma.$ZonePayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -983,6 +1093,7 @@ readonly fields: RegionFieldRefs;
  */
 export interface Prisma__RegionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  zones<T extends Prisma.Region$zonesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$zonesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ZonePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Region$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1412,6 +1523,30 @@ export type RegionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Regions to delete.
    */
   limit?: number
+}
+
+/**
+ * Region.zones
+ */
+export type Region$zonesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Zone
+   */
+  select?: Prisma.ZoneSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Zone
+   */
+  omit?: Prisma.ZoneOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZoneInclude<ExtArgs> | null
+  where?: Prisma.ZoneWhereInput
+  orderBy?: Prisma.ZoneOrderByWithRelationInput | Prisma.ZoneOrderByWithRelationInput[]
+  cursor?: Prisma.ZoneWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ZoneScalarFieldEnum | Prisma.ZoneScalarFieldEnum[]
 }
 
 /**

@@ -5,8 +5,9 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   DataPagination,
   SearchInput,
-  ConfirmDialog,
+  ConfirmDialog, 
   PageLoader,
+  PageLoader2,
   EmptyState,
 } from "@/presentation/components/shared";
 import { useAuth } from "@/presentation/hooks";
@@ -209,7 +210,7 @@ export function CrudPage<
 
       {/* Content */}
       {isLoading ? (
-        <PageLoader />
+        <PageLoader2 />
       ) : !data?.data?.length ? (
         <EmptyState
           icon={Icon}

@@ -1114,6 +1114,45 @@ backend/src/infrastructure/
 
 ## Build the Region Backend
 
+### Procedure of building backend of regions
+
+
+```
+Prisma
+ ├── region 
+
+        ↓
+
+Domain
+ ├── regionEntity 
+
+        ↓
+
+Repository contracts
+ ├── IRegionRepository 
+
+        ↓
+
+DTOs
+ ├── region DTO 
+
+        ↓
+
+Use cases
+ ├── region 
+
+        ↓
+
+Infrastructure
+ ├── region repository 
+
+        ↓
+
+Presentation
+ ├── region controller 
+ 
+```
+
 - complete flow becomes
 
 ```

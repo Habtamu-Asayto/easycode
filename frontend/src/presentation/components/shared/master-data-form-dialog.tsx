@@ -41,7 +41,7 @@ interface MasterDataFormDialogProps<T extends { id: string }> {
 export function MasterDataFormDialog<
   T extends {
     id: string;
-    name: string;
+    name: string; 
     code: string;
     description?: string | null;
   },

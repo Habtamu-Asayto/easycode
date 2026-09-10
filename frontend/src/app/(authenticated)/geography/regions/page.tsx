@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { regionsApi }from "@/infrastructure/geography/api/geography.api";
+import { regionsApi } from "@/infrastructure/geography/api";
 import {
   CrudPage,
   StatusBadge,

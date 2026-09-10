@@ -57,3 +57,18 @@ export type AuditLog = Prisma.AuditLogModel
  * 
  */
 export type Region = Prisma.RegionModel
+/**
+ * Model Zone
+ * 
+ */
+export type Zone = Prisma.ZoneModel
+/**
+ * Model Woreda
+ * 
+ */
+export type Woreda = Prisma.WoredaModel
+/**
+ * Model Kebele
+ * 
+ */
+export type Kebele = Prisma.KebeleModel

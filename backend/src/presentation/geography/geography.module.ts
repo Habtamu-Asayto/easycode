@@ -1,49 +1,26 @@
+import { Module } from '@nestjs/common';
 
-import { Module } from "@nestjs/common";
-
+// Controllers
 import {
-  GetRegionsUseCase,
-  GetRegionUseCase,
-  CreateRegionUseCase,
-  UpdateRegionUseCase,
-  DeleteRegionUseCase,
-  LookupRegionsUseCase,
-} from "../../application/geography/use-cases";
+  RegionController,
+  ZoneController,
+  WoredaController,
+  KebeleController,
+} from './controllers';
 
-import { PrismaService } from "../../infrastructure/database/prisma/prisma.service";
-
-import { PrismaRegionRepository } from "../../infrastructure/geography/database/repositories/region.repository.impl";
-
-import { RegionController } from "./controllers/region.controller";
-
-import { GEOGRAPHY_TOKENS } from "../../shared/constants";
-
+// Providers
+import {
+  repositoryProviders,
+  useCaseProviders,
+} from './providers/geography.providers'; 
 @Module({
-  controllers: [RegionController],
-
-  providers: [
-    PrismaService,
-
-    {
-      provide: GEOGRAPHY_TOKENS.REGION_REPOSITORY,
-      useClass: PrismaRegionRepository,
-    },
-
-    GetRegionsUseCase,
-    GetRegionUseCase,
-    CreateRegionUseCase,
-    UpdateRegionUseCase,
-    DeleteRegionUseCase,
-    LookupRegionsUseCase,
+  controllers: [
+    RegionController,
+    ZoneController,
+    WoredaController,
+    KebeleController, 
   ],
-
-  exports: [
-    GetRegionsUseCase,
-    GetRegionUseCase,
-    CreateRegionUseCase,
-    UpdateRegionUseCase,
-    DeleteRegionUseCase,
-    LookupRegionsUseCase,
-  ],
+  providers: [...repositoryProviders, ...useCaseProviders],
+  exports: [...repositoryProviders],
 })
 export class GeographyModule {}

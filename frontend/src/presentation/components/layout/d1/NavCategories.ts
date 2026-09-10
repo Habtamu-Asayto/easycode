@@ -7,15 +7,7 @@ import {
   Map,
   MapPin,
   Building2,
-  Home,
-  FlaskConical,
-  Layers,
-  Sprout,
-  Sun,
-  CalendarRange,
-  Warehouse,
-  Truck,
-  Store,
+  Home, 
 } from "lucide-react";
 
 export type NavItem = {
@@ -41,7 +33,7 @@ export const navCategories: NavCategory[] = [
         icon: LayoutDashboard,
       },
     ],
-  },
+  }, 
 
   {
     label: "Administration",

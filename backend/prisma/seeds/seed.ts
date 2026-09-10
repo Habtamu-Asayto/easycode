@@ -180,10 +180,10 @@ async function main() {
   // Create super admin user
   const hashedPassword = await bcrypt.hash('Admin@123456', SALT_ROUNDS);
   const superAdmin = await prisma.user.upsert({
-    where: { email: 'admin@fms.com' },
+    where: { email: 'admin@test.com' },
     update: {},
     create: {
-      email: 'admin@fms.com',
+      email: 'admin@test.com',
       username: 'superadmin',
       password: hashedPassword,
       firstName: 'Super',
@@ -213,10 +213,10 @@ async function main() {
   // Create a demo regular user
   const demoPassword = await bcrypt.hash('User@123456', SALT_ROUNDS);
   const demoUser = await prisma.user.upsert({
-    where: { email: 'user@fms.com' },
+    where: { email: 'user@test.com' },
     update: {},
     create: {
-      email: 'user@fms.com',
+      email: 'user@test.com',
       username: 'demouser',
       password: demoPassword,
       firstName: 'Demo',

@@ -1,48 +1,56 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import { Sidebar } from './sidebar'
-import { Topbar } from './topbar'
+import { AppSidebar } from "./sidebar";
+import { Topbar } from "./topbar";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [collapsed, setCollapsed] = useState(false)
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   // Default theme: Light
   useEffect(() => {
-    document.documentElement.classList.remove('dark')
-    document.documentElement.classList.add('light')
-  }, [])
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prev) => {
-      const next = prev === 'dark' ? 'light' : 'dark'
+      const next = prev === "dark" ? "light" : "dark";
 
-      document.documentElement.classList.toggle('dark', next === 'dark')
-      document.documentElement.classList.toggle('light', next === 'light')
+      document.documentElement.classList.toggle(
+        "dark",
+        next === "dark",
+      );
 
-      return next
-    })
-  }
+      document.documentElement.classList.toggle(
+        "light",
+        next === "light",
+      );
 
-  // On desktop the button collapses the rail;
-  // on mobile it opens the slide-over drawer.
+      return next;
+    });
+  };
+
+  // Desktop: collapse/expand sidebar
+  // Mobile: open/close sidebar drawer
   const handleMenu = () => {
-    if (window.matchMedia('(min-width: 1024px)').matches) {
-      setCollapsed((c) => !c)
+    if (window.matchMedia("(min-width: 1024px)").matches) {
+      setCollapsed((prev) => !prev);
     } else {
-      setSidebarOpen((o) => !o)
+      setMobileOpen((prev) => !prev);
     }
-  }
+  };
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <Sidebar
-        open={sidebarOpen}
+    <div className="flex min-h-screen bg-background text-foreground">
+      <AppSidebar
         collapsed={collapsed}
-        onClose={() => setSidebarOpen(false)}
+        onToggleCollapse={() => setCollapsed((prev) => !prev)}
+        mobileOpen={mobileOpen}
+        onMobileClose={() => setMobileOpen(false)}
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
@@ -52,10 +60,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           onToggleTheme={toggleTheme}
         />
 
-        <main className="flex-1 px-4 py-6 sm:px-6">
+        <main className="min-w-0 flex-1">
           {children}
         </main>
       </div>
     </div>
-  )
+  );
 }

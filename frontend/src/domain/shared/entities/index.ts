@@ -8,12 +8,12 @@ export interface ApiResponse<T> {
 
 export interface PaginatedResponse<T> {
   success: boolean;
-  data: T[];
+  items: T[];
   meta: PaginationMeta;
   message?: string;
   timestamp: string;
 }
-
+ 
 export interface PaginationMeta {
   page: number;
   limit: number;

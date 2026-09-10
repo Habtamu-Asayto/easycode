@@ -404,7 +404,10 @@ export const ModelName = {
   RolePermission: 'RolePermission',
   RefreshToken: 'RefreshToken',
   AuditLog: 'AuditLog',
-  Region: 'Region'
+  Region: 'Region',
+  Zone: 'Zone',
+  Woreda: 'Woreda',
+  Kebele: 'Kebele'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -420,7 +423,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "refreshToken" | "auditLog" | "region"
+    modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "refreshToken" | "auditLog" | "region" | "zone" | "woreda" | "kebele"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1016,6 +1019,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Zone: {
+      payload: Prisma.$ZonePayload<ExtArgs>
+      fields: Prisma.ZoneFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ZoneFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ZoneFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>
+        }
+        findFirst: {
+          args: Prisma.ZoneFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ZoneFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>
+        }
+        findMany: {
+          args: Prisma.ZoneFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>[]
+        }
+        create: {
+          args: Prisma.ZoneCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>
+        }
+        createMany: {
+          args: Prisma.ZoneCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ZoneCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>[]
+        }
+        delete: {
+          args: Prisma.ZoneDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>
+        }
+        update: {
+          args: Prisma.ZoneUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>
+        }
+        deleteMany: {
+          args: Prisma.ZoneDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ZoneUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ZoneUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>[]
+        }
+        upsert: {
+          args: Prisma.ZoneUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZonePayload>
+        }
+        aggregate: {
+          args: Prisma.ZoneAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateZone>
+        }
+        groupBy: {
+          args: Prisma.ZoneGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ZoneGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ZoneCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ZoneCountAggregateOutputType> | number
+        }
+      }
+    }
+    Woreda: {
+      payload: Prisma.$WoredaPayload<ExtArgs>
+      fields: Prisma.WoredaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WoredaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WoredaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>
+        }
+        findFirst: {
+          args: Prisma.WoredaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WoredaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>
+        }
+        findMany: {
+          args: Prisma.WoredaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>[]
+        }
+        create: {
+          args: Prisma.WoredaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>
+        }
+        createMany: {
+          args: Prisma.WoredaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WoredaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>[]
+        }
+        delete: {
+          args: Prisma.WoredaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>
+        }
+        update: {
+          args: Prisma.WoredaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>
+        }
+        deleteMany: {
+          args: Prisma.WoredaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WoredaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WoredaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>[]
+        }
+        upsert: {
+          args: Prisma.WoredaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WoredaPayload>
+        }
+        aggregate: {
+          args: Prisma.WoredaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWoreda>
+        }
+        groupBy: {
+          args: Prisma.WoredaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WoredaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WoredaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WoredaCountAggregateOutputType> | number
+        }
+      }
+    }
+    Kebele: {
+      payload: Prisma.$KebelePayload<ExtArgs>
+      fields: Prisma.KebeleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.KebeleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.KebeleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>
+        }
+        findFirst: {
+          args: Prisma.KebeleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.KebeleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>
+        }
+        findMany: {
+          args: Prisma.KebeleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>[]
+        }
+        create: {
+          args: Prisma.KebeleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>
+        }
+        createMany: {
+          args: Prisma.KebeleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.KebeleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>[]
+        }
+        delete: {
+          args: Prisma.KebeleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>
+        }
+        update: {
+          args: Prisma.KebeleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>
+        }
+        deleteMany: {
+          args: Prisma.KebeleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.KebeleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.KebeleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>[]
+        }
+        upsert: {
+          args: Prisma.KebeleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$KebelePayload>
+        }
+        aggregate: {
+          args: Prisma.KebeleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateKebele>
+        }
+        groupBy: {
+          args: Prisma.KebeleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.KebeleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.KebeleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.KebeleCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1071,6 +1296,9 @@ export const UserScalarFieldEnum = {
   failedLoginAttempts: 'failedLoginAttempts',
   passwordChangedAt: 'passwordChangedAt',
   regionId: 'regionId',
+  zoneId: 'zoneId',
+  woredaId: 'woredaId',
+  kebeleId: 'kebeleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
@@ -1188,6 +1416,54 @@ export const RegionScalarFieldEnum = {
 } as const
 
 export type RegionScalarFieldEnum = (typeof RegionScalarFieldEnum)[keyof typeof RegionScalarFieldEnum]
+
+
+export const ZoneScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  regionId: 'regionId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ZoneScalarFieldEnum = (typeof ZoneScalarFieldEnum)[keyof typeof ZoneScalarFieldEnum]
+
+
+export const WoredaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  zoneId: 'zoneId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type WoredaScalarFieldEnum = (typeof WoredaScalarFieldEnum)[keyof typeof WoredaScalarFieldEnum]
+
+
+export const KebeleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  woredaId: 'woredaId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type KebeleScalarFieldEnum = (typeof KebeleScalarFieldEnum)[keyof typeof KebeleScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1472,6 +1748,9 @@ export type GlobalOmitConfig = {
   refreshToken?: Prisma.RefreshTokenOmit
   auditLog?: Prisma.AuditLogOmit
   region?: Prisma.RegionOmit
+  zone?: Prisma.ZoneOmit
+  woreda?: Prisma.WoredaOmit
+  kebele?: Prisma.KebeleOmit
 }
 
 /* Types for Logging */

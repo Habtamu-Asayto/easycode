@@ -58,7 +58,10 @@ export const ModelName = {
   RolePermission: 'RolePermission',
   RefreshToken: 'RefreshToken',
   AuditLog: 'AuditLog',
-  Region: 'Region'
+  Region: 'Region',
+  Zone: 'Zone',
+  Woreda: 'Woreda',
+  Kebele: 'Kebele'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -93,6 +96,9 @@ export const UserScalarFieldEnum = {
   failedLoginAttempts: 'failedLoginAttempts',
   passwordChangedAt: 'passwordChangedAt',
   regionId: 'regionId',
+  zoneId: 'zoneId',
+  woredaId: 'woredaId',
+  kebeleId: 'kebeleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
@@ -210,6 +216,54 @@ export const RegionScalarFieldEnum = {
 } as const
 
 export type RegionScalarFieldEnum = (typeof RegionScalarFieldEnum)[keyof typeof RegionScalarFieldEnum]
+
+
+export const ZoneScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  regionId: 'regionId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ZoneScalarFieldEnum = (typeof ZoneScalarFieldEnum)[keyof typeof ZoneScalarFieldEnum]
+
+
+export const WoredaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  zoneId: 'zoneId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type WoredaScalarFieldEnum = (typeof WoredaScalarFieldEnum)[keyof typeof WoredaScalarFieldEnum]
+
+
+export const KebeleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  woredaId: 'woredaId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type KebeleScalarFieldEnum = (typeof KebeleScalarFieldEnum)[keyof typeof KebeleScalarFieldEnum]
 
 
 export const SortOrder = {

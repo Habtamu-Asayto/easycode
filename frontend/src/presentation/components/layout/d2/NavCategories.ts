@@ -67,17 +67,11 @@ export const navCategories: NavCategory[] = [
         permission: "users:read",
       },
       {
-        label: "Roles",
-        href: "/roles",
+        label: "Access Control",
+        href: "/rbac",
         icon: Shield,
         permission: "roles:read",
-      },
-      {
-        label: "Permissions",
-        href: "/permissions",
-        icon: Key,
-        permission: "permissions:read",
-      },
+      }, 
       {
         label: "Audit Logs",
         href: "/audit-logs",

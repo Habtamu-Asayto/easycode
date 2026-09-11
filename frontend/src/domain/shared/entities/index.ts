@@ -13,7 +13,7 @@ export interface PaginatedResponse<T> {
   message?: string;
   timestamp: string;
 }
- 
+
 export interface PaginationMeta {
   page: number;
   limit: number;

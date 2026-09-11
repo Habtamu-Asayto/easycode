@@ -94,12 +94,12 @@ export function AppSidebar({
           "group relative flex w-full items-center rounded-xl text-sm font-medium transition-all duration-200",
           collapsed ? "h-11 w-11 justify-center" : "gap-3 px-3 py-2.5",
           isActive
-            ? "bg-gradient-to-br from-primary/15 via-primary/10 to-chart-2/10 text-primary ring-1 ring-primary/20 shadow-sm dark:from-primary/25 dark:via-primary/15 dark:to-chart-2/15 dark:text-primary-foreground dark:ring-primary/25"
+            ? "from-primary/15 via-primary/10 to-chart-2/10 text-primary ring-primary/20 dark:from-primary/25 dark:via-primary/15 dark:to-chart-2/15 dark:text-primary-foreground dark:ring-primary/25 bg-gradient-to-br shadow-sm ring-1"
             : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground",
         )}
       >
         {isActive && !collapsed && (
-          <span className="absolute left-0 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-primary" />
+          <span className="bg-primary absolute top-1/2 left-0 h-5 w-1 -translate-y-1/2 rounded-r-full" />
         )}
 
         <Icon
@@ -121,7 +121,7 @@ export function AppSidebar({
             className={cn(
               "grid h-5 min-w-5 place-items-center rounded-full px-1.5 text-[10px] font-semibold",
               isActive
-                ? "bg-primary/20 text-primary ring-1 ring-primary/25 dark:bg-primary/30 dark:text-primary-foreground"
+                ? "bg-primary/20 text-primary ring-primary/25 dark:bg-primary/30 dark:text-primary-foreground ring-1"
                 : "bg-sidebar-accent text-sidebar-accent-foreground",
             )}
           >
@@ -139,14 +139,14 @@ export function AppSidebar({
         aria-hidden={!mobileOpen}
         onClick={onMobileClose}
         className={cn(
-          "fixed inset-0 z-40 bg-foreground/40 backdrop-blur-sm transition-opacity lg:hidden",
+          "bg-foreground/40 fixed inset-0 z-40 backdrop-blur-sm transition-opacity lg:hidden",
           mobileOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[transform,width] duration-300 ease-out lg:sticky lg:top-0 lg:z-auto lg:h-screen lg:translate-x-0",
+          "border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-y-0 left-0 z-50 flex flex-col border-r transition-[transform,width] duration-300 ease-out lg:sticky lg:top-0 lg:z-auto lg:h-screen lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           collapsed ? "w-[76px]" : "w-72",
         )}
@@ -154,20 +154,20 @@ export function AppSidebar({
         {/* Brand */}
         <div
           className={cn(
-            "flex h-16 shrink-0 items-center border-b border-sidebar-border",
+            "border-sidebar-border flex h-16 shrink-0 items-center border-b",
             collapsed ? "justify-center px-2" : "gap-3 px-5",
           )}
         >
-          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-primary to-chart-2 text-primary-foreground shadow-lg shadow-primary/25">
+          <span className="from-primary to-chart-2 text-primary-foreground shadow-primary/25 grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br shadow-lg">
             <HeartPulse className="size-5" strokeWidth={2.2} />
           </span>
 
           {!collapsed && (
             <div className="flex min-w-0 flex-1 flex-col">
-              <span className="truncate text-sm font-bold tracking-[0.14em] text-sidebar-foreground">
+              <span className="text-sidebar-foreground truncate text-sm font-bold tracking-[0.14em]">
                 MEDICARE
               </span>
-              <span className="truncate text-[9px] font-medium uppercase tracking-[0.22em] text-sidebar-foreground/50">
+              <span className="text-sidebar-foreground/50 truncate text-[9px] font-medium tracking-[0.22em] uppercase">
                 Clinic Operations
               </span>
             </div>
@@ -177,7 +177,7 @@ export function AppSidebar({
             <button
               onClick={onToggleCollapse}
               aria-label="Collapse sidebar"
-              className="hidden size-8 place-items-center rounded-lg text-sidebar-foreground/55 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground lg:grid"
+              className="text-sidebar-foreground/55 hover:bg-sidebar-accent hover:text-sidebar-foreground hidden size-8 place-items-center rounded-lg transition-colors lg:grid"
             >
               <PanelLeftClose className="size-4" />
             </button>
@@ -186,7 +186,7 @@ export function AppSidebar({
           <button
             onClick={onMobileClose}
             aria-label="Close menu"
-            className="grid size-8 place-items-center rounded-lg text-sidebar-foreground/60 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground lg:hidden"
+            className="text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground grid size-8 place-items-center rounded-lg transition-colors lg:hidden"
           >
             <X className="size-4" />
           </button>
@@ -198,7 +198,7 @@ export function AppSidebar({
             <button
               onClick={onToggleCollapse}
               aria-label="Expand sidebar"
-              className="grid size-8 place-items-center rounded-lg text-sidebar-foreground/55 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+              className="text-sidebar-foreground/55 hover:bg-sidebar-accent hover:text-sidebar-foreground grid size-8 place-items-center rounded-lg transition-colors"
             >
               <PanelLeftOpen className="size-4" />
             </button>
@@ -214,24 +214,24 @@ export function AppSidebar({
 
               return (
                 <div key={cat.label} className="pb-1">
-                   {showHeader && !collapsed && (
+                  {showHeader && !collapsed && (
                     <button
                       type="button"
                       onClick={() =>
                         cat.collapsible && toggleCategory(cat.label)
                       }
                       className={cn(
-                        "flex w-full items-center px-3 pb-1 pt-4",
+                        "flex w-full items-center px-3 pt-4 pb-1",
                         cat.collapsible ? "cursor-pointer" : "cursor-default",
                       )}
                     >
-                      <span className="flex-1 text-left text-[10px] font-semibold uppercase tracking-[0.18em] text-sidebar-foreground/40">
+                      <span className="text-sidebar-foreground/40 flex-1 text-left text-[10px] font-semibold tracking-[0.18em] uppercase">
                         {cat.label}
                       </span>
                       {cat.collapsible && (
                         <ChevronRight
                           className={cn(
-                            "size-3.5 text-sidebar-foreground/40 transition-transform duration-200",
+                            "text-sidebar-foreground/40 size-3.5 transition-transform duration-200",
                             !isCatCollapsed && "rotate-90",
                           )}
                         />
@@ -241,7 +241,7 @@ export function AppSidebar({
 
                   {collapsed && (
                     <div className="my-2 flex justify-center">
-                      <span className="h-px w-6 rounded-full bg-sidebar-border" />
+                      <span className="bg-sidebar-border h-px w-6 rounded-full" />
                     </div>
                   )}
 
@@ -286,23 +286,23 @@ export function AppSidebar({
         <div className="px-3">
           <div
             className={cn(
-              "rounded-xl border border-sidebar-border bg-sidebar-accent/50 shadow-sm",
+              "border-sidebar-border bg-sidebar-accent/50 rounded-xl border shadow-sm",
               collapsed ? "flex justify-center p-2.5" : "p-3.5",
             )}
           >
             <div className={cn("flex items-center", collapsed ? "" : "gap-2")}>
               <span className="relative flex size-2">
-                <span className="pulse-dot absolute inline-flex size-2 rounded-full bg-success" />
-                <span className="relative inline-flex size-2 rounded-full bg-success" />
+                <span className="pulse-dot bg-success absolute inline-flex size-2 rounded-full" />
+                <span className="bg-success relative inline-flex size-2 rounded-full" />
               </span>
               {!collapsed && (
-                <span className="text-xs font-semibold text-sidebar-foreground">
+                <span className="text-sidebar-foreground text-xs font-semibold">
                   All systems operational
                 </span>
               )}
             </div>
             {!collapsed && (
-              <p className="mt-1.5 text-[11px] leading-4 text-sidebar-foreground/50">
+              <p className="text-sidebar-foreground/50 mt-1.5 text-[11px] leading-4">
                 EMR synced · 3 wards live · updated 12s ago
               </p>
             )}
@@ -326,7 +326,7 @@ export function AppSidebar({
                   <button
                     type="button"
                     aria-label={label}
-                    className="grid size-11 place-items-center rounded-xl text-sidebar-foreground/65 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                    className="text-sidebar-foreground/65 hover:bg-sidebar-accent hover:text-sidebar-foreground grid size-11 place-items-center rounded-xl transition-colors"
                   >
                     <Icon className="size-[18px]" />
                   </button>
@@ -339,7 +339,7 @@ export function AppSidebar({
               <button
                 key={label}
                 type="button"
-                className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-sidebar-foreground/65 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                className="text-sidebar-foreground/65 hover:bg-sidebar-accent hover:text-sidebar-foreground flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors"
               >
                 <Icon className="size-[18px] shrink-0" />
                 <span>{label}</span>
@@ -349,13 +349,13 @@ export function AppSidebar({
         </div>
 
         {/* Footer / user */}
-        <div className="mt-2 border-t border-sidebar-border p-3">
+        <div className="border-sidebar-border mt-2 border-t p-3">
           <DropdownMenu>
             <DropdownMenuTrigger
               render={
                 <button
                   className={cn(
-                    "flex w-full items-center rounded-xl transition-colors hover:bg-sidebar-accent",
+                    "hover:bg-sidebar-accent flex w-full items-center rounded-xl transition-colors",
                     collapsed
                       ? "mx-auto size-11 justify-center"
                       : "gap-2.5 px-2 py-2",
@@ -363,18 +363,18 @@ export function AppSidebar({
                 />
               }
             >
-              <Avatar className="size-9 shrink-0 ring-2 ring-primary/20">
-                <AvatarFallback className="bg-gradient-to-br from-primary to-chart-2 text-[11px] font-semibold text-primary-foreground">
+              <Avatar className="ring-primary/20 size-9 shrink-0 ring-2">
+                <AvatarFallback className="from-primary to-chart-2 text-primary-foreground bg-gradient-to-br text-[11px] font-semibold">
                   {initials}
                 </AvatarFallback>
               </Avatar>
 
               {!collapsed && (
                 <div className="flex min-w-0 flex-1 flex-col items-start">
-                  <span className="truncate text-[13px] font-semibold leading-tight text-sidebar-foreground">
+                  <span className="text-sidebar-foreground truncate text-[13px] leading-tight font-semibold">
                     {user?.firstName} {user?.lastName}
                   </span>
-                  <span className="truncate text-[11px] leading-tight text-sidebar-foreground/55">
+                  <span className="text-sidebar-foreground/55 truncate text-[11px] leading-tight">
                     {user?.roles}
                   </span>
                 </div>
@@ -390,7 +390,7 @@ export function AppSidebar({
                 <p className="text-sm font-medium">
                   {user?.firstName} {user?.lastName}
                 </p>
-                <p className="truncate text-xs text-muted-foreground">
+                <p className="text-muted-foreground truncate text-xs">
                   {user?.email}
                 </p>
               </div>

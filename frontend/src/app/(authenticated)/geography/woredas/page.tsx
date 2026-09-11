@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { GeographyHierarchySelector } from "@/presentation/components/shared/geography-hierarchy-selector";
-import {  Building2, Check, X, Database } from "lucide-react";
+import { Building2, Check, X, Database } from "lucide-react";
 
 import { woredasApi } from "@/infrastructure/geography/api";
 
@@ -25,14 +25,14 @@ const columns: ColumnDef<WoredaResponse>[] = [
     label: "Name",
     className: "w-[250px]",
     render: (w) => (
-      <span className="text-[13px] font-medium text-foreground">{w.name}</span>
+      <span className="text-foreground text-[13px] font-medium">{w.name}</span>
     ),
   },
   {
     key: "code",
     label: "Code",
     render: (w) => (
-      <span className="text-[13px] text-muted-foreground">{w.code}</span>
+      <span className="text-muted-foreground text-[13px]">{w.code}</span>
     ),
   },
   {

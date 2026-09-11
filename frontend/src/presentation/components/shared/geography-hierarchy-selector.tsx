@@ -8,6 +8,7 @@ import {
   regionsApi,
   zonesApi,
   woredasApi,
+  kebelesApi,
 } from "@/infrastructure/geography/api";
 
 import { SearchableRelationSelector } from "@/presentation/components/shared";
@@ -18,12 +19,11 @@ interface GeographyHierarchySelectorProps {
   isLoading: boolean;
 
   /**
-   * How deep the hierarchy should be displayed.
-   *
    * 2 = Region → Zone
    * 3 = Region → Zone → Woreda
+   * 4 = Region → Zone → Woreda → Kebele
    */
-  level: 2 | 3;
+  level: 2 | 3 | 4;
 }
 
 export function GeographyHierarchySelector({
@@ -32,24 +32,26 @@ export function GeographyHierarchySelector({
   isLoading,
   level,
 }: GeographyHierarchySelectorProps) {
-  const regionId = typeof fields._regionId === "string" ? fields._regionId : "";
+  const regionId = typeof fields.regionId === "string" ? fields.regionId : "";
 
-  const zoneId = typeof fields._zoneId === "string" ? fields._zoneId : "";
+  const zoneId = typeof fields.zoneId === "string" ? fields.zoneId : "";
 
   const woredaId = typeof fields.woredaId === "string" ? fields.woredaId : "";
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // Regions
-  // ───────────────────────────────────────────────────────────────────────────
+  const kebeleId = typeof fields.kebeleId === "string" ? fields.kebeleId : "";
+
+  // ─────────────────────────────────────────────
+  // Region
+  // ─────────────────────────────────────────────
 
   const { data: regions = [], isLoading: isRegionsLoading } = useQuery({
     queryKey: ["regions-lookup"],
     queryFn: () => regionsApi.lookup(),
   });
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // Zones depend on Region
-  // ───────────────────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────
+  // Zone
+  // ─────────────────────────────────────────────
 
   const { data: zones = [], isLoading: isZonesLoading } = useQuery({
     queryKey: ["zones-by-region", regionId],
@@ -57,9 +59,9 @@ export function GeographyHierarchySelector({
     enabled: Boolean(regionId),
   });
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // Woredas depend on Zone
-  // ───────────────────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────
+  // Woreda
+  // ─────────────────────────────────────────────
 
   const { data: woredas = [], isLoading: isWoredasLoading } = useQuery({
     queryKey: ["woredas-by-zone", zoneId],
@@ -67,33 +69,51 @@ export function GeographyHierarchySelector({
     enabled: level >= 3 && Boolean(zoneId),
   });
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // Clear dependent values
-  // ───────────────────────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────
+  // Kebele
+  // ─────────────────────────────────────────────
+
+  const { data: kebeles = [], isLoading: isKebelesLoading } = useQuery({
+    queryKey: ["kebeles-by-woreda", woredaId],
+    queryFn: () => kebelesApi.byWoreda(woredaId),
+    enabled: level >= 4 && Boolean(woredaId),
+  });
+
+  // ─────────────────────────────────────────────
+  // Validate Zone when Region changes
+  // ─────────────────────────────────────────────
 
   useEffect(() => {
     if (!regionId) {
       if (zoneId) {
-        setField("_zoneId", "");
+        setField("zoneId", "");
       }
 
       if (woredaId) {
         setField("woredaId", "");
       }
 
+      if (kebeleId) {
+        setField("kebeleId", "");
+      }
+
       return;
     }
 
-    // Region changed and current zone does not belong to it.
     if (
       zoneId &&
       zones.length > 0 &&
       !zones.some((zone) => zone.id === zoneId)
     ) {
-      setField("_zoneId", "");
+      setField("zoneId", "");
       setField("woredaId", "");
+      setField("kebeleId", "");
     }
-  }, [regionId, zones, zoneId, woredaId, setField]);
+  }, [regionId, zones, zoneId, woredaId, kebeleId, setField]);
+
+  // ─────────────────────────────────────────────
+  // Validate Woreda when Zone changes
+  // ─────────────────────────────────────────────
 
   useEffect(() => {
     if (!zoneId) {
@@ -101,10 +121,13 @@ export function GeographyHierarchySelector({
         setField("woredaId", "");
       }
 
+      if (kebeleId) {
+        setField("kebeleId", "");
+      }
+
       return;
     }
 
-    // Zone changed and current woreda does not belong to it.
     if (
       level >= 3 &&
       woredaId &&
@@ -112,26 +135,46 @@ export function GeographyHierarchySelector({
       !woredas.some((woreda) => woreda.id === woredaId)
     ) {
       setField("woredaId", "");
+      setField("kebeleId", "");
     }
-  }, [zoneId, woredas, woredaId, level, setField]);
+  }, [zoneId, woredas, woredaId, kebeleId, level, setField]);
+
+  // ─────────────────────────────────────────────
+  // Validate Kebele when Woreda changes
+  // ─────────────────────────────────────────────
+
+  useEffect(() => {
+    if (!woredaId) {
+      if (kebeleId) {
+        setField("kebeleId", "");
+      }
+
+      return;
+    }
+
+    if (
+      level >= 4 &&
+      kebeleId &&
+      kebeles.length > 0 &&
+      !kebeles.some((kebele) => kebele.id === kebeleId)
+    ) {
+      setField("kebeleId", "");
+    }
+  }, [woredaId, kebeles, kebeleId, level, setField]);
 
   return (
     <div className="space-y-4">
-      {/* ────────────────────────────────────────────────────────────────────
-          Region
-      ──────────────────────────────────────────────────────────────────── */}
-
+      {/* Region */}
       <SearchableRelationSelector
         label="Region"
         id="region"
         items={regions}
         value={regionId}
         onChange={(value) => {
-          setField("_regionId", value);
-
-          // Region changed → reset all children.
-          setField("_zoneId", "");
+          setField("regionId", value);
+          setField("zoneId", "");
           setField("woredaId", "");
+          setField("kebeleId", "");
         }}
         placeholder="Select region"
         searchPlaceholder="Search region..."
@@ -141,19 +184,16 @@ export function GeographyHierarchySelector({
         icon={MapPin}
       />
 
-      {/* ────────────────────────────────────────────────────────────────────
-          Zone
-      ──────────────────────────────────────────────────────────────────── */}
-
+      {/* Zone */}
       <SearchableRelationSelector
         label="Zone"
         id="zone"
         items={zones}
         value={zoneId}
         onChange={(value) => {
-          setField("_zoneId", value);
           setField("zoneId", value);
           setField("woredaId", "");
+          setField("kebeleId", "");
         }}
         placeholder={regionId ? "Select zone" : "Select region first"}
         searchPlaceholder="Search zone..."
@@ -163,10 +203,7 @@ export function GeographyHierarchySelector({
         icon={MapPin}
       />
 
-      {/* ────────────────────────────────────────────────────────────────────
-          Woreda
-      ──────────────────────────────────────────────────────────────────── */}
-
+      {/* Woreda */}
       {level >= 3 && (
         <SearchableRelationSelector
           label="Woreda"
@@ -175,12 +212,32 @@ export function GeographyHierarchySelector({
           value={woredaId}
           onChange={(value) => {
             setField("woredaId", value);
+            setField("kebeleId", "");
           }}
           placeholder={zoneId ? "Select woreda" : "Select zone first"}
           searchPlaceholder="Search woreda..."
           isLoading={isWoredasLoading}
           disabled={isLoading || !zoneId}
           itemLabel="woreda"
+          icon={MapPin}
+        />
+      )}
+
+      {/* Kebele */}
+      {level >= 4 && (
+        <SearchableRelationSelector
+          label="Kebele"
+          id="kebele"
+          items={kebeles}
+          value={kebeleId}
+          onChange={(value) => {
+            setField("kebeleId", value);
+          }}
+          placeholder={woredaId ? "Select kebele" : "Select woreda first"}
+          searchPlaceholder="Search kebele..."
+          isLoading={isKebelesLoading}
+          disabled={isLoading || !woredaId}
+          itemLabel="kebele"
           icon={MapPin}
         />
       )}

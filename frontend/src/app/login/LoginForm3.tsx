@@ -86,37 +86,37 @@ export default function LoginForm2() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col overflow-hidden bg-[oklch(0.92_0.018_250)] text-foreground lg:flex-row">
+    <main className="text-foreground flex min-h-screen flex-col overflow-hidden bg-[oklch(0.92_0.018_250)] lg:flex-row">
       {" "}
       {/* ========================================================= LEFT BRAND PANEL ========================================================= */}{" "}
-      <section className=" brand-panel relative flex min-h-[390px] flex-1 flex-col justify-between overflow-hidden bg-[radial-gradient(circle_at_45%_48%,oklch(0.92_0.14_145_/_0.72),transparent_29%),radial-gradient(circle_at_92%_6%,oklch(0.86_0.16_88_/_0.7),transparent_25%),var(--background)] px-6 py-6 sm:px-10 lg:min-h-screen lg:px-16 lg:py-8 ">
+      <section className="brand-panel relative flex min-h-[390px] flex-1 flex-col justify-between overflow-hidden bg-[radial-gradient(circle_at_45%_48%,oklch(0.92_0.14_145_/_0.72),transparent_29%),radial-gradient(circle_at_92%_6%,oklch(0.86_0.16_88_/_0.7),transparent_25%),var(--background)] px-6 py-6 sm:px-10 lg:min-h-screen lg:px-16 lg:py-8">
         {" "}
         {/* Grid */}{" "}
         <div
           aria-hidden="true"
-          className=" pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(oklch(0.8_0.1_195_/_0.08)_1px,transparent_1px),linear-gradient(90deg,oklch(0.8_0.1_195_/_0.08)_1px,transparent_1px)] [background-size:42px_42px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)] "
+          className="pointer-events-none absolute inset-0 [background-image:linear-gradient(oklch(0.8_0.1_195_/_0.08)_1px,transparent_1px),linear-gradient(90deg,oklch(0.8_0.1_195_/_0.08)_1px,transparent_1px)] [mask-image:linear-gradient(to_bottom,black,transparent_85%)] [background-size:42px_42px] opacity-20"
         />{" "}
         {/* Orb 1 */}{" "}
         <div
           aria-hidden="true"
-          className=" pointer-events-none absolute left-[30%] top-[18%] h-[38rem] w-[38rem] rounded-full border border-[oklch(0.78_0.16_195_/_0.25)] shadow-[0_0_90px_oklch(0.75_0.16_195_/_0.1),inset_0_0_50px_oklch(0.75_0.16_195_/_0.08)] animate-[breathe_8s_ease-in-out_infinite] max-lg:left-[40%] max-lg:top-0 max-lg:h-[26rem] max-lg:w-[26rem] "
+          className="pointer-events-none absolute top-[18%] left-[30%] h-[38rem] w-[38rem] animate-[breathe_8s_ease-in-out_infinite] rounded-full border border-[oklch(0.78_0.16_195_/_0.25)] shadow-[0_0_90px_oklch(0.75_0.16_195_/_0.1),inset_0_0_50px_oklch(0.75_0.16_195_/_0.08)] max-lg:top-0 max-lg:left-[40%] max-lg:h-[26rem] max-lg:w-[26rem]"
         />{" "}
         {/* Orb 2 */}{" "}
         <div
           aria-hidden="true"
-          className=" pointer-events-none absolute left-[37%] top-[5%] h-[48rem] w-[27rem] rounded-full border border-[oklch(0.8_0.13_35_/_0.25)] shadow-[0_0_90px_oklch(0.75_0.16_195_/_0.08)] animate-[breathe_11s_ease-in-out_infinite] [animation-delay:-3s] max-lg:left-[52%] max-lg:top-[-4rem] max-lg:h-[30rem] max-lg:w-[18rem] "
+          className="pointer-events-none absolute top-[5%] left-[37%] h-[48rem] w-[27rem] animate-[breathe_11s_ease-in-out_infinite] rounded-full border border-[oklch(0.8_0.13_35_/_0.25)] shadow-[0_0_90px_oklch(0.75_0.16_195_/_0.08)] [animation-delay:-3s] max-lg:top-[-4rem] max-lg:left-[52%] max-lg:h-[30rem] max-lg:w-[18rem]"
         />{" "}
         {/* Sweep */}{" "}
         <div
           aria-hidden="true"
-          className=" pointer-events-none absolute left-[10%] top-[48%] h-px w-[80%] bg-[linear-gradient(90deg,transparent,var(--primary),transparent)] opacity-45 animate-[sweep_7s_ease-in-out_infinite] "
+          className="pointer-events-none absolute top-[48%] left-[10%] h-px w-[80%] animate-[sweep_7s_ease-in-out_infinite] bg-[linear-gradient(90deg,transparent,var(--primary),transparent)] opacity-45"
         />{" "}
         {/* Header */}{" "}
-        <header className=" relative z-10 flex items-center justify-between opacity-0 animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_50ms_forwards] ">
+        <header className="relative z-10 flex animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_50ms_forwards] items-center justify-between opacity-0">
           {" "}
           <div className="flex items-center gap-3" aria-label="NNPP home">
             {" "}
-            <span className=" grid size-10 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-[0_0_25px_oklch(0.78_0.16_195_/_0.25)] animate-[logo-float_4s_ease-in-out_infinite] ">
+            <span className="bg-primary text-primary-foreground grid size-10 animate-[logo-float_4s_ease-in-out_infinite] place-items-center rounded-2xl shadow-[0_0_25px_oklch(0.78_0.16_195_/_0.25)]">
               {" "}
               <Leaf className="size-5" aria-hidden="true" />{" "}
             </span>{" "}
@@ -125,41 +125,41 @@ export default function LoginForm2() {
               NNPP{" "}
             </span>{" "}
           </div>{" "}
-          <span className=" flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground ">
+          <span className="text-muted-foreground flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] uppercase">
             {" "}
-            <span className=" size-1.5 rounded-full bg-primary shadow-[0_0_12px_var(--primary)] animate-[blink_2s_ease-in-out_infinite] " />{" "}
+            <span className="bg-primary size-1.5 animate-[blink_2s_ease-in-out_infinite] rounded-full shadow-[0_0_12px_var(--primary)]" />{" "}
             Live workspace{" "}
           </span>{" "}
         </header>{" "}
         {/* Hero */}{" "}
         <div className="relative z-10 max-w-xl py-14 lg:py-0">
           {" "}
-          <p className=" mb-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-primary opacity-0 animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_140ms_forwards] ">
+          <p className="text-primary mb-6 flex animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_140ms_forwards] items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase opacity-0">
             {" "}
-            <span className="h-px w-10 bg-primary" /> Private by design{" "}
+            <span className="bg-primary h-px w-10" /> Private by design{" "}
           </p>{" "}
-          <h1 className=" max-w-2xl text-balance text-6xl font-semibold leading-[0.87] tracking-[-0.09em] opacity-0 animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_230ms_forwards] sm:text-7xl lg:text-[7.4rem] ">
+          <h1 className="max-w-2xl animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_230ms_forwards] text-6xl leading-[0.87] font-semibold tracking-[-0.09em] text-balance opacity-0 sm:text-7xl lg:text-[7.4rem]">
             {" "}
             Manage <br />{" "}
-            <span className=" text-primary [text-shadow:0_0_50px_oklch(0.78_0.16_195_/_0.23)] ">
+            <span className="text-primary [text-shadow:0_0_50px_oklch(0.78_0.16_195_/_0.23)]">
               {" "}
               with focus.{" "}
             </span>{" "}
           </h1>{" "}
-          <p className=" mt-8 max-w-sm text-pretty text-sm leading-6 text-muted-foreground opacity-0 animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_320ms_forwards] sm:text-base ">
+          <p className="text-muted-foreground mt-8 max-w-sm animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_320ms_forwards] text-sm leading-6 text-pretty opacity-0 sm:text-base">
             {" "}
             A centralized command center for managing fertilizer demand, supply,
             warehouses, logistics, and reporting.{" "}
           </p>{" "}
         </div>{" "}
         {/* Footer */}{" "}
-        <footer className=" relative z-10 flex items-end justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground opacity-0 animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_410ms_forwards] ">
+        <footer className="text-muted-foreground relative z-10 flex animate-[enter-up_800ms_cubic-bezier(.16,1,.3,1)_410ms_forwards] items-end justify-between font-mono text-[10px] tracking-[0.22em] uppercase opacity-0">
           {" "}
           <span>NNPP / 01</span> <span>Secure workspace</span>{" "}
         </footer>{" "}
       </section>{" "}
       {/* ========================================================= RIGHT FORM PANEL ========================================================= */}{" "}
-      <section className=" flex flex-1 items-center justify-center bg-[oklch(0.97_0.012_250)] px-5 py-12 sm:px-10 lg:px-16 ">
+      <section className="flex flex-1 items-center justify-center bg-[oklch(0.97_0.012_250)] px-5 py-12 sm:px-10 lg:px-16">
         {" "}
         <div
           className="w-full max-w-md [perspective:1000px]"
@@ -168,17 +168,12 @@ export default function LoginForm2() {
         >
           {" "}
           {/* Login Card */}{" "}
-          <div
-            className=" relative overflow-hidden rounded-[1.75rem] border border-[oklch(0.88_0.018_250)]
-bg-[linear-gradient(145deg,oklch(1_0_0_/_0.98),oklch(0.985_0.012_250_/_0.98))]
-p-6
-shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_0.06)] transition-[transform,box-shadow] duration-300 [transform:rotateX(var(--tilt-y,0deg))_rotateY(var(--tilt-x,0deg))] hover:shadow-[0_40px_110px_oklch(0.28_0.04_255_/_0.18),0_0_40px_oklch(0.58_0.17_148_/_0.12)] sm:p-9 max-[560px]:rounded-[1.35rem] "
-          >
+          <div className="relative [transform:rotateX(var(--tilt-y,0deg))_rotateY(var(--tilt-x,0deg))] overflow-hidden rounded-[1.75rem] border border-[oklch(0.88_0.018_250)] bg-[linear-gradient(145deg,oklch(1_0_0_/_0.98),oklch(0.985_0.012_250_/_0.98))] p-6 shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_0.06)] transition-[transform,box-shadow] duration-300 hover:shadow-[0_40px_110px_oklch(0.28_0.04_255_/_0.18),0_0_40px_oklch(0.58_0.17_148_/_0.12)] max-[560px]:rounded-[1.35rem] sm:p-9">
             {" "}
             {/* Card Glow */}{" "}
             <div
               aria-hidden="true"
-              className=" pointer-events-none absolute right-[-8rem] top-[-8rem] size-56 rounded-full bg-primary opacity-[0.09] blur-[22px] animate-[card-glow_6s_ease-in-out_infinite] "
+              className="bg-primary pointer-events-none absolute top-[-8rem] right-[-8rem] size-56 animate-[card-glow_6s_ease-in-out_infinite] rounded-full opacity-[0.09] blur-[22px]"
             />{" "}
             <div className="relative z-10">
               {" "}
@@ -187,7 +182,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                 {" "}
                 <div>
                   {" "}
-                  <div className="mb-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
+                  <div className="text-primary mb-4 flex items-center gap-2 text-[10px] font-semibold tracking-[0.28em] uppercase">
                     {" "}
                     <Sparkles className="size-3" aria-hidden="true" /> Workspace
                     access{" "}
@@ -196,19 +191,19 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                     {" "}
                     Welcome back.{" "}
                   </h2>{" "}
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  <p className="text-muted-foreground mt-3 text-sm leading-6">
                     {" "}
                     The next clear move starts here.{" "}
                   </p>{" "}
                 </div>{" "}
-                <span className=" hidden rounded-2xl border border-border p-3 text-primary shadow-[0_0_20px_oklch(0.78_0.16_195_/_0.1)] animate-[fingerprint-pulse_3s_ease-in-out_infinite] sm:block ">
+                <span className="border-border text-primary hidden animate-[fingerprint-pulse_3s_ease-in-out_infinite] rounded-2xl border p-3 shadow-[0_0_20px_oklch(0.78_0.16_195_/_0.1)] sm:block">
                   {" "}
                   <Fingerprint className="size-5" aria-hidden="true" />{" "}
                 </span>{" "}
               </div>{" "}
               {/* Error */}{" "}
               {error && (
-                <div className="mb-5 rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
+                <div className="border-destructive/20 bg-destructive/5 text-destructive mb-5 rounded-xl border px-4 py-3 text-sm">
                   {" "}
                   {error}{" "}
                 </div>
@@ -220,7 +215,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                 <label htmlFor="email" className="flex flex-col gap-2">
                   {" "}
                   <span
-                    className={` font-mono text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-200 ${focused === "email" ? "translate-x-[3px] text-primary" : "text-muted-foreground"} `}
+                    className={`font-mono text-[10px] font-medium tracking-[0.18em] uppercase transition-all duration-200 ${focused === "email" ? "text-primary translate-x-[3px]" : "text-muted-foreground"} `}
                   >
                     {" "}
                     Email address{" "}
@@ -228,7 +223,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                   <span className="relative block">
                     {" "}
                     <Mail
-                      className={` pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 transition-all duration-200 ${focused === "email" ? "scale-110 text-primary" : "text-muted-foreground"} `}
+                      className={`pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 transition-all duration-200 ${focused === "email" ? "text-primary scale-110" : "text-muted-foreground"} `}
                       aria-hidden="true"
                     />{" "}
                     <input
@@ -243,7 +238,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                       onBlur={() => setFocused(null)}
                       disabled={loading}
                       required
-                      className=" h-15 w-full rounded-2xl border border-border bg-background/70 px-11 text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/65 focus:-translate-y-[3px] focus:border-primary focus:bg-card focus:shadow-[0_0_0_4px_oklch(0.58_0.17_148_/_0.12),0_10px_30px_oklch(0.58_0.17_148_/_0.08)] disabled:cursor-not-allowed disabled:opacity-60 "
+                      className="border-border bg-background/70 text-foreground placeholder:text-muted-foreground/65 focus:border-primary focus:bg-card h-15 w-full rounded-2xl border px-11 transition-all duration-200 outline-none focus:-translate-y-[3px] focus:shadow-[0_0_0_4px_oklch(0.58_0.17_148_/_0.12),0_10px_30px_oklch(0.58_0.17_148_/_0.08)] disabled:cursor-not-allowed disabled:opacity-60"
                     />{" "}
                   </span>{" "}
                 </label>{" "}
@@ -251,7 +246,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                 <label htmlFor="password" className="flex flex-col gap-2">
                   {" "}
                   <span
-                    className={` font-mono text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-200 ${focused === "password" ? "translate-x-[3px] text-primary" : "text-muted-foreground"} `}
+                    className={`font-mono text-[10px] font-medium tracking-[0.18em] uppercase transition-all duration-200 ${focused === "password" ? "text-primary translate-x-[3px]" : "text-muted-foreground"} `}
                   >
                     {" "}
                     Password{" "}
@@ -259,7 +254,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                   <span className="relative block">
                     {" "}
                     <LockKeyhole
-                      className={` pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 transition-all duration-200 ${focused === "password" ? "scale-110 text-primary" : "text-muted-foreground"} `}
+                      className={`pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 transition-all duration-200 ${focused === "password" ? "text-primary scale-110" : "text-muted-foreground"} `}
                       aria-hidden="true"
                     />{" "}
                     <input
@@ -274,13 +269,13 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                       onBlur={() => setFocused(null)}
                       disabled={loading}
                       required
-                      className=" h-15 w-full rounded-2xl border border-border bg-background/70 px-11 pr-12 text-foreground outline-none transition-all duration-200 placeholder:text-muted-foreground/65 focus:-translate-y-[3px] focus:border-primary focus:bg-card focus:shadow-[0_0_0_4px_oklch(0.58_0.17_148_/_0.12),0_10px_30px_oklch(0.58_0.17_148_/_0.08)] disabled:cursor-not-allowed disabled:opacity-60 "
+                      className="border-border bg-background/70 text-foreground placeholder:text-muted-foreground/65 focus:border-primary focus:bg-card h-15 w-full rounded-2xl border px-11 pr-12 transition-all duration-200 outline-none focus:-translate-y-[3px] focus:shadow-[0_0_0_4px_oklch(0.58_0.17_148_/_0.12),0_10px_30px_oklch(0.58_0.17_148_/_0.08)] disabled:cursor-not-allowed disabled:opacity-60"
                     />{" "}
                     <button
                       type="button"
                       onClick={() => setShowPassword((value) => !value)}
                       disabled={loading}
-                      className=" absolute right-3 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full text-muted-foreground transition hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:opacity-50 "
+                      className="text-muted-foreground hover:bg-accent hover:text-foreground absolute top-1/2 right-3 grid size-8 -translate-y-1/2 place-items-center rounded-full transition disabled:pointer-events-none disabled:opacity-50"
                       aria-label={
                         showPassword ? "Hide password" : "Show password"
                       }
@@ -299,7 +294,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                   {" "}
                   <label
                     htmlFor="remember"
-                    className="flex cursor-pointer items-center gap-2 text-muted-foreground"
+                    className="text-muted-foreground flex cursor-pointer items-center gap-2"
                   >
                     {" "}
                     <input
@@ -308,13 +303,13 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                       checked={remember}
                       onChange={(event) => setRemember(event.target.checked)}
                       disabled={loading}
-                      className="size-4 rounded border-border accent-primary"
+                      className="border-border accent-primary size-4 rounded"
                     />{" "}
                     Remember me{" "}
                   </label>{" "}
                   <a
                     href="#forgot"
-                    className="font-medium text-primary transition hover:text-primary/70"
+                    className="text-primary hover:text-primary/70 font-medium transition"
                   >
                     {" "}
                     Forgot password?{" "}
@@ -324,12 +319,12 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                 <Button
                   type="submit"
                   disabled={loading || signedIn}
-                  className={` group relative mt-2 h-14 w-full overflow-hidden rounded-2xl bg-primary text-primary-foreground shadow-[0_12px_30px_oklch(0.78_0.16_195_/_0.16)] transition-all duration-300 hover:-translate-y-[3px] hover:bg-primary hover:shadow-[0_18px_40px_oklch(0.78_0.16_195_/_0.26)] ${signedIn ? "bg-[oklch(0.7_0.15_150)] hover:bg-[oklch(0.7_0.15_150)]" : ""} `}
+                  className={`group bg-primary text-primary-foreground hover:bg-primary relative mt-2 h-14 w-full overflow-hidden rounded-2xl shadow-[0_12px_30px_oklch(0.78_0.16_195_/_0.16)] transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_18px_40px_oklch(0.78_0.16_195_/_0.26)] ${signedIn ? "bg-[oklch(0.7_0.15_150)] hover:bg-[oklch(0.7_0.15_150)]" : ""} `}
                 >
                   {" "}
                   <span
                     aria-hidden="true"
-                    className=" absolute inset-0 -translate-x-[120%] bg-[linear-gradient(110deg,transparent_25%,oklch(1_0_0_/_0.28)_50%,transparent_75%)] transition-transform duration-700 group-hover:translate-x-[120%] "
+                    className="absolute inset-0 -translate-x-[120%] bg-[linear-gradient(110deg,transparent_25%,oklch(1_0_0_/_0.28)_50%,transparent_75%)] transition-transform duration-700 group-hover:translate-x-[120%]"
                   />{" "}
                   {loading ? (
                     <>
@@ -351,7 +346,7 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                       {" "}
                       <span>Enter workspace</span>{" "}
                       <ArrowUpRight
-                        className=" size-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 "
+                        className="size-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
                         aria-hidden="true"
                       />{" "}
                     </>
@@ -359,21 +354,21 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                 </Button>{" "}
               </form>{" "}
               {/* Divider */}{" "}
-              <div className="my-7 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
+              <div className="text-muted-foreground/70 my-7 flex items-center gap-4 font-mono text-[10px] tracking-[0.2em] uppercase">
                 {" "}
-                <span className="h-px flex-1 bg-border" /> or{" "}
-                <span className="h-px flex-1 bg-border" />{" "}
+                <span className="bg-border h-px flex-1" /> or{" "}
+                <span className="bg-border h-px flex-1" />{" "}
               </div>{" "}
               {/* Google */}{" "}
               <Button
                 type="button"
                 variant="outline"
-                className=" google-button h-14 w-full rounded-2xl border-border bg-card text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-accent "
+                className="google-button border-border bg-card text-foreground hover:border-primary hover:bg-accent h-14 w-full rounded-2xl transition-all duration-200 hover:-translate-y-0.5"
               >
                 {" "}
                 <span
                   aria-hidden="true"
-                  className=" grid size-6 place-items-center rounded-full bg-foreground text-[10px] font-bold text-background "
+                  className="bg-foreground text-background grid size-6 place-items-center rounded-full text-[10px] font-bold"
                 >
                   {" "}
                   G{" "}
@@ -381,16 +376,16 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                 Continue with Google{" "}
               </Button>{" "}
               {/* Demo Accounts */}{" "}
-              <div className=" mt-5 rounded-2xl border border-dashed border-[oklch(0.78_0.04_95)] bg-[oklch(0.96_0.02_95_/_0.8)] p-4 ">
+              <div className="mt-5 rounded-2xl border border-dashed border-[oklch(0.78_0.04_95)] bg-[oklch(0.96_0.02_95_/_0.8)] p-4">
                 {" "}
                 <div className="mb-3 flex items-center gap-2">
                   {" "}
-                  <span className="h-px flex-1 bg-border/50" />{" "}
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="bg-border/50 h-px flex-1" />{" "}
+                  <p className="text-muted-foreground font-mono text-[9px] tracking-[0.18em] uppercase">
                     {" "}
                     Quick access{" "}
                   </p>{" "}
-                  <span className="h-px flex-1 bg-border/50" />{" "}
+                  <span className="bg-border/50 h-px flex-1" />{" "}
                 </div>{" "}
                 <div className="grid grid-cols-2 gap-2">
                   {" "}
@@ -405,14 +400,14 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                         setSignedIn(false);
                         setError("");
                       }}
-                      className=" flex min-w-0 flex-col gap-0.5 rounded-xl border border-[oklch(0.84_0.03_95)] bg-card/70 p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/55 hover:bg-[oklch(0.98_0.04_95)] disabled:pointer-events-none disabled:opacity-50 "
+                      className="bg-card/70 hover:border-primary/55 flex min-w-0 flex-col gap-0.5 rounded-xl border border-[oklch(0.84_0.03_95)] p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:bg-[oklch(0.98_0.04_95)] disabled:pointer-events-none disabled:opacity-50"
                     >
                       {" "}
-                      <span className="text-[11px] font-bold text-primary">
+                      <span className="text-primary text-[11px] font-bold">
                         {" "}
                         {account.role}{" "}
                       </span>{" "}
-                      <small className="truncate text-[10px] text-muted-foreground">
+                      <small className="text-muted-foreground truncate text-[10px]">
                         {" "}
                         {account.email}{" "}
                       </small>{" "}
@@ -421,21 +416,21 @@ shadow-[0_30px_90px_oklch(0.28_0.04_250_/_0.12),0_0_0_1px_oklch(0.55_0.08_250_/_
                 </div>{" "}
               </div>{" "}
               {/* Security */}{" "}
-              <div className="mt-7 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+              <div className="text-muted-foreground mt-7 flex items-center justify-center gap-2 text-xs">
                 {" "}
-                <span className=" grid size-5 place-items-center rounded-full bg-[oklch(0.78_0.16_195_/_0.12)] text-primary ">
+                <span className="text-primary grid size-5 place-items-center rounded-full bg-[oklch(0.78_0.16_195_/_0.12)]">
                   {" "}
                   <LockKeyhole className="size-3" aria-hidden="true" />{" "}
                 </span>{" "}
                 End-to-end encrypted workspace{" "}
               </div>{" "}
               {/* Signup */}{" "}
-              <p className="mt-6 text-center text-sm text-muted-foreground">
+              <p className="text-muted-foreground mt-6 text-center text-sm">
                 {" "}
                 New to NNPP?{" "}
                 <a
                   href="#signup"
-                  className="font-semibold text-primary transition hover:text-primary/70"
+                  className="text-primary hover:text-primary/70 font-semibold transition"
                 >
                   {" "}
                   Create an account{" "}

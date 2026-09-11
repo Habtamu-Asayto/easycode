@@ -89,13 +89,13 @@ export default function RolesPage() {
   });
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       {/* Page header */}
       <div>
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-foreground text-xl font-semibold tracking-tight">
           Role Management
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">
+        <p className="text-muted-foreground mt-1 text-sm">
           Define roles and manage permission assignments
         </p>
       </div>
@@ -134,7 +134,7 @@ export default function RolesPage() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="rounded-lg border bg-card p-4 flex items-center gap-4"
+            className="bg-card flex items-center gap-4 rounded-lg border p-4"
           >
             <div
               className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${stat.iconBg}`}
@@ -142,8 +142,8 @@ export default function RolesPage() {
               <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-              <p className="text-xs text-muted-foreground">{stat.label}</p>
+              <p className="text-foreground text-2xl font-bold">{stat.value}</p>
+              <p className="text-muted-foreground text-xs">{stat.label}</p>
             </div>
           </div>
         ))}
@@ -173,7 +173,7 @@ export default function RolesPage() {
           placeholder="Search roles..."
           className="w-72"
         />
-        <span className="ml-auto text-xs text-muted-foreground">
+        <span className="text-muted-foreground ml-auto text-xs">
           Showing {data?.items?.length ?? 0} of {stats.total} records
         </span>
       </div>
@@ -206,24 +206,24 @@ export default function RolesPage() {
           }
         />
       ) : (
-        <div className="rounded-md border bg-card overflow-hidden">
+        <div className="bg-card overflow-hidden rounded-md border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
-                  <TableHead className="h-10 w-[200px] text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 w-[200px] text-xs font-medium">
                     Role Name
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Description
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Permissions
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Users
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Status
                   </TableHead>
                   <TableHead className="w-[50px]" />
@@ -234,20 +234,20 @@ export default function RolesPage() {
                   <TableRow key={role.id} className="group hover:bg-muted/50">
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <span className="text-[13px] font-medium text-foreground">
+                        <span className="text-foreground text-[13px] font-medium">
                           {role.name.replace("_", " ")}
                         </span>
                         {role.isSystem && (
                           <Badge
                             variant="outline"
-                            className="text-[10px] px-1.5 py-0"
+                            className="px-1.5 py-0 text-[10px]"
                           >
                             System
                           </Badge>
                         )}
                       </div>
                     </TableCell>
-                    <TableCell className="text-[13px] text-muted-foreground max-w-[300px] truncate">
+                    <TableCell className="text-muted-foreground max-w-[300px] truncate text-[13px]">
                       {role.description || "—"}
                     </TableCell>
                     <TableCell>
@@ -258,12 +258,12 @@ export default function RolesPage() {
                         {role.permissions?.length || 0} permissions
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-[13px] text-muted-foreground">
+                    <TableCell className="text-muted-foreground text-[13px]">
                       {role.userCount ?? 0}
                     </TableCell>
                     <TableCell>
                       {role.isActive ? (
-                        <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 text-[11px] border border-emerald-200 dark:border-emerald-800">
+                        <Badge className="border border-emerald-200 bg-emerald-50 text-[11px] text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">
                           Active
                         </Badge>
                       ) : (

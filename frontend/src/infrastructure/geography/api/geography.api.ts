@@ -131,7 +131,6 @@ export const zonesApi = {
 
     return data ?? [];
   },
-
 };
 
 // ── Woredas ──────────────────────────────────────────────────────────────────
@@ -235,9 +234,9 @@ export const kebelesApi = {
 
   /** Lookup: kebeles by woreda for dropdowns */
   byWoreda: async (woredaId: string) => {
-    const { data } = await api.get<ApiResponse<KebeleResponse[]>>(
+    const { data } = await api.get<KebeleResponse[]>(
       `/kebeles/by-woreda/${woredaId}`,
     );
-    return data.data ?? [];
+    return data ?? [];
   },
 };

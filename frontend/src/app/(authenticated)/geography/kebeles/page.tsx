@@ -8,12 +8,12 @@ import { kebelesApi } from "@/infrastructure/geography/api";
 import {
   CrudPage,
   StatusBadge,
-  MasterDataFormDialog, 
+  MasterDataFormDialog,
 } from "@/presentation/components/shared";
 import type { ColumnDef, StatDef } from "@/presentation/components/shared";
 import type { KebeleResponse } from "@/domain/geography/entities";
-import { Badge } from "@/presentation/components/ui/badge"; 
-import { Home, Check, X, Database  } from "lucide-react";
+import { Badge } from "@/presentation/components/ui/badge";
+import { Home, Check, X, Database } from "lucide-react";
 
 const columns: ColumnDef<KebeleResponse>[] = [
   {
@@ -21,14 +21,14 @@ const columns: ColumnDef<KebeleResponse>[] = [
     label: "Name",
     className: "w-[250px]",
     render: (k) => (
-      <span className="text-[13px] font-medium text-foreground">{k.name}</span>
+      <span className="text-foreground text-[13px] font-medium">{k.name}</span>
     ),
   },
   {
     key: "code",
     label: "Code",
     render: (k) => (
-      <span className="text-[13px] text-muted-foreground">{k.code}</span>
+      <span className="text-muted-foreground text-[13px]">{k.code}</span>
     ),
   },
   {

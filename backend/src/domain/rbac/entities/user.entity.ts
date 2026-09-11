@@ -41,12 +41,38 @@ export interface UserResponseModel {
   username: string;
   firstName: string;
   lastName: string;
+
+  mobileNumber: string | null;
   phone: string | null;
   avatar: string | null;
+
   isActive: boolean;
   isLocked: boolean;
+  failedLoginAttempts: number;
   lastLoginAt: Date | null;
+
   roles: UserRoleInfo[];
+
+  region: {
+    id: string;
+    name: string;
+  } | null;
+
+  zone: {
+    id: string;
+    name: string;
+  } | null;
+
+  woreda: {
+    id: string;
+    name: string;
+  } | null;
+
+  kebele: {
+    id: string;
+    name: string;
+  } | null;
+
   createdAt: Date;
   updatedAt: Date;
 }

@@ -60,5 +60,32 @@ export const USER_INCLUDE = {
       },
     },
   },
-  region: { select: { id: true, name: true } }, 
+
+  region: {
+    select: {
+      id: true,
+      name: true,
+    },
+  },
+
+  zone: {
+    select: {
+      id: true,
+      name: true,
+    },
+  },
+
+  woreda: {
+    select: {
+      id: true,
+      name: true,
+    },
+  },
+
+  kebele: {
+    select: {
+      id: true,
+      name: true,
+    },
+  },
 } as const;

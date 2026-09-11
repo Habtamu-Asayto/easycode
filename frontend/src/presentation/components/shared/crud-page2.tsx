@@ -1,16 +1,7 @@
 "use client";
 
-import {
-  useMemo,
-  useState,
-  type ComponentType,
-  type ReactNode,
-} from "react";
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMemo, useState, type ComponentType, type ReactNode } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Activity,
   CheckCircle2,
@@ -58,10 +49,7 @@ import {
   DropdownMenuTrigger,
 } from "@/presentation/components/ui/dropdown-menu";
 
-import type {
-  PaginationQuery,
-  PaginationMeta,
-} from "@/domain/rbac/entities";
+import type { PaginationQuery, PaginationMeta } from "@/domain/rbac/entities";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -91,9 +79,7 @@ interface CrudPageConfig<T extends { id: string; isActive: boolean }> {
   icon: ComponentType<{ className?: string }>;
 
   api: {
-    getAll: (
-      params: PaginationQuery & Record<string, unknown>,
-    ) => Promise<{
+    getAll: (params: PaginationQuery & Record<string, unknown>) => Promise<{
       data: T[];
       meta: PaginationMeta;
     }>;
@@ -120,18 +106,16 @@ interface CrudPageConfig<T extends { id: string; isActive: boolean }> {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function getErrorMessage(error: unknown, fallback: string) {
-  if (
-    error &&
-    typeof error === "object" &&
-    "response" in error
-  ) {
-    const response = (error as {
-      response?: {
-        data?: {
-          message?: string | string[];
+  if (error && typeof error === "object" && "response" in error) {
+    const response = (
+      error as {
+        response?: {
+          data?: {
+            message?: string | string[];
+          };
         };
-      };
-    }).response;
+      }
+    ).response;
 
     const message = response?.data?.message;
 
@@ -189,21 +173,8 @@ export function CrudPage<
   // Query
   // ─────────────────────────────────────────────────────────────────────────
 
-  const {
-    data,
-    isLoading,
-    isFetching,
-    isError,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: [
-      queryKey,
-      page,
-      limit,
-      search,
-      extraParams,
-    ],
+  const { data, isLoading, isFetching, isError, error, refetch } = useQuery({
+    queryKey: [queryKey, page, limit, search, extraParams],
 
     queryFn: () =>
       api.getAll({
@@ -225,10 +196,7 @@ export function CrudPage<
       return [];
     }
 
-    return getStats(
-      data.data,
-      data.meta?.total ?? data.data.length,
-    );
+    return getStats(data.data, data.meta?.total ?? data.data.length);
   }, [data, getStats]);
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -239,9 +207,7 @@ export function CrudPage<
     mutationFn: (id: string) => api.delete(id),
 
     onSuccess: () => {
-      toast.success(
-        `${entityName} deleted successfully`,
-      );
+      toast.success(`${entityName} deleted successfully`);
 
       queryClient.invalidateQueries({
         queryKey: [queryKey],
@@ -251,12 +217,7 @@ export function CrudPage<
     },
 
     onError: (error: unknown) => {
-      toast.error(
-        getErrorMessage(
-          error,
-          `Failed to delete ${entityName}`,
-        ),
-      );
+      toast.error(getErrorMessage(error, `Failed to delete ${entityName}`));
     },
   });
 
@@ -293,60 +254,52 @@ export function CrudPage<
     setEditItem(null);
   };
 
-  const totalRecords =
-    data?.meta?.total ?? data?.data?.length ?? 0;
+  const totalRecords = data?.meta?.total ?? data?.data?.length ?? 0;
 
   const visibleRecords = data?.data?.length ?? 0;
 
-  const canCreate = hasPermission(
-    `${permission}:create`,
-  );
+  const canCreate = hasPermission(`${permission}:create`);
 
-  const canUpdate = hasPermission(
-    `${permission}:update`,
-  );
+  const canUpdate = hasPermission(`${permission}:update`);
 
-  const canDelete = hasPermission(
-    `${permission}:delete`,
-  );
+  const canDelete = hasPermission(`${permission}:delete`);
 
   // ─────────────────────────────────────────────────────────────────────────
   // Render
   // ─────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-full bg-background text-foreground">
+    <div className="bg-background text-foreground min-h-full">
       <div className="mx-auto w-full max-w-[1600px] space-y-7 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-
         {/* ──────────────────────────────────────────────────────────────── */}
         {/* Page Header */}
         {/* ──────────────────────────────────────────────────────────────── */}
 
-        <section className="relative overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm">
+        <section className="border-border/70 bg-card relative overflow-hidden rounded-2xl border shadow-sm">
           {/* Decorative background */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 overflow-hidden"
           >
-            <div className="absolute -right-20 -top-24 size-64 rounded-full bg-primary/5 blur-3xl" />
-            <div className="absolute -bottom-24 -left-20 size-64 rounded-full bg-primary/5 blur-3xl" />
+            <div className="bg-primary/5 absolute -top-24 -right-20 size-64 rounded-full blur-3xl" />
+            <div className="bg-primary/5 absolute -bottom-24 -left-20 size-64 rounded-full blur-3xl" />
           </div>
 
           <div className="relative flex flex-col gap-6 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between lg:p-7">
             <div className="flex min-w-0 items-start gap-4">
-              <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary shadow-sm">
+              <div className="border-primary/15 bg-primary/10 text-primary flex size-12 shrink-0 items-center justify-center rounded-2xl border shadow-sm">
                 <Icon className="size-6" />
               </div>
 
               <div className="min-w-0">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                  <span className="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">
                     Management
                   </span>
 
-                  <ChevronRight className="size-3.5 text-muted-foreground" />
+                  <ChevronRight className="text-muted-foreground size-3.5" />
 
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-muted-foreground text-xs">
                     {entityName}
                   </span>
                 </div>
@@ -355,7 +308,7 @@ export function CrudPage<
                   {title}
                 </h1>
 
-                <p className="mt-1.5 max-w-2xl text-sm leading-6 text-muted-foreground">
+                <p className="text-muted-foreground mt-1.5 max-w-2xl text-sm leading-6">
                   {description}
                 </p>
               </div>
@@ -371,19 +324,13 @@ export function CrudPage<
                 className="h-9 gap-2 rounded-lg"
               >
                 <RefreshCw
-                  className={`size-3.5 ${
-                    isFetching ? "animate-spin" : ""
-                  }`}
+                  className={`size-3.5 ${isFetching ? "animate-spin" : ""}`}
                 />
-                <span className="hidden sm:inline">
-                  Refresh
-                </span>
+                <span className="hidden sm:inline">Refresh</span>
               </Button>
 
               {canCreate && (
-                <PermissionGate
-                  permission={`${permission}:create`}
-                >
+                <PermissionGate permission={`${permission}:create`}>
                   <Button
                     type="button"
                     size="sm"
@@ -411,19 +358,19 @@ export function CrudPage<
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                className="group border-border/70 bg-card relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
                 style={{
                   animationDelay: `${index * 70}ms`,
                 }}
               >
                 <div
                   aria-hidden="true"
-                  className="absolute -right-8 -top-8 size-24 rounded-full bg-primary/5 blur-2xl transition-transform duration-500 group-hover:scale-150"
+                  className="bg-primary/5 absolute -top-8 -right-8 size-24 rounded-full blur-2xl transition-transform duration-500 group-hover:scale-150"
                 />
 
                 <div className="relative flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-medium text-muted-foreground">
+                    <p className="text-muted-foreground text-xs font-medium">
                       {stat.label}
                     </p>
 
@@ -431,7 +378,7 @@ export function CrudPage<
                       {stat.value.toLocaleString()}
                     </p>
 
-                    <div className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                    <div className="text-muted-foreground mt-3 flex items-center gap-1.5 text-[11px]">
                       <TrendingUp className="size-3.5 text-emerald-500" />
                       <span>Current overview</span>
                     </div>
@@ -440,9 +387,7 @@ export function CrudPage<
                   <div
                     className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${stat.iconBg} transition-transform duration-300 group-hover:scale-105`}
                   >
-                    <stat.icon
-                      className={`size-5 ${stat.iconColor}`}
-                    />
+                    <stat.icon className={`size-5 ${stat.iconColor}`} />
                   </div>
                 </div>
               </div>
@@ -454,26 +399,25 @@ export function CrudPage<
         {/* Main Content */}
         {/* ──────────────────────────────────────────────────────────────── */}
 
-        <section className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm">
-
+        <section className="border-border/70 bg-card overflow-hidden rounded-2xl border shadow-sm">
           {/* Section heading */}
-          <div className="border-b border-border/70 px-5 py-5 sm:px-6">
+          <div className="border-border/70 border-b px-5 py-5 sm:px-6">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <Activity className="size-4 text-primary" />
+                  <Activity className="text-primary size-4" />
 
                   <h2 className="text-base font-semibold">
                     {entityName} records
                   </h2>
                 </div>
 
-                <p className="mt-1 text-xs text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-xs">
                   Manage, search and maintain your {entityName} data.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <div className="text-muted-foreground flex items-center gap-2 text-xs">
                 <span className="inline-flex items-center gap-1.5">
                   <span className="size-1.5 rounded-full bg-emerald-500" />
                   System operational
@@ -483,7 +427,7 @@ export function CrudPage<
                   <>
                     <span className="text-border">•</span>
 
-                    <span className="inline-flex items-center gap-1.5 text-primary">
+                    <span className="text-primary inline-flex items-center gap-1.5">
                       <RefreshCw className="size-3 animate-spin" />
                       Updating
                     </span>
@@ -497,9 +441,8 @@ export function CrudPage<
           {/* Toolbar */}
           {/* ──────────────────────────────────────────────────────────── */}
 
-          <div className="border-b border-border/70 bg-muted/20 px-4 py-4 sm:px-5">
+          <div className="border-border/70 bg-muted/20 border-b px-4 py-4 sm:px-5">
             <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-
               <div className="w-full lg:max-w-md">
                 <SearchInput
                   value={search}
@@ -510,18 +453,16 @@ export function CrudPage<
               </div>
 
               <div className="flex items-center justify-between gap-3 sm:justify-end">
-                <div className="hidden items-center gap-2 rounded-lg border border-border/70 bg-background px-3 py-2 text-xs text-muted-foreground sm:flex">
+                <div className="border-border/70 bg-background text-muted-foreground hidden items-center gap-2 rounded-lg border px-3 py-2 text-xs sm:flex">
                   <Search className="size-3.5" />
 
                   <span>
-                    {search
-                      ? `Searching "${search}"`
-                      : `All ${entityName}s`}
+                    {search ? `Searching "${search}"` : `All ${entityName}s`}
                   </span>
                 </div>
 
-                <div className="inline-flex items-center gap-2 rounded-lg border border-border/70 bg-background px-3 py-2 text-xs">
-                  <span className="font-semibold text-foreground">
+                <div className="border-border/70 bg-background inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs">
+                  <span className="text-foreground font-semibold">
                     {visibleRecords}
                   </span>
 
@@ -543,7 +484,7 @@ export function CrudPage<
             </div>
           ) : isError ? (
             <div className="flex min-h-[420px] flex-col items-center justify-center px-6 text-center">
-              <div className="flex size-14 items-center justify-center rounded-2xl bg-destructive/10 text-destructive">
+              <div className="bg-destructive/10 text-destructive flex size-14 items-center justify-center rounded-2xl">
                 <CircleAlert className="size-7" />
               </div>
 
@@ -551,7 +492,7 @@ export function CrudPage<
                 Unable to load {entityName}s
               </h3>
 
-              <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
+              <p className="text-muted-foreground mt-2 max-w-md text-sm leading-6">
                 {getErrorMessage(
                   error,
                   `Something went wrong while loading ${entityName} records.`,
@@ -581,9 +522,7 @@ export function CrudPage<
                 }
                 action={
                   canCreate ? (
-                    <PermissionGate
-                      permission={`${permission}:create`}
-                    >
+                    <PermissionGate permission={`${permission}:create`}>
                       <Button
                         size="sm"
                         onClick={handleCreate}
@@ -605,8 +544,8 @@ export function CrudPage<
 
               <div className="relative overflow-x-auto">
                 {isFetching && !isLoading && (
-                  <div className="absolute inset-x-0 top-0 z-10 h-0.5 overflow-hidden bg-primary/10">
-                    <div className="h-full w-1/3 animate-[loading_1.2s_ease-in-out_infinite] bg-primary" />
+                  <div className="bg-primary/10 absolute inset-x-0 top-0 z-10 h-0.5 overflow-hidden">
+                    <div className="bg-primary h-full w-1/3 animate-[loading_1.2s_ease-in-out_infinite]" />
                   </div>
                 )}
 
@@ -616,7 +555,7 @@ export function CrudPage<
                       {columns.map((column) => (
                         <TableHead
                           key={column.key}
-                          className={`h-11 whitespace-nowrap px-4 text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground first:pl-5 last:pr-5 sm:px-5 ${
+                          className={`text-muted-foreground h-11 px-4 text-[10px] font-bold tracking-[0.14em] whitespace-nowrap uppercase first:pl-5 last:pr-5 sm:px-5 ${
                             column.className ?? ""
                           }`}
                         >
@@ -632,7 +571,7 @@ export function CrudPage<
                     {data.data.map((item, index) => (
                       <TableRow
                         key={item.id}
-                        className="group border-border/60 transition-colors duration-200 hover:bg-primary/[0.025]"
+                        className="group border-border/60 hover:bg-primary/[0.025] transition-colors duration-200"
                         style={{
                           animationDelay: `${index * 35}ms`,
                         }}
@@ -654,7 +593,7 @@ export function CrudPage<
                                 <Button
                                   variant="ghost"
                                   size="icon"
-                                  className="size-8 rounded-lg opacity-70 transition-all duration-200 hover:bg-muted hover:opacity-100 group-hover:opacity-100"
+                                  className="hover:bg-muted size-8 rounded-lg opacity-70 transition-all duration-200 group-hover:opacity-100 hover:opacity-100"
                                   aria-label={`Actions for ${item.name}`}
                                 />
                               }
@@ -671,9 +610,7 @@ export function CrudPage<
                                   permission={`${permission}:update`}
                                 >
                                   <DropdownMenuItem
-                                    onClick={() =>
-                                      handleEdit(item)
-                                    }
+                                    onClick={() => handleEdit(item)}
                                     className="gap-2 rounded-lg"
                                   >
                                     <Pencil className="size-3.5" />
@@ -691,10 +628,8 @@ export function CrudPage<
                                   permission={`${permission}:delete`}
                                 >
                                   <DropdownMenuItem
-                                    onClick={() =>
-                                      setDeleteItem(item)
-                                    }
-                                    className="gap-2 rounded-lg text-destructive focus:text-destructive"
+                                    onClick={() => setDeleteItem(item)}
+                                    className="text-destructive focus:text-destructive gap-2 rounded-lg"
                                   >
                                     <Trash2 className="size-3.5" />
                                     Delete {entityName}
@@ -714,26 +649,26 @@ export function CrudPage<
               {/* Footer / Pagination */}
               {/* ─────────────────────────────────────────────────────── */}
 
-              <div className="border-t border-border/70 bg-muted/[0.12]">
+              <div className="border-border/70 bg-muted/[0.12] border-t">
                 <div className="flex flex-col gap-3 px-4 py-3 sm:px-5">
                   <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="text-muted-foreground flex items-center gap-2 text-xs">
                       <CheckCircle2 className="size-3.5 text-emerald-500" />
 
                       <span>
                         Showing{" "}
-                        <strong className="font-semibold text-foreground">
+                        <strong className="text-foreground font-semibold">
                           {visibleRecords}
                         </strong>{" "}
                         of{" "}
-                        <strong className="font-semibold text-foreground">
+                        <strong className="text-foreground font-semibold">
                           {totalRecords}
                         </strong>{" "}
                         records
                       </span>
                     </div>
 
-                    <div className="hidden items-center gap-1.5 text-[11px] text-muted-foreground md:flex">
+                    <div className="text-muted-foreground hidden items-center gap-1.5 text-[11px] md:flex">
                       <Clock3 className="size-3.5" />
                       Live data
                     </div>
@@ -807,28 +742,10 @@ export function CrudPage<
 // Active / Inactive Badge
 // ─────────────────────────────────────────────────────────────────────────────
 
-export function StatusBadge({
-  isActive,
-}: {
-  isActive: boolean;
-}) {
+export function StatusBadge({ isActive }: { isActive: boolean }) {
   if (isActive) {
     return (
-      <Badge
-        className="
-          inline-flex items-center gap-1.5
-          border border-emerald-200
-          bg-emerald-50
-          px-2.5 py-1
-          text-[11px] font-semibold
-          text-emerald-700
-          hover:bg-emerald-50
-          dark:border-emerald-800
-          dark:bg-emerald-900/30
-          dark:text-emerald-400
-          dark:hover:bg-emerald-900/30
-        "
-      >
+      <Badge className="inline-flex items-center gap-1.5 border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 dark:hover:bg-emerald-900/30">
         <span className="size-1.5 rounded-full bg-emerald-500" />
         Active
       </Badge>
@@ -838,13 +755,9 @@ export function StatusBadge({
   return (
     <Badge
       variant="secondary"
-      className="
-        inline-flex items-center gap-1.5
-        px-2.5 py-1
-        text-[11px] font-semibold
-      "
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold"
     >
-      <span className="size-1.5 rounded-full bg-muted-foreground/50" />
+      <span className="bg-muted-foreground/50 size-1.5 rounded-full" />
       Inactive
     </Badge>
   );

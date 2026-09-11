@@ -7,7 +7,7 @@ import {
   Map,
   MapPin,
   Building2,
-  Home, 
+  Home,
 } from "lucide-react";
 
 export type NavItem = {
@@ -33,7 +33,7 @@ export const navCategories: NavCategory[] = [
         icon: LayoutDashboard,
       },
     ],
-  }, 
+  },
 
   {
     label: "Administration",
@@ -96,6 +96,4 @@ export const navCategories: NavCategory[] = [
       },
     ],
   },
-
- 
 ];

@@ -19,7 +19,7 @@ import {
 } from "@/presentation/components/ui/dropdown-menu";
 import {
   Tooltip,
-  TooltipContent, 
+  TooltipContent,
   TooltipTrigger,
 } from "@/presentation/components/ui/tooltip";
 
@@ -80,7 +80,7 @@ export function AppSidebar() {
         href={item.href}
         className={cn(
           "relative flex items-center rounded transition-colors duration-100",
-          isCollapsed ? "justify-center w-11 h-11 mx-auto" : "gap-3 px-3 py-2",
+          isCollapsed ? "mx-auto h-11 w-11 justify-center" : "gap-3 px-3 py-2",
           isActive
             ? "bg-accent text-primary font-semibold"
             : "text-foreground/70 hover:bg-accent hover:text-foreground",
@@ -88,13 +88,13 @@ export function AppSidebar() {
       >
         <Icon
           className={cn(
-            "shrink-0 h-[18px] w-[18px]",
+            "h-[18px] w-[18px] shrink-0",
             isActive ? "text-primary" : "text-muted-foreground",
           )}
         />
 
         {!isCollapsed && (
-          <span className="text-[13px] truncate">{item.label}</span>
+          <span className="truncate text-[13px]">{item.label}</span>
         )}
       </Link>
     );
@@ -103,30 +103,30 @@ export function AppSidebar() {
   return (
     <aside
       className={cn(
-        "flex h-full shrink-0 flex-col bg-sidebar border-r border-sidebar-border transition-[width] duration-200 ease-out overflow-hidden",
+        "bg-sidebar border-sidebar-border flex h-full shrink-0 flex-col overflow-hidden border-r transition-[width] duration-200 ease-out",
         isCollapsed ? "w-[68px]" : "w-60",
       )}
     >
       {/* Brand */}
       <div
         className={cn(
-          "flex h-12 shrink-0 items-center border-b border-sidebar-border",
-          isCollapsed ? "justify-center px-2" : "px-4 gap-2.5",
+          "border-sidebar-border flex h-12 shrink-0 items-center border-b",
+          isCollapsed ? "justify-center px-2" : "gap-2.5 px-4",
         )}
       >
         {!isCollapsed ? (
           <>
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-primary">
+            <div className="bg-primary flex h-7 w-7 shrink-0 items-center justify-center rounded">
               🌿
             </div>
 
-            <span className="text-sm font-semibold tracking-tight text-sidebar-foreground truncate flex-1">
+            <span className="text-sidebar-foreground flex-1 truncate text-sm font-semibold tracking-tight">
               Ethiopian FMS
             </span>
 
             <button
               onClick={toggle}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded hover:bg-accent text-muted-foreground transition-colors"
+              className="hover:bg-accent text-muted-foreground flex h-8 w-8 shrink-0 items-center justify-center rounded transition-colors"
             >
               <PanelLeftClose className="h-4 w-4" />
             </button>
@@ -134,7 +134,7 @@ export function AppSidebar() {
         ) : (
           <button
             onClick={toggle}
-            className="flex h-8 w-8 items-center justify-center rounded hover:bg-accent text-muted-foreground transition-colors"
+            className="hover:bg-accent text-muted-foreground flex h-8 w-8 items-center justify-center rounded transition-colors"
           >
             <PanelLeftOpen className="h-4 w-4" />
           </button>
@@ -142,7 +142,7 @@ export function AppSidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto fluent-scroll py-2">
+      <nav className="fluent-scroll flex-1 overflow-y-auto py-2">
         <div className={cn("space-y-1", isCollapsed ? "px-2" : "px-3")}>
           {filteredCategories.map((cat) => {
             const isCatCollapsed = !!collapsedCategories[cat.label];
@@ -154,11 +154,11 @@ export function AppSidebar() {
                   <button
                     onClick={() => cat.collapsible && toggleCategory(cat.label)}
                     className={cn(
-                      "flex w-full items-center pt-4 pb-1 px-3",
-                      cat.collapsible && "cursor-pointer group",
+                      "flex w-full items-center px-3 pt-4 pb-1",
+                      cat.collapsible && "group cursor-pointer",
                     )}
                   >
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70 flex-1 text-left">
+                    <span className="text-muted-foreground/70 flex-1 text-left text-[10px] font-semibold tracking-wider uppercase">
                       {cat.label}
                     </span>
 
@@ -206,33 +206,33 @@ export function AppSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-sidebar-border p-2">
+      <div className="border-sidebar-border border-t p-2">
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
               <button
                 className={cn(
-                  "flex w-full items-center rounded transition-colors hover:bg-accent",
+                  "hover:bg-accent flex w-full items-center rounded transition-colors",
                   isCollapsed
-                    ? "justify-center w-10 h-10 mx-auto"
+                    ? "mx-auto h-10 w-10 justify-center"
                     : "gap-2.5 px-2 py-1.5",
                 )}
               />
             }
           >
             <Avatar className="h-8 w-8 shrink-0">
-              <AvatarFallback className="bg-primary/10 text-[11px] font-semibold text-primary">
+              <AvatarFallback className="bg-primary/10 text-primary text-[11px] font-semibold">
                 {initials}
               </AvatarFallback>
             </Avatar>
 
             {!isCollapsed && (
-              <div className="flex flex-col items-start min-w-0 flex-1">
-                <span className="truncate text-[13px] font-medium text-sidebar-foreground leading-tight">
+              <div className="flex min-w-0 flex-1 flex-col items-start">
+                <span className="text-sidebar-foreground truncate text-[13px] leading-tight font-medium">
                   {user?.firstName} {user?.lastName}
                 </span>
 
-                <span className="truncate text-[11px] text-muted-foreground leading-tight">
+                <span className="text-muted-foreground truncate text-[11px] leading-tight">
                   {user?.email}
                 </span>
               </div>
@@ -249,7 +249,7 @@ export function AppSidebar() {
                 {user?.firstName} {user?.lastName}
               </p>
 
-              <p className="text-xs text-muted-foreground">{user?.email}</p>
+              <p className="text-muted-foreground text-xs">{user?.email}</p>
             </div>
 
             <DropdownMenuSeparator />

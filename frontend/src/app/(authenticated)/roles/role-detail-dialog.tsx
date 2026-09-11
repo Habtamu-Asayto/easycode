@@ -52,14 +52,14 @@ export function RoleDetailDialog({
 
         <div className="space-y-4">
           {role.description && (
-            <p className="text-sm text-muted-foreground">{role.description}</p>
+            <p className="text-muted-foreground text-sm">{role.description}</p>
           )}
 
           <div className="flex gap-6 text-sm">
             <div>
               <span className="text-muted-foreground">Status: </span>
               {role.isActive ? (
-                <Badge className="bg-emerald-100 text-emerald-700 text-xs">
+                <Badge className="bg-emerald-100 text-xs text-emerald-700">
                   Active
                 </Badge>
               ) : (
@@ -81,7 +81,7 @@ export function RoleDetailDialog({
           <Separator />
 
           <div>
-            <h4 className="text-sm font-semibold mb-2">
+            <h4 className="mb-2 text-sm font-semibold">
               Permissions ({role.permissions?.length || 0})
             </h4>
             <ScrollArea className="h-[250px] rounded-md border p-3">
@@ -90,7 +90,7 @@ export function RoleDetailDialog({
                   .sort()
                   .map((module) => (
                     <div key={module}>
-                      <h5 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                      <h5 className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
                         {module}
                       </h5>
                       <div className="flex flex-wrap gap-1">

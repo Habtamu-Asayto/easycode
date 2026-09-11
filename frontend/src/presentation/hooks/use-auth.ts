@@ -58,9 +58,7 @@ export function useAuth() {
     ? RbacDomainService.isSuperAdmin(user.roles)
     : false;
 
-  const isAdmin = user?.roles
-    ? RbacDomainService.isAdmin(user.roles)
-    : false;
+  const isAdmin = user?.roles ? RbacDomainService.isAdmin(user.roles) : false;
 
   return {
     user,

@@ -37,7 +37,10 @@ export class PrismaUserRepository implements IUserRepository {
 
     if (query.roleId) {
       where.userRoles = {
-        some: { roleId: query.roleId, deletedAt: null },
+        some: {
+          roleId: query.roleId,
+          deletedAt: null,
+        },
       };
     }
 
@@ -46,12 +49,7 @@ export class PrismaUserRepository implements IUserRepository {
     const [users, total] = await Promise.all([
       this.prisma.user.findMany({
         where,
-        include: {
-          userRoles: {
-            where: { deletedAt: null },
-            include: { role: true },
-          },
-        },
+        include: USER_INCLUDE,
         orderBy: { [query.sortBy]: query.sortOrder },
         skip,
         take: query.limit,
@@ -133,19 +131,75 @@ export class PrismaUserRepository implements IUserRepository {
   }
 
   async assignRoles(userId: string, roleIds: string[], currentUserId?: string) {
-    // Soft-delete existing roles
-    await this.prisma.userRole.updateMany({
-      where: { userId, deletedAt: null },
-      data: {
-        ...this.prisma.softDelete(),
-        ...this.prisma.auditUpdate(currentUserId),
-      },
+    const uniqueRoleIds = [...new Set(roleIds)];
+
+    // Get all existing assignments, including soft-deleted ones.
+    const existingAssignments = await this.prisma.userRole.findMany({
+      where: { userId },
     });
 
-    // Create new role assignments
-    if (roleIds.length > 0) {
+    const selectedRoleIds = new Set(uniqueRoleIds);
+
+    // --------------------------------------------------------------------------
+    // 1. Soft-delete currently active roles that are no longer selected
+    // --------------------------------------------------------------------------
+
+    const rolesToRemove = existingAssignments.filter(
+      (assignment) =>
+        assignment.deletedAt === null &&
+        !selectedRoleIds.has(assignment.roleId),
+    );
+
+    if (rolesToRemove.length > 0) {
+      await this.prisma.userRole.updateMany({
+        where: {
+          id: {
+            in: rolesToRemove.map((assignment) => assignment.id),
+          },
+        },
+        data: {
+          ...this.prisma.softDelete(),
+          ...this.prisma.auditUpdate(currentUserId),
+        },
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // 2. Restore previously soft-deleted roles that are selected again
+    // --------------------------------------------------------------------------
+
+    const rolesToRestore = existingAssignments.filter(
+      (assignment) =>
+        assignment.deletedAt !== null && selectedRoleIds.has(assignment.roleId),
+    );
+
+    for (const assignment of rolesToRestore) {
+      await this.prisma.userRole.update({
+        where: {
+          id: assignment.id,
+        },
+        data: {
+          deletedAt: null,
+          ...this.prisma.auditUpdate(currentUserId),
+        },
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // 3. Create roles that have never existed for this user
+    // --------------------------------------------------------------------------
+
+    const existingRoleIds = new Set(
+      existingAssignments.map((assignment) => assignment.roleId),
+    );
+
+    const newRoleIds = uniqueRoleIds.filter(
+      (roleId) => !existingRoleIds.has(roleId),
+    );
+
+    if (newRoleIds.length > 0) {
       await this.prisma.userRole.createMany({
-        data: roleIds.map((roleId) => ({
+        data: newRoleIds.map((roleId) => ({
           userId,
           roleId,
           ...this.prisma.auditCreate(currentUserId),

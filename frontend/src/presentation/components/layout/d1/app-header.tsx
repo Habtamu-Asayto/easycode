@@ -26,20 +26,20 @@ export function AppHeader() {
   };
 
   return (
-    <div className="flex justify-end items-center gap-4 border-b border-border bg-background px-4 py-2 relative">
+    <div className="border-border bg-background relative flex items-center justify-end gap-4 border-b px-4 py-2">
       {/* Profile dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <button className="flex items-center gap-2 rounded px-2 py-1 hover:bg-accent transition-colors" />
+            <button className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1 transition-colors" />
           }
         >
           <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-primary/10 text-[11px] font-semibold text-primary">
+            <AvatarFallback className="bg-primary/10 text-primary text-[11px] font-semibold">
               {initials}
             </AvatarFallback>
           </Avatar>
-          <span className="hidden text-[13px] font-medium text-foreground md:inline-block">
+          <span className="text-foreground hidden text-[13px] font-medium md:inline-block">
             {user?.firstName}
           </span>
         </DropdownMenuTrigger>
@@ -49,13 +49,13 @@ export function AppHeader() {
             <p className="text-sm font-medium">
               {user?.firstName} {user?.lastName}
             </p>
-            <p className="text-xs text-muted-foreground">{user?.email}</p>
+            <p className="text-muted-foreground text-xs">{user?.email}</p>
             <div className="mt-1 flex flex-wrap gap-1">
               {user?.roles?.map((role) => (
                 <Badge
                   key={role}
                   variant="secondary"
-                  className="text-[10px] px-1.5 py-0"
+                  className="px-1.5 py-0 text-[10px]"
                 >
                   {role.replace("_", " ")}
                 </Badge>

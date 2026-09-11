@@ -162,13 +162,10 @@ export const authConfig: NextAuthConfig = {
     signIn: "/login",
   },
   session: {
-    strategy: "jwt", 
+    strategy: "jwt",
     maxAge: 1 * 24 * 60 * 60, // 7 days
   },
   trustHost: true,
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
-
-
-

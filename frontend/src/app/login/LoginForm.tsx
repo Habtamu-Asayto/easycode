@@ -50,16 +50,16 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-screen bg-muted/30">
+    <div className="bg-muted/30 flex min-h-screen">
       {/* Left: Brand panel */}
-      <div className="hidden lg:flex lg:w-[420px] flex-col justify-between bg-gradient-to-br from-primary to-emerald-700 p-10 text-white">
+      <div className="from-primary hidden flex-col justify-between bg-gradient-to-br to-emerald-700 p-10 text-white lg:flex lg:w-[420px]">
         <div>
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20">
               <Leaf className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h2 className="text-lg font-bold leading-tight">
+              <h2 className="text-lg leading-tight font-bold">
                 Fertilizer Management System
               </h2>
               <p className="text-[12px] text-white/70">
@@ -71,10 +71,10 @@ export default function LoginForm() {
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-bold leading-tight">
+            <h1 className="text-3xl leading-tight font-bold">
               Manage Fertilizer Distribution with Confidence
             </h1>
-            <p className="mt-3 text-[14px] text-white/80 leading-relaxed max-w-[320px]">
+            <p className="mt-3 max-w-[320px] text-[14px] leading-relaxed text-white/80">
               A centralized platform for managing fertilizer demand, supply,
               warehouses, logistics, and reporting across Ethiopia.
             </p>
@@ -96,8 +96,8 @@ export default function LoginForm() {
         </div>
 
         <p className="text-[11px] text-white/40">
-          © {new Date().getFullYear()} Fertilizer Management System. All
-          rights reserved.
+          © {new Date().getFullYear()} Fertilizer Management System. All rights
+          reserved.
         </p>
       </div>
 
@@ -106,35 +106,33 @@ export default function LoginForm() {
         <div className="w-full max-w-[400px]">
           {/* Mobile brand */}
           <div className="mb-8 flex items-center gap-3 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
+            <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-lg">
               <Leaf className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-bold text-foreground">
+            <span className="text-foreground text-lg font-bold">
               Fertilizer Management System
             </span>
           </div>
 
           {/* Sign in card */}
-          <div className="rounded-lg border bg-card p-8 shadow-sm">
+          <div className="bg-card rounded-lg border p-8 shadow-sm">
             <div className="mb-6">
-              <h1 className="text-xl font-semibold text-foreground">
-                Sign in
-              </h1>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <h1 className="text-foreground text-xl font-semibold">Sign in</h1>
+              <p className="text-muted-foreground mt-1 text-sm">
                 Enter your credentials to access your account.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (
-                <div className="flex items-center gap-2 rounded border border-red-200 dark:border-red-800/50 bg-red-50 dark:bg-red-900/20 p-3 text-[13px] text-red-700 dark:text-red-400">
+                <div className="flex items-center gap-2 rounded border border-red-200 bg-red-50 p-3 text-[13px] text-red-700 dark:border-red-800/50 dark:bg-red-900/20 dark:text-red-400">
                   <AlertCircle className="h-4 w-4 shrink-0" />
                   <span>{error}</span>
                 </div>
               )}
 
               <div className="space-y-1.5">
-                <Label htmlFor="email" className="text-sm text-foreground">
+                <Label htmlFor="email" className="text-foreground text-sm">
                   Email
                 </Label>
                 <Input
@@ -152,7 +150,7 @@ export default function LoginForm() {
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="password" className="text-sm text-foreground">
+                <Label htmlFor="password" className="text-foreground text-sm">
                   Password
                 </Label>
                 <div className="relative">
@@ -171,7 +169,7 @@ export default function LoginForm() {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-1 top-1/2 h-7 w-7 -translate-y-1/2"
+                    className="absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2"
                     onClick={() => setShowPassword(!showPassword)}
                     tabIndex={-1}
                   >
@@ -184,27 +182,25 @@ export default function LoginForm() {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full h-10" disabled={loading}>
-                {loading && (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                )}
+              <Button type="submit" className="h-10 w-full" disabled={loading}>
+                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {loading ? "Signing in..." : "Sign in"}
               </Button>
             </form>
 
             {/* Demo accounts */}
-            <div className="mt-6 rounded-md border bg-muted/50 p-3">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
+            <div className="bg-muted/50 mt-6 rounded-md border p-3">
+              <p className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
                 Demo Accounts
               </p>
-              <div className="space-y-1 text-xs text-muted-foreground">
+              <div className="text-muted-foreground space-y-1 text-xs">
                 <p>
-                  <span className="font-medium text-foreground">Admin:</span>{" "}
+                  <span className="text-foreground font-medium">Admin:</span>{" "}
                   admin@test.com / Admin@123456
                 </p>
                 <p>
-                  <span className="font-medium text-foreground">User:</span>{" "}
-                    user@test.com / User@123456
+                  <span className="text-foreground font-medium">User:</span>{" "}
+                  user@test.com / User@123456
                 </p>
               </div>
             </div>
@@ -214,4 +210,3 @@ export default function LoginForm() {
     </div>
   );
 }
- 

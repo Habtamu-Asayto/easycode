@@ -17,14 +17,14 @@ const columns: ColumnDef<RegionResponse>[] = [
     label: "Name",
     className: "w-[250px]",
     render: (r) => (
-      <span className="text-[13px] font-medium text-foreground">{r.name}</span>
+      <span className="text-foreground text-[13px] font-medium">{r.name}</span>
     ),
   },
   {
     key: "code",
     label: "Code",
     render: (r) => (
-      <span className="text-[13px] text-muted-foreground">{r.code}</span>
+      <span className="text-muted-foreground text-[13px]">{r.code}</span>
     ),
   },
   {

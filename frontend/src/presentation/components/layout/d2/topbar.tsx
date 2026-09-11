@@ -54,27 +54,27 @@ export function Topbar({
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border/80 bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex  min-h-[3.95rem] w-full items-center gap-3 px-4 sm:gap-4 sm:px-7">
+    <header className="border-border/80 bg-background/85 sticky top-0 z-30 border-b backdrop-blur-xl">
+      <div className="mx-auto flex min-h-[3.95rem] w-full items-center gap-3 px-4 sm:gap-4 sm:px-7">
         {/* Mobile / Sidebar menu */}
         <button
           type="button"
           onClick={onMenu}
           aria-label="Open navigation"
-          className="grid size-10 shrink-0 place-items-center rounded-xl border border-border bg-card text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground lg:hidden"
+          className="border-border bg-card text-muted-foreground hover:border-primary/30 hover:text-foreground grid size-10 shrink-0 place-items-center rounded-xl border transition-colors lg:hidden"
         >
           <Menu className="size-4" />
         </button>
         {/* Search */}
-        <label className="relative ml-auto flex min-w-0 max-w-xl flex-1 items-center md:ml-4">
-          <Search className="pointer-events-none absolute left-3.5 size-4 text-muted-foreground" />
+        <label className="relative ml-auto flex max-w-xl min-w-0 flex-1 items-center md:ml-4">
+          <Search className="text-muted-foreground pointer-events-none absolute left-3.5 size-4" />
           <input
             type="search"
             placeholder="Search patients, doctors, records..."
             aria-label="Search patients, doctors, records"
-            className="h-11 w-full rounded-xl border border-border bg-card pl-10 pr-14 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground/70 hover:border-primary/30 focus:border-primary focus:ring-4 focus:ring-primary/10"
+            className="border-border bg-card text-foreground placeholder:text-muted-foreground/70 hover:border-primary/30 focus:border-primary focus:ring-primary/10 h-11 w-full rounded-xl border pr-14 pl-10 text-sm transition-all outline-none focus:ring-4"
           />
-          <kbd className="absolute right-3 hidden rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline">
+          <kbd className="border-border bg-muted text-muted-foreground absolute right-3 hidden rounded-md border px-1.5 py-0.5 font-mono text-[10px] sm:inline">
             ⌘K
           </kbd>
         </label>
@@ -86,7 +86,7 @@ export function Topbar({
             type="button"
             onClick={onToggleTheme}
             aria-label="Toggle theme"
-            className="grid size-11 place-items-center rounded-xl border border-border bg-card text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+            className="border-border bg-card text-muted-foreground hover:border-primary/30 hover:text-foreground grid size-11 place-items-center rounded-xl border transition-colors"
           >
             {theme === "dark" ? (
               <Sun className="size-4" />
@@ -105,35 +105,35 @@ export function Topbar({
                 setNotificationsOpen((value) => !value);
                 setProfileOpen(false);
               }}
-              className="relative grid size-11 place-items-center rounded-xl border border-border bg-card text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
+              className="border-border bg-card text-muted-foreground hover:border-primary/30 hover:text-foreground relative grid size-11 place-items-center rounded-xl border transition-colors"
             >
               <Bell className="size-4" />
-              <span className="absolute right-2.5 top-2.5 size-2 rounded-full bg-destructive ring-2 ring-card" />
+              <span className="bg-destructive ring-card absolute top-2.5 right-2.5 size-2 rounded-full ring-2" />
             </button>
             {notificationsOpen && (
-              <div className="absolute right-0 top-14 w-72 rounded-2xl border border-border bg-popover p-4 text-popover-foreground shadow-xl">
+              <div className="border-border bg-popover text-popover-foreground absolute top-14 right-0 w-72 rounded-2xl border p-4 shadow-xl">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold">Notifications</p>
-                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                  <span className="bg-primary/10 text-primary rounded-full px-2 py-0.5 text-[10px] font-semibold">
                     3 new
                   </span>
                 </div>
                 <div className="mt-3 space-y-2">
-                  <div className="rounded-xl bg-muted/60 p-3">
+                  <div className="bg-muted/60 rounded-xl p-3">
                     <p className="text-xs font-medium"> Patient update </p>
-                    <p className="mt-1 text-[11px] leading-4 text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 text-[11px] leading-4">
                       A patient record needs your attention.
                     </p>
                   </div>
-                  <div className="rounded-xl bg-muted/60 p-3">
+                  <div className="bg-muted/60 rounded-xl p-3">
                     <p className="text-xs font-medium">Appointment reminder</p>
-                    <p className="mt-1 text-[11px] leading-4 text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 text-[11px] leading-4">
                       You have an upcoming appointment.
                     </p>
                   </div>
-                  <div className="rounded-xl bg-muted/60 p-3">
+                  <div className="bg-muted/60 rounded-xl p-3">
                     <p className="text-xs font-medium"> System update </p>
-                    <p className="mt-1 text-[11px] leading-4 text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 text-[11px] leading-4">
                       EMR synchronization completed successfully.
                     </p>
                   </div>
@@ -153,7 +153,7 @@ export function Topbar({
                 setNotificationsOpen(false);
               }}
               className={[
-                "flex items-center gap-2 rounded-xl border border-border bg-card p-1.5 pr-2.5 transition-colors",
+                "border-border bg-card flex items-center gap-2 rounded-xl border p-1.5 pr-2.5 transition-colors",
                 "hover:border-primary/30",
                 profileOpen && "border-primary/40",
               ]
@@ -161,40 +161,40 @@ export function Topbar({
                 .join(" ")}
             >
               <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-primary/10 text-[11px] font-semibold text-primary">
+                <AvatarFallback className="bg-primary/10 text-primary text-[11px] font-semibold">
                   {initials}
                 </AvatarFallback>
               </Avatar>
-              <span className="hidden text-[13px] font-medium text-foreground md:inline-block">
+              <span className="text-foreground hidden text-[13px] font-medium md:inline-block">
                 {user?.firstName}
               </span>
-              <ChevronDown className="hidden size-3.5 text-muted-foreground lg:block" />
+              <ChevronDown className="text-muted-foreground hidden size-3.5 lg:block" />
             </button>
             {profileOpen && (
-              <div className="absolute right-0 top-14 w-56 rounded-2xl border border-border bg-popover p-2 text-popover-foreground shadow-xl">
+              <div className="border-border bg-popover text-popover-foreground absolute top-14 right-0 w-56 rounded-2xl border p-2 shadow-xl">
                 <div className="rounded-xl px-3 py-2">
-                  <p className="text-sm font-semibold">{ user?.firstName }</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    { user?.roles }
+                  <p className="text-sm font-semibold">{user?.firstName}</p>
+                  <p className="text-muted-foreground mt-1 text-xs">
+                    {user?.roles}
                   </p>
                 </div>
-                <div className="my-1 h-px bg-border" />
+                <div className="bg-border my-1 h-px" />
                 <button
                   type="button"
-                  className="w-full rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
+                  className="hover:bg-muted w-full rounded-lg px-3 py-2 text-left text-sm transition-colors"
                 >
                   Account settings
                 </button>
                 <button
                   type="button"
-                  className="w-full rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
+                  className="hover:bg-muted w-full rounded-lg px-3 py-2 text-left text-sm transition-colors"
                 >
                   Profile
                 </button>
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="w-full rounded-lg px-3 py-2 text-left text-sm text-destructive transition-colors hover:bg-destructive/10"
+                  className="text-destructive hover:bg-destructive/10 w-full rounded-lg px-3 py-2 text-left text-sm transition-colors"
                 >
                   Sign out
                 </button>

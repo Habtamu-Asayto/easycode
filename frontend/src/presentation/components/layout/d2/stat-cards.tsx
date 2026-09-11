@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import { TrendingUp, TrendingDown } from 'lucide-react'
+import { TrendingUp, TrendingDown } from "lucide-react";
 
-import { Card, CardContent } from '@/presentation/components/ui/card'
-import { useCountUp } from '@/presentation/hooks/count.up'
-import { kpis, type Kpi } from '@/lib/sample.data'
-import { cn } from '@/lib/utils'
+import { Card, CardContent } from "@/presentation/components/ui/card";
+import { useCountUp } from "@/presentation/hooks/count.up";
+import { kpis, type Kpi } from "@/lib/sample.data";
+import { cn } from "@/lib/utils";
 
 function Sparkline({ points, color }: { points: number[]; color: string }) {
-  const max = Math.max(...points)
-  const min = Math.min(...points)
-  const range = max - min || 1
-  const w = 96
-  const h = 34
-  const step = w / (points.length - 1)
+  const max = Math.max(...points);
+  const min = Math.min(...points);
+  const range = max - min || 1;
+  const w = 96;
+  const h = 34;
+  const step = w / (points.length - 1);
   const coords = points.map((p, i) => {
-    const x = i * step
-    const y = h - ((p - min) / range) * (h - 4) - 2
-    return [x, y] as const
-  })
-  const line = coords.map(([x, y]) => `${x},${y}`).join(' ')
-  const area = `0,${h} ${line} ${w},${h}`
-  const id = `spark-${color.replace(/[^a-z0-9]/gi, '')}`
+    const x = i * step;
+    const y = h - ((p - min) / range) * (h - 4) - 2;
+    return [x, y] as const;
+  });
+  const line = coords.map(([x, y]) => `${x},${y}`).join(" ");
+  const area = `0,${h} ${line} ${w},${h}`;
+  const id = `spark-${color.replace(/[^a-z0-9]/gi, "")}`;
 
   return (
     <svg
@@ -54,13 +54,13 @@ function Sparkline({ points, color }: { points: number[]; color: string }) {
         fill={color}
       />
     </svg>
-  )
+  );
 }
 
 function StatCard({ kpi, index }: { kpi: Kpi; index: number }) {
-  const animated = useCountUp(kpi.value, 1300, index * 120)
-  const Icon = kpi.icon
-  const up = kpi.trend === 'up'
+  const animated = useCountUp(kpi.value, 1300, index * 120);
+  const Icon = kpi.icon;
+  const up = kpi.trend === "up";
 
   return (
     <Card
@@ -81,15 +81,15 @@ function StatCard({ kpi, index }: { kpi: Kpi; index: number }) {
           <Sparkline points={kpi.spark} color={kpi.accent} />
         </div>
 
-        <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <p className="text-muted-foreground mt-4 text-xs font-semibold tracking-wider uppercase">
           {kpi.title}
         </p>
         <div className="mt-1 flex items-baseline gap-1">
-          <span className="font-mono text-3xl font-bold tabular-nums text-foreground">
+          <span className="text-foreground font-mono text-3xl font-bold tabular-nums">
             {kpi.display(animated)}
           </span>
           {kpi.suffix ? (
-            <span className="text-lg font-semibold text-muted-foreground">
+            <span className="text-muted-foreground text-lg font-semibold">
               {kpi.suffix}
             </span>
           ) : null}
@@ -98,10 +98,10 @@ function StatCard({ kpi, index }: { kpi: Kpi; index: number }) {
         <div className="mt-2 flex items-center gap-1.5">
           <span
             className={cn(
-              'inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[11px] font-semibold',
+              "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[11px] font-semibold",
               up
-                ? 'bg-[var(--success)]/12 text-[var(--success)]'
-                : 'bg-destructive/12 text-destructive',
+                ? "bg-[var(--success)]/12 text-[var(--success)]"
+                : "bg-destructive/12 text-destructive",
             )}
           >
             {up ? (
@@ -111,13 +111,13 @@ function StatCard({ kpi, index }: { kpi: Kpi; index: number }) {
             )}
             {kpi.change}
           </span>
-          <span className="text-[11px] text-muted-foreground">
+          <span className="text-muted-foreground text-[11px]">
             vs yesterday
           </span>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export function StatCards() {
@@ -127,5 +127,5 @@ export function StatCards() {
         <StatCard key={kpi.key} kpi={kpi} index={i} />
       ))}
     </div>
-  )
+  );
 }

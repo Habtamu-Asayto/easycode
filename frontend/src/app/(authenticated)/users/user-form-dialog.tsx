@@ -3,9 +3,7 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { usersApi, rolesApi } from "@/infrastructure/rbac/api";
-import {
-  regionsApi 
-} from "@/infrastructure/geography/api/geography.api";
+import { regionsApi } from "@/infrastructure/geography/api/geography.api";
 import {
   Dialog,
   DialogContent,
@@ -75,7 +73,7 @@ export function UserFormDialog({
     queryFn: () => regionsApi.lookup(),
     enabled: open,
   });
-   useEffect(() => {
+  useEffect(() => {
     if (open) {
       if (user) {
         setFirstName(user.firstName);
@@ -173,7 +171,7 @@ export function UserFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[560px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[560px]">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit User" : "Create User"}</DialogTitle>
           <DialogDescription>
@@ -262,7 +260,7 @@ export function UserFormDialog({
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="absolute right-1 top-1/2 h-7 w-7 -translate-y-1/2"
+                  className="absolute top-1/2 right-1 h-7 w-7 -translate-y-1/2"
                   onClick={() => setShowPassword(!showPassword)}
                   tabIndex={-1}
                 >
@@ -278,7 +276,7 @@ export function UserFormDialog({
 
           {/* Geography assignment */}
           <div className="space-y-3">
-            <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <Label className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
               Geography Assignment
             </Label>
             <div className="grid grid-cols-2 gap-4">
@@ -324,7 +322,6 @@ export function UserFormDialog({
                       }
                     />
                   </SelectTrigger>
-                  
                 </Select>
               </div>
             </div>
@@ -346,7 +343,6 @@ export function UserFormDialog({
                       }
                     />
                   </SelectTrigger>
-                  
                 </Select>
               </div>
               <div className="space-y-2">
@@ -363,7 +359,6 @@ export function UserFormDialog({
                       }
                     />
                   </SelectTrigger>
-                  
                 </Select>
               </div>
             </div>
@@ -376,7 +371,7 @@ export function UserFormDialog({
                 {rolesData?.items?.map((role) => (
                   <label
                     key={role.id}
-                    className="flex items-center gap-2 rounded p-1.5 hover:bg-accent cursor-pointer"
+                    className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded p-1.5"
                   >
                     <Checkbox
                       checked={selectedRoles.includes(role.id)}
@@ -388,7 +383,7 @@ export function UserFormDialog({
                         {role.name.replace("_", " ")}
                       </span>
                       {role.description && (
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-muted-foreground text-xs">
                           {role.description}
                         </p>
                       )}

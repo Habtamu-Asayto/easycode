@@ -2,7 +2,7 @@ import { UserEntity } from '../entities/index.js';
 
 export interface IUserRepository {
   findAll(query: {
-    page: number;
+    page: number; 
     limit: number;
     sortBy: string;
     sortOrder: 'asc' | 'desc';

@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/presentation/components/ui/card'
-import { departments } from '@/lib/sample.data'
+} from "@/presentation/components/ui/card";
+import { departments } from "@/lib/sample.data";
 
 export function DepartmentChart() {
-  const total = departments.reduce((sum, d) => sum + d.value, 0)
+  const total = departments.reduce((sum, d) => sum + d.value, 0);
 
   return (
-    <Card className="animate-fade-up" style={{ animationDelay: '180ms' }}>
+    <Card className="animate-fade-up" style={{ animationDelay: "180ms" }}>
       <CardHeader>
         <CardTitle className="text-base">Department Load</CardTitle>
-        <p className="mt-1 text-xs text-muted-foreground">
+        <p className="text-muted-foreground mt-1 text-xs">
           Share of active cases
         </p>
       </CardHeader>
@@ -42,10 +42,10 @@ export function DepartmentChart() {
             </PieChart>
           </ResponsiveContainer>
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-            <span className="font-mono text-2xl font-bold text-foreground">
+            <span className="text-foreground font-mono text-2xl font-bold">
               {total}
             </span>
-            <span className="text-[11px] uppercase tracking-wider text-muted-foreground">
+            <span className="text-muted-foreground text-[11px] tracking-wider uppercase">
               Active
             </span>
           </div>
@@ -59,7 +59,7 @@ export function DepartmentChart() {
                 style={{ backgroundColor: d.color }}
               />
               <span className="text-muted-foreground">{d.name}</span>
-              <span className="ml-auto font-mono font-semibold text-foreground">
+              <span className="text-foreground ml-auto font-mono font-semibold">
                 {d.value}%
               </span>
             </div>
@@ -67,5 +67,5 @@ export function DepartmentChart() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

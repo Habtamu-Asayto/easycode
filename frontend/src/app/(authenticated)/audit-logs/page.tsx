@@ -98,14 +98,14 @@ export default function AuditLogsPage() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       {/* ── Page header + command bar ───────────────────────────────────── */}
       <div className="space-y-3">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          <h1 className="text-foreground text-xl font-semibold tracking-tight">
             Audit Logs
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-muted-foreground mt-1 text-sm">
             Track all system activities and changes
           </p>
         </div>
@@ -145,7 +145,7 @@ export default function AuditLogsPage() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="rounded-lg border bg-card p-4 flex items-center gap-4"
+            className="bg-card flex items-center gap-4 rounded-lg border p-4"
           >
             <div
               className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${stat.iconBg}`}
@@ -153,8 +153,8 @@ export default function AuditLogsPage() {
               <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-              <p className="text-xs text-muted-foreground">{stat.label}</p>
+              <p className="text-foreground text-2xl font-bold">{stat.value}</p>
+              <p className="text-muted-foreground text-xs">{stat.label}</p>
             </div>
           </div>
         ))}
@@ -199,7 +199,7 @@ export default function AuditLogsPage() {
             <SelectItem value="Permission">Permission</SelectItem>
           </SelectContent>
         </Select>
-        <span className="ml-auto text-xs text-muted-foreground">
+        <span className="text-muted-foreground ml-auto text-xs">
           Showing {data?.items?.length ?? 0} of {stats.total} records
         </span>
       </div>
@@ -214,27 +214,27 @@ export default function AuditLogsPage() {
           description="Activity logs will appear here as users perform actions"
         />
       ) : (
-        <div className="rounded-md border bg-card overflow-hidden">
+        <div className="bg-card overflow-hidden rounded-md border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Date & Time
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     User
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Action
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Entity
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Entity ID
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     IP Address
                   </TableHead>
                 </TableRow>
@@ -242,22 +242,22 @@ export default function AuditLogsPage() {
               <TableBody>
                 {data.items.map((log) => (
                   <TableRow key={log.id} className="group hover:bg-muted/50">
-                    <TableCell className="whitespace-nowrap text-sm text-muted-foreground">
+                    <TableCell className="text-muted-foreground text-sm whitespace-nowrap">
                       {format(new Date(log.createdAt), "MMM d, yyyy HH:mm:ss")}
                     </TableCell>
                     <TableCell>
                       <div>
-                        <p className="text-sm font-medium text-foreground">
+                        <p className="text-foreground text-sm font-medium">
                           {log.user?.firstName} {log.user?.lastName}
                         </p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-muted-foreground text-xs">
                           {log.user?.email}
                         </p>
                       </div>
                     </TableCell>
                     <TableCell>
                       <Badge
-                        className={`${getActionColor(log.action)} text-[11px] border`}
+                        className={`${getActionColor(log.action)} border text-[11px]`}
                       >
                         {log.action.replace(/_/g, " ")}
                       </Badge>
@@ -270,10 +270,10 @@ export default function AuditLogsPage() {
                         {log.entity}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-xs text-muted-foreground font-mono max-w-[120px] truncate">
+                    <TableCell className="text-muted-foreground max-w-[120px] truncate font-mono text-xs">
                       {log.entityId || "—"}
                     </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
+                    <TableCell className="text-muted-foreground text-sm">
                       {log.ipAddress || "—"}
                     </TableCell>
                   </TableRow>

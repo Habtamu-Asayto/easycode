@@ -23,7 +23,7 @@ import { Plus, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import type { PaginationQuery, PaginationMeta } from "@/domain/rbac/entities";
 import { redirect } from "next/navigation";
- 
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 export interface ColumnDef<T> {
   key: string;
@@ -113,7 +113,6 @@ export function TrackPage<
     destination: "",
   });
 
-  
   const statusColors: Record<string, string> = {
     IN_WAREHOUSE: "bg-blue-100 text-blue-800",
     IN_TRANSIT_UNION: "bg-amber-100 text-amber-800",
@@ -161,13 +160,13 @@ export function TrackPage<
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       {/* Header */}
       <div>
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-foreground text-xl font-semibold tracking-tight">
           {title}
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">{description}</p>
+        <p className="text-muted-foreground mt-1 text-sm">{description}</p>
       </div>
 
       {/* Stats */}
@@ -176,7 +175,7 @@ export function TrackPage<
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-lg border bg-card p-4 flex items-center gap-4"
+              className="bg-card flex items-center gap-4 rounded-lg border p-4"
             >
               <div
                 className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${stat.iconBg}`}
@@ -184,10 +183,10 @@ export function TrackPage<
                 <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-foreground">
+                <p className="text-foreground text-2xl font-bold">
                   {stat.value}
                 </p>
-                <p className="text-xs text-muted-foreground">{stat.label}</p>
+                <p className="text-muted-foreground text-xs">{stat.label}</p>
               </div>
             </div>
           ))}
@@ -212,7 +211,7 @@ export function TrackPage<
           placeholder={`Search ${entityName}s...`}
           className="w-72"
         />
-        <span className="ml-auto text-xs text-muted-foreground">
+        <span className="text-muted-foreground ml-auto text-xs">
           Showing {data?.data?.length ?? 0} Tackings
         </span>
       </div>
@@ -239,31 +238,31 @@ export function TrackPage<
           }
         />
       ) : (
-        <div className="rounded-md borde-0 bg-card overflow-hidden">
-          <div className="overflow-x-auto bg-muted/40">
+        <div className="borde-0 bg-card overflow-hidden rounded-md">
+          <div className="bg-muted/40 overflow-x-auto">
             {/* Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {data.data.map((item) => (
                 <div
                   key={item.id}
-                  className="p-5 rounded-xl border bg-card cursor-pointer hover:shadow-md transition-all"
+                  className="bg-card cursor-pointer rounded-xl border p-5 transition-all hover:shadow-md"
                   onClick={() => console.log("go detail", item.id)} // replace with router if needed
                 >
                   <div onClick={() => handleDetail()}>
                     {/* Tracking */}
-                    <p className="text-xs text-muted-foreground font-medium">
+                    <p className="text-muted-foreground text-xs font-medium">
                       TRACKING NUMBER
                     </p>
-                    <p className="text-base font-mono font-semibold text-foreground">
+                    <p className="text-foreground font-mono text-base font-semibold">
                       {item.name}
                     </p>
 
                     {/* Status */}
-                    <p className="mt-3 text-xs text-muted-foreground font-medium">
+                    <p className="text-muted-foreground mt-3 text-xs font-medium">
                       STATUS
                     </p>
                     <span
-                      className={`inline-block mt-1 px-3 py-1 rounded-full text-xs font-medium ${
+                      className={`mt-1 inline-block rounded-full px-3 py-1 text-xs font-medium ${
                         (item as any).status
                           ? statusColors[(item as any).status]
                           : "bg-gray-100 text-gray-700"
@@ -273,14 +272,14 @@ export function TrackPage<
                     </span>
 
                     {/* Details */}
-                    <div className="pt-3 border-t mt-3 space-y-1">
-                      <p className="text-xs text-muted-foreground">
+                    <div className="mt-3 space-y-1 border-t pt-3">
+                      <p className="text-muted-foreground text-xs">
                         From:{" "}
                         <span className="text-foreground">
                           {(item as any).origin}
                         </span>
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         To:{" "}
                         <span className="text-foreground">
                           {(item as any).destination}
@@ -289,14 +288,14 @@ export function TrackPage<
                     </div>
 
                     {/* Date */}
-                    <p className="text-[11px] text-muted-foreground mt-3">
+                    <p className="text-muted-foreground mt-3 text-[11px]">
                       Created{" "}
                       {new Date((item as any).createdAt).toLocaleDateString()}
                     </p>
                   </div>
 
                   {/* Actions */}
-                  <div className="flex justify-end mt-3">
+                  <div className="mt-3 flex justify-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger
                         render={
@@ -331,7 +330,6 @@ export function TrackPage<
                         </PermissionGate>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                    
                   </div>
                 </div>
               ))}
@@ -369,7 +367,7 @@ export function TrackPage<
 // ── Helper: Active/Inactive Badge ─────────────────────────────────────────────
 export function StatusBadge({ isActive }: { isActive: boolean }) {
   return isActive ? (
-    <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 text-[11px] border border-emerald-200 dark:border-emerald-800">
+    <Badge className="border border-emerald-200 bg-emerald-50 text-[11px] text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">
       Active
     </Badge>
   ) : (

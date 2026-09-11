@@ -34,9 +34,8 @@ import {
   MapPin,
 } from "lucide-react";
 import Link from "next/link";
- 
-export default function Dashboard() 
-{
+
+export default function Dashboard() {
   // ── Mock Data ─────────────────────────────────────────────────────────────────
   const kpiCards = [
     {
@@ -91,19 +90,19 @@ export default function Dashboard()
   ];
 
   const regionDistribution = [
-    { name: "Oromia" , value: 32, color: "#0d9488" },
+    { name: "Oromia", value: 32, color: "#0d9488" },
     { name: "Amhara", value: 24, color: "#059669" },
     { name: "SNNP", value: 18, color: "#0891b2" },
     { name: "Tigray", value: 12, color: "#7c3aed" },
     { name: "Sidama", value: 8, color: "#2563eb" },
-    { name:"Other", value: 6, color: "#94a3b8" },
+    { name: "Other", value: 6, color: "#94a3b8" },
   ];
 
   const fertilizerBreakdown = [
     { name: "Urea", value: 45, color: "#0d9488" },
     { name: "DAP", value: 28, color: "#059669" },
     { name: "NPS", value: 18, color: "#0891b2" },
-    { name:"Blended", value: 9, color: "#7c3aed" },
+    { name: "Blended", value: 9, color: "#7c3aed" },
   ];
 
   const recentActivities = [
@@ -112,14 +111,14 @@ export default function Dashboard()
       entity: "Role",
       user: "Admin User",
       time: "2 min ago",
-      detail:"Created new role",
+      detail: "Created new role",
     },
     {
       action: "USER_CREATED",
       entity: "User",
       user: "Admin User",
       time: "15 min ago",
-      detail: "Added new user" + 'Kebede Alemu',
+      detail: "Added new user" + "Kebede Alemu",
     },
     {
       action: "PERMISSION_UPDATED",
@@ -152,7 +151,7 @@ export default function Dashboard()
       percentage: 78.8,
     },
     {
-      region:"amhara",
+      region: "amhara",
       allocated: 98000,
       distributed: 82300,
       percentage: 84.0,
@@ -192,15 +191,15 @@ export default function Dashboard()
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       {/* ── Page header ─────────────────────────────────────────────────── */}
       <div>
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-            Dashboard
+        <h1 className="text-foreground text-xl font-semibold tracking-tight">
+          Dashboard
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Welcome back, {user?.firstName}.{" "}
-          Here&apos; your Fullstack sample dashboard
+        <p className="text-muted-foreground mt-1 text-sm">
+          Welcome back, {user?.firstName}. Here&apos; your Fullstack sample
+          dashboard
         </p>
       </div>
 
@@ -214,14 +213,14 @@ export default function Dashboard()
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between">
                     <div>
-                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
                         {kpi.title}
                       </p>
                       <div className="mt-2 flex items-baseline gap-1.5">
-                        <span className="text-2xl font-bold text-foreground">
+                        <span className="text-foreground text-2xl font-bold">
                           {kpi.value}
                         </span>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-muted-foreground text-xs">
                           {kpi.unit}
                         </span>
                       </div>
@@ -240,7 +239,7 @@ export default function Dashboard()
                         >
                           {kpi.change}
                         </span>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-muted-foreground text-xs">
                           vs last quarter
                         </span>
                       </div>
@@ -262,7 +261,7 @@ export default function Dashboard()
             <Card className="lg:col-span-2">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-semibold text-foreground">
+                  <CardTitle className="text-foreground text-sm font-semibold">
                     Quarterly Fertilizer Data
                   </CardTitle>
                   <Badge variant="outline" className="text-[11px] font-normal">
@@ -379,7 +378,7 @@ export default function Dashboard()
             {/* Region Distribution Pie */}
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-semibold text-foreground">
+                <CardTitle className="text-foreground text-sm font-semibold">
                   Distribution By Region
                 </CardTitle>
               </CardHeader>
@@ -419,11 +418,11 @@ export default function Dashboard()
                       className="flex items-center gap-2 text-[12px]"
                     >
                       <div
-                        className="h-2.5 w-2.5 rounded-full shrink-0"
+                        className="h-2.5 w-2.5 shrink-0 rounded-full"
                         style={{ backgroundColor: r.color }}
                       />
                       <span className="text-muted-foreground">{r.name}</span>
-                      <span className="ml-auto font-medium text-foreground">
+                      <span className="text-foreground ml-auto font-medium">
                         {r.value}%
                       </span>
                     </div>
@@ -439,17 +438,17 @@ export default function Dashboard()
             <Card className="lg:col-span-2">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-semibold text-foreground">
+                  <CardTitle className="text-foreground text-sm font-semibold">
                     Regional Allocation vs Distribution
                   </CardTitle>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground flex items-center gap-3 text-xs">
                     <div className="flex items-center gap-1">
                       <div className="h-2.5 w-2.5 rounded-sm bg-teal-500" />
-                            Allocated
+                      Allocated
                     </div>
                     <div className="flex items-center gap-1">
                       <div className="h-2.5 w-2.5 rounded-sm bg-emerald-400" />
-                         Distributed
+                      Distributed
                     </div>
                   </div>
                 </div>
@@ -508,12 +507,12 @@ export default function Dashboard()
             <Card>
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-semibold text-foreground">
-                   Recent Activity
+                  <CardTitle className="text-foreground text-sm font-semibold">
+                    Recent Activity
                   </CardTitle>
                   <Link
                     href="/audit-logs"
-                    className="text-xs text-primary hover:underline"
+                    className="text-primary text-xs hover:underline"
                   >
                     View All
                   </Link>
@@ -524,23 +523,23 @@ export default function Dashboard()
                   {recentActivities.map((activity, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 pb-3 border-b border-border last:border-0 last:pb-0"
+                      className="border-border flex items-start gap-3 border-b pb-3 last:border-0 last:pb-0"
                     >
                       <div className="mt-0.5">
-                        <Activity className="h-3.5 w-3.5 text-muted-foreground" />
+                        <Activity className="text-muted-foreground h-3.5 w-3.5" />
                       </div>
-                      <div className="flex-1 min-w-0">
+                      <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
                           <Badge
-                            className={`${getActionColor(activity.action)} text-[10px] px-1.5 py-0 border`}
+                            className={`${getActionColor(activity.action)} border px-1.5 py-0 text-[10px]`}
                           >
                             {activity.action.replace(/_/g, " ")}
                           </Badge>
                         </div>
-                        <p className="mt-0.5 text-xs text-foreground truncate">
+                        <p className="text-foreground mt-0.5 truncate text-xs">
                           {activity.detail}
                         </p>
-                        <p className="text-[10px] text-muted-foreground">
+                        <p className="text-muted-foreground text-[10px]">
                           {activity.user} · {activity.time}
                         </p>
                       </div>
@@ -556,7 +555,7 @@ export default function Dashboard()
             {/* Fertilizer Breakdown */}
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-semibold text-foreground">
+                <CardTitle className="text-foreground text-sm font-semibold">
                   By Fertilizer Type
                 </CardTitle>
               </CardHeader>
@@ -589,7 +588,7 @@ export default function Dashboard()
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="space-y-1.5 mt-1">
+                <div className="mt-1 space-y-1.5">
                   {fertilizerBreakdown.map((f) => (
                     <div
                       key={f.name}
@@ -602,7 +601,7 @@ export default function Dashboard()
                         />
                         <span className="text-muted-foreground">{f.name}</span>
                       </div>
-                      <span className="font-medium text-foreground">
+                      <span className="text-foreground font-medium">
                         {f.value}%
                       </span>
                     </div>
@@ -614,7 +613,7 @@ export default function Dashboard()
             {/* Quick Access Links */}
             <Card className="lg:col-span-3">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-semibold text-foreground">
+                <CardTitle className="text-foreground text-sm font-semibold">
                   Quick Access
                 </CardTitle>
               </CardHeader>
@@ -623,7 +622,7 @@ export default function Dashboard()
                   {[
                     {
                       title: "Create, edit, and manage user accounts",
-                      description:"Create, edit, and manage user accounts",
+                      description: "Create, edit, and manage user accounts",
                       icon: Users,
                       href: "/users",
                       color: "text-teal-600",
@@ -655,17 +654,17 @@ export default function Dashboard()
                     },
                   ].map((link) => (
                     <Link key={link.href} href={link.href}>
-                      <div className="flex items-start gap-3 rounded-md border p-3.5 transition-all hover:shadow-sm hover:border-primary/30 cursor-pointer h-full">
+                      <div className="hover:border-primary/30 flex h-full cursor-pointer items-start gap-3 rounded-md border p-3.5 transition-all hover:shadow-sm">
                         <div
                           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${link.bg}`}
                         >
                           <link.icon className={`h-4 w-4 ${link.color}`} />
                         </div>
                         <div>
-                          <h4 className="text-sm font-medium text-foreground">
+                          <h4 className="text-foreground text-sm font-medium">
                             {link.title}
                           </h4>
-                          <p className="mt-0.5 text-xs text-muted-foreground">
+                          <p className="text-muted-foreground mt-0.5 text-xs">
                             {link.description}
                           </p>
                         </div>

@@ -48,22 +48,22 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       {/* Page header */}
       <div>
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-foreground text-xl font-semibold tracking-tight">
           Settings
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">
+        <p className="text-muted-foreground mt-1 text-sm">
           Manage your account and preferences
         </p>
       </div>
 
-      <div className="overflow-auto max-w-3xl space-y-6">
+      <div className="max-w-3xl space-y-6 overflow-auto">
         {/* Profile Info */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base text-foreground">
+            <CardTitle className="text-foreground text-base">
               Profile Information
             </CardTitle>
             <CardDescription>
@@ -76,13 +76,13 @@ export default function SettingsPage() {
                 <Label className="text-muted-foreground text-xs">
                   Full Name
                 </Label>
-                <p className="text-sm font-medium text-foreground">
+                <p className="text-foreground text-sm font-medium">
                   {user?.firstName} {user?.lastName}
                 </p>
               </div>
               <div>
                 <Label className="text-muted-foreground text-xs">Email</Label>
-                <p className="text-sm font-medium text-foreground">
+                <p className="text-foreground text-sm font-medium">
                   {user?.email}
                 </p>
               </div>
@@ -115,7 +115,7 @@ export default function SettingsPage() {
         {/* Change Password */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base text-foreground">
+            <CardTitle className="text-foreground text-base">
               Change Password
             </CardTitle>
             <CardDescription>
@@ -123,7 +123,7 @@ export default function SettingsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-sm">
+            <form onSubmit={handleSubmit} className="max-w-sm space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="currentPw">Current Password</Label>
                 <Input

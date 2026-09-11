@@ -26,9 +26,7 @@ export interface SearchableRelationItem {
   code?: string;
 }
 
-interface SearchableRelationSelectorProps<
-  T extends SearchableRelationItem,
-> {
+interface SearchableRelationSelectorProps<T extends SearchableRelationItem> {
   label: string;
   id?: string;
 
@@ -51,9 +49,7 @@ interface SearchableRelationSelectorProps<
   icon?: React.ComponentType<{ className?: string }>;
 }
 
-export function SearchableRelationSelector<
-  T extends SearchableRelationItem,
->({
+export function SearchableRelationSelector<T extends SearchableRelationItem>({
   label,
   id,
   items,
@@ -92,41 +88,12 @@ export function SearchableRelationSelector<
               role="combobox"
               aria-expanded={open}
               disabled={isDisabled}
-              className="
-                flex h-10 w-full items-center justify-between
-                rounded-md border border-input
-                bg-background px-3 py-2
-                text-sm
-                ring-offset-background
-                transition-all duration-200
-                hover:border-primary/50
-                focus:outline-none
-                focus:ring-2
-                focus:ring-primary/20
-                disabled:cursor-not-allowed
-                disabled:opacity-50
-              "
+              className="border-input bg-background ring-offset-background hover:border-primary/50 focus:ring-primary/20 flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm transition-all duration-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             >
               {selectedItem ? (
-                <div
-                  className="
-                    flex min-w-0 items-center gap-2
-                    animate-in
-                    fade-in
-                    slide-in-from-left-1
-                    duration-200
-                  "
-                >
+                <div className="animate-in fade-in slide-in-from-left-1 flex min-w-0 items-center gap-2 duration-200">
                   {Icon && (
-                    <div
-                      className="
-                        flex h-6 w-6 shrink-0
-                        items-center justify-center
-                        rounded-md
-                        bg-primary/10
-                        text-primary
-                      "
-                    >
+                    <div className="bg-primary/10 text-primary flex h-6 w-6 shrink-0 items-center justify-center rounded-md">
                       <Icon className="h-3.5 w-3.5" />
                     </div>
                   )}
@@ -136,7 +103,7 @@ export function SearchableRelationSelector<
                   </span>
 
                   {selectedItem.code && (
-                    <span className="shrink-0 text-xs text-muted-foreground">
+                    <span className="text-muted-foreground shrink-0 text-xs">
                       ({selectedItem.code})
                     </span>
                   )}
@@ -147,13 +114,7 @@ export function SearchableRelationSelector<
                 </span>
               )}
 
-              <Search
-                className="
-                  ml-2 h-4 w-4 shrink-0
-                  text-muted-foreground
-                  transition-transform duration-200
-                "
-              />
+              <Search className="text-muted-foreground ml-2 h-4 w-4 shrink-0 transition-transform duration-200" />
             </button>
           }
         />
@@ -161,65 +122,27 @@ export function SearchableRelationSelector<
         <PopoverContent
           align="start"
           sideOffset={5}
-          className="
-            w-[var(--radix-popover-trigger-width)]
-            overflow-hidden
-            rounded-xl
-            border
-            bg-popover
-            p-0
-            shadow-lg
-            animate-in
-            fade-in-0
-            zoom-in-95
-            duration-200
-          "
+          className="bg-popover animate-in fade-in-0 zoom-in-95 w-[var(--radix-popover-trigger-width)] overflow-hidden rounded-xl border p-0 shadow-lg duration-200"
         >
           <Command>
-            <div className="border-b bg-popover p-2">
+            <div className="bg-popover border-b p-2">
               <CommandInput
                 placeholder={searchPlaceholder}
-                className="
-                  h-9
-                  rounded-lg
-                  bg-muted/40
-                  transition-all
-                  duration-200
-                  focus:bg-background
-                "
+                className="bg-muted/40 focus:bg-background h-9 rounded-lg transition-all duration-200"
               />
             </div>
 
             <CommandList className="max-h-60 overflow-y-auto p-1">
               <CommandEmpty>
-                <div
-                  className="
-                    flex flex-col items-center
-                    gap-2 py-8
-                    text-center
-                    animate-in
-                    fade-in
-                    zoom-in-95
-                    duration-200
-                  "
-                >
-                  <div
-                    className="
-                      flex h-10 w-10
-                      items-center justify-center
-                      rounded-full
-                      bg-muted
-                    "
-                  >
-                    <Search className="h-5 w-5 text-muted-foreground" />
+                <div className="animate-in fade-in zoom-in-95 flex flex-col items-center gap-2 py-8 text-center duration-200">
+                  <div className="bg-muted flex h-10 w-10 items-center justify-center rounded-full">
+                    <Search className="text-muted-foreground h-5 w-5" />
                   </div>
 
                   <div>
-                    <p className="text-sm font-medium">
-                      {emptyTitle}
-                    </p>
+                    <p className="text-sm font-medium">{emptyTitle}</p>
 
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 text-xs">
                       {emptyDescription}
                     </p>
                   </div>
@@ -232,15 +155,7 @@ export function SearchableRelationSelector<
                     key={item.id}
                     value={`${item.name} ${item.code ?? ""}`}
                     onSelect={() => handleSelect(item.id)}
-                    className="
-                      cursor-pointer
-                      rounded-lg
-                      transition-all
-                      duration-200
-                      animate-in
-                      fade-in
-                      slide-in-from-left-1
-                    "
+                    className="animate-in fade-in slide-in-from-left-1 cursor-pointer rounded-lg transition-all duration-200"
                     style={{
                       animationDelay: `${index * 30}ms`,
                       animationFillMode: "backwards",
@@ -248,18 +163,7 @@ export function SearchableRelationSelector<
                   >
                     <div className="flex w-full min-w-0 items-center gap-3">
                       {Icon && (
-                        <div
-                          className="
-                            flex h-8 w-8 shrink-0
-                            items-center justify-center
-                            rounded-md
-                            bg-primary/10
-                            text-primary
-                            transition-all
-                            duration-200
-                            group-hover:bg-primary/15
-                          "
-                        >
+                        <div className="bg-primary/10 text-primary group-hover:bg-primary/15 flex h-8 w-8 shrink-0 items-center justify-center rounded-md transition-all duration-200">
                           <Icon className="h-4 w-4" />
                         </div>
                       )}
@@ -270,22 +174,18 @@ export function SearchableRelationSelector<
                         </span>
 
                         {item.code && (
-                          <span className="text-[11px] text-muted-foreground">
+                          <span className="text-muted-foreground text-[11px]">
                             {itemLabel} code: {item.code}
                           </span>
                         )}
                       </div>
 
                       <Check
-                        className={`
-                          h-4 w-4 shrink-0
-                          transition-all duration-200
-                          ${
-                            value === item.id
-                              ? "scale-100 opacity-100"
-                              : "scale-75 opacity-0"
-                          }
-                        `}
+                        className={`h-4 w-4 shrink-0 transition-all duration-200 ${
+                          value === item.id
+                            ? "scale-100 opacity-100"
+                            : "scale-75 opacity-0"
+                        } `}
                       />
                     </div>
                   </CommandItem>
@@ -295,17 +195,8 @@ export function SearchableRelationSelector<
 
             {/* Footer */}
             {items.length > 0 && (
-              <div
-                className="
-                  border-t
-                  bg-muted/20
-                  px-3 py-2
-                  animate-in
-                  fade-in
-                  duration-200
-                "
-              >
-                <p className="text-[11px] text-muted-foreground">
+              <div className="bg-muted/20 animate-in fade-in border-t px-3 py-2 duration-200">
+                <p className="text-muted-foreground text-[11px]">
                   {items.length} {itemLabel}
                   {items.length !== 1 ? "s" : ""} available
                 </p>

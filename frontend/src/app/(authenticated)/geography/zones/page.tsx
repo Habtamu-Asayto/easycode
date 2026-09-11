@@ -35,14 +35,14 @@ const columns: ColumnDef<ZoneResponse>[] = [
     label: "Name",
     className: "w-[250px]",
     render: (z) => (
-      <span className="text-[13px] font-medium text-foreground">{z.name}</span>
+      <span className="text-foreground text-[13px] font-medium">{z.name}</span>
     ),
   },
   {
     key: "code",
     label: "Code",
     render: (z) => (
-      <span className="text-[13px] text-muted-foreground">{z.code}</span>
+      <span className="text-muted-foreground text-[13px]">{z.code}</span>
     ),
   },
   {

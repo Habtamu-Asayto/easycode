@@ -20,15 +20,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     setTheme((prev) => {
       const next = prev === "dark" ? "light" : "dark";
 
-      document.documentElement.classList.toggle(
-        "dark",
-        next === "dark",
-      );
+      document.documentElement.classList.toggle("dark", next === "dark");
 
-      document.documentElement.classList.toggle(
-        "light",
-        next === "light",
-      );
+      document.documentElement.classList.toggle("light", next === "light");
 
       return next;
     });
@@ -45,7 +39,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
+    <div className="bg-background text-foreground flex min-h-screen">
       <AppSidebar
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed((prev) => !prev)}
@@ -54,15 +48,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <Topbar
-          onMenu={handleMenu}
-          theme={theme}
-          onToggleTheme={toggleTheme}
-        />
+        <Topbar onMenu={handleMenu} theme={theme} onToggleTheme={toggleTheme} />
 
-        <main className="min-w-0 flex-1">
-          {children}
-        </main>
+        <main className="min-w-0 flex-1">{children}</main>
       </div>
     </div>
   );

@@ -9,11 +9,11 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="bg-background flex h-screen overflow-hidden">
       <AppSidebar />
-      <div className="flex flex-1 flex-col overflow-hidden min-w-0">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         <AppHeader />
-        <main className="flex-1 overflow-y-auto bg-muted/30 fluent-scroll">
+        <main className="bg-muted/30 fluent-scroll flex-1 overflow-y-auto">
           {children}
         </main>
       </div>

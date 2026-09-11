@@ -15,8 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "NE2P",
-  description:
-    "Learn Next, Nest and PostgreSQL with Prisma",
+  description: "Learn Next, Nest and PostgreSQL with Prisma",
 };
 
 export default function RootLayout({

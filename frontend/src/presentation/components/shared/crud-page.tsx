@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   DataPagination,
   SearchInput,
-  ConfirmDialog, 
+  ConfirmDialog,
   PageLoader,
   PageLoader2,
   EmptyState,
@@ -47,7 +47,7 @@ export interface StatDef {
   icon: React.ComponentType<{ className?: string }>;
   iconBg: string;
   iconColor: string;
-} 
+}
 
 interface CrudPageConfig<T extends { id: string; isActive: boolean }> {
   /** Page title */
@@ -150,13 +150,13 @@ export function CrudPage<
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       {/* Header */}
       <div>
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-foreground text-xl font-semibold tracking-tight">
           {title}
         </h1>
-        <p className="text-sm text-muted-foreground mt-1">{description}</p>
+        <p className="text-muted-foreground mt-1 text-sm">{description}</p>
       </div>
 
       {/* Stats */}
@@ -165,7 +165,7 @@ export function CrudPage<
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-lg border bg-card p-4 flex items-center gap-4"
+              className="bg-card flex items-center gap-4 rounded-lg border p-4"
             >
               <div
                 className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${stat.iconBg}`}
@@ -173,10 +173,10 @@ export function CrudPage<
                 <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-foreground">
+                <p className="text-foreground text-2xl font-bold">
                   {stat.value}
                 </p>
-                <p className="text-xs text-muted-foreground">{stat.label}</p>
+                <p className="text-muted-foreground text-xs">{stat.label}</p>
               </div>
             </div>
           ))}
@@ -192,8 +192,6 @@ export function CrudPage<
           </Button>
         </PermissionGate>
 
-        
-
         <SearchInput
           value={search}
           onChange={(v) => {
@@ -203,7 +201,7 @@ export function CrudPage<
           placeholder={`Search ${entityName}s...`}
           className="w-72"
         />
-        <span className="ml-auto text-xs text-muted-foreground">
+        <span className="text-muted-foreground ml-auto text-xs">
           Showing {data?.data?.length ?? 0} of {data?.meta?.total ?? 0} records
         </span>
       </div>
@@ -230,7 +228,7 @@ export function CrudPage<
           }
         />
       ) : (
-        <div className="rounded-md border bg-card overflow-hidden">
+        <div className="bg-card overflow-hidden rounded-md border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
@@ -238,7 +236,7 @@ export function CrudPage<
                   {columns.map((col) => (
                     <TableHead
                       key={col.key}
-                      className={`h-10 text-xs font-medium text-muted-foreground ${col.className ?? ""}`}
+                      className={`text-muted-foreground h-10 text-xs font-medium ${col.className ?? ""}`}
                     >
                       {col.label}
                     </TableHead>
@@ -333,7 +331,7 @@ export function CrudPage<
 // ── Helper: Active/Inactive Badge ─────────────────────────────────────────────
 export function StatusBadge({ isActive }: { isActive: boolean }) {
   return isActive ? (
-    <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 text-[11px] border border-emerald-200 dark:border-emerald-800">
+    <Badge className="border border-emerald-200 bg-emerald-50 text-[11px] text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">
       Active
     </Badge>
   ) : (

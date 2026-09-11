@@ -150,7 +150,7 @@ export function RoleFormDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] max-h-[85vh]">
+      <DialogContent className="max-h-[85vh] sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit Role" : "Create Role"}</DialogTitle>
           <DialogDescription>
@@ -199,13 +199,13 @@ export function RoleFormDialog({
           <div className="space-y-2">
             <Label>Permissions</Label>
             <ScrollArea className="h-[300px] rounded-md border">
-              <div className="p-3 space-y-3">
+              <div className="space-y-3 p-3">
                 {Object.keys(grouped)
                   .sort()
                   .map((module) => (
                     <div key={module} className="space-y-1.5">
                       {/* Module header with select all */}
-                      <label className="flex items-center gap-2 rounded px-2 py-1.5 bg-muted/50 cursor-pointer hover:bg-muted">
+                      <label className="bg-muted/50 hover:bg-muted flex cursor-pointer items-center gap-2 rounded px-2 py-1.5">
                         <Checkbox
                           checked={isModuleAllSelected(module)}
                           // @ts-ignore
@@ -213,7 +213,7 @@ export function RoleFormDialog({
                           onCheckedChange={() => toggleModule(module)}
                           disabled={isLoading}
                         />
-                        <span className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                        <span className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
                           {module}
                         </span>
                         <Badge
@@ -234,7 +234,7 @@ export function RoleFormDialog({
                         {grouped[module].map((perm) => (
                           <label
                             key={perm.id}
-                            className="flex items-center gap-2 rounded px-2 py-1 hover:bg-accent cursor-pointer"
+                            className="hover:bg-accent flex cursor-pointer items-center gap-2 rounded px-2 py-1"
                           >
                             <Checkbox
                               checked={selectedPermissions.includes(perm.id)}

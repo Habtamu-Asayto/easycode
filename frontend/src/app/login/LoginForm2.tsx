@@ -71,7 +71,7 @@ export default function LoginPage() {
             ? "Invalid email or password"
             : result.error;
 
-        toast.error("Invalid Username or Password");
+        toast.error(message);
 
         return;
       }
@@ -103,108 +103,40 @@ export default function LoginPage() {
         {/* =====================================================
             LEFT SIDE
            ===================================================== */}
-        <section
-          className="
-            relative flex min-h-[480px] flex-1 flex-col
-            justify-between overflow-hidden
-            bg-[oklch(0.92_0.018_250)]
-            px-6 py-7
-            sm:px-10
-            lg:min-h-screen lg:px-16 lg:py-10
-          "
-        >
+        <section className="relative flex min-h-[480px] flex-1 flex-col justify-between overflow-hidden bg-[oklch(0.92_0.018_250)] px-6 py-7 sm:px-10 lg:min-h-screen lg:px-16 lg:py-10">
           {/* Background glow */}
-          <div
-            className="
-              pointer-events-none absolute -right-32 -top-32
-              size-[28rem] rounded-full
-              bg-[oklch(0.78_0.075_190_/_0.28)]
-              blur-3xl
-            "
-          />
+          <div className="pointer-events-none absolute -top-32 -right-32 size-[28rem] rounded-full bg-[oklch(0.78_0.075_190_/_0.28)] blur-3xl" />
 
-          <div
-            className="
-              pointer-events-none absolute -bottom-32 -left-24
-              size-[26rem] rounded-full
-              bg-[oklch(0.72_0.075_225_/_0.22)]
-              blur-3xl
-            "
-          />
+          <div className="pointer-events-none absolute -bottom-32 -left-24 size-[26rem] rounded-full bg-[oklch(0.72_0.075_225_/_0.22)] blur-3xl" />
 
-          <div
-            className="
-              pointer-events-none absolute left-1/2 top-1/2
-              size-72 -translate-x-1/2 -translate-y-1/2
-              rounded-full
-              bg-[oklch(0.82_0.055_175_/_0.10)]
-              blur-3xl
-            "
-          />
+          <div className="pointer-events-none absolute top-1/2 left-1/2 size-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.82_0.055_175_/_0.10)] blur-3xl" />
 
           {/* Subtle grid */}
-          <div
-            className="
-              pointer-events-none absolute inset-0 opacity-[0.035]
-              [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)]
-              [background-size:42px_42px]
-            "
-          />
+          <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] [background-size:42px_42px] opacity-[0.035]" />
 
           {/* Brand */}
-          <header className="relative z-10 flex items-center justify-between animate-fade-up">
+          <header className="animate-fade-up relative z-10 flex items-center justify-between">
             <a
               href="#"
               className="group flex items-center gap-3"
               aria-label="Healthcare system home"
             >
-              <span
-                className="
-                  grid size-11 place-items-center rounded-2xl
-                  bg-white
-                  text-[oklch(0.38_0.12_220)]
-                  shadow-[0_12px_30px_oklch(0.35_0.05_250_/_0.12)]
-                  ring-1 ring-[oklch(0.85_0.02_250)]
-                  transition duration-300
-                  group-hover:-translate-y-0.5
-                "
-              >
+              <span className="grid size-11 place-items-center rounded-2xl bg-white text-[oklch(0.38_0.12_220)] shadow-[0_12px_30px_oklch(0.35_0.05_250_/_0.12)] ring-1 ring-[oklch(0.85_0.02_250)] transition duration-300 group-hover:-translate-y-0.5">
                 <HeartPulse className="size-5" strokeWidth={2.2} />
               </span>
 
               <div className="flex flex-col">
-                <span
-                  className="
-                    text-sm font-bold tracking-[0.18em]
-                    text-[oklch(0.25_0.045_250)]
-                  "
-                >
+                <span className="text-sm font-bold tracking-[0.18em] text-[oklch(0.25_0.045_250)]">
                   MEDICARE
                 </span>
 
-                <span
-                  className="
-                    text-[9px] font-medium uppercase
-                    tracking-[0.24em]
-                    text-[oklch(0.48_0.035_250)]
-                  "
-                >
+                <span className="text-[9px] font-medium tracking-[0.24em] text-[oklch(0.48_0.035_250)] uppercase">
                   Healthcare System
                 </span>
               </div>
             </a>
 
-            <div
-              className="
-                hidden items-center gap-2 rounded-full
-                border border-[oklch(0.84_0.025_250)]
-                bg-white/60 px-3 py-1.5
-                text-[10px] font-medium uppercase
-                tracking-[0.16em]
-                text-[oklch(0.43_0.035_250)]
-                backdrop-blur-sm sm:flex
-              "
-            >
+            <div className="hidden items-center gap-2 rounded-full border border-[oklch(0.84_0.025_250)] bg-white/60 px-3 py-1.5 text-[10px] font-medium tracking-[0.16em] text-[oklch(0.43_0.035_250)] uppercase backdrop-blur-sm sm:flex">
               <span className="size-1.5 rounded-full bg-[oklch(0.62_0.14_165)]" />
               Secure Healthcare
             </div>
@@ -212,66 +144,30 @@ export default function LoginPage() {
 
           {/* Hero */}
           <div className="relative z-10 max-w-xl py-16 lg:py-0">
-            <div className="mb-6 flex items-center gap-3 animate-fade-up [animation-delay:120ms]">
-              <span
-                className="
-                  grid size-8 place-items-center rounded-lg
-                  bg-white/70
-                  text-[oklch(0.40_0.12_185)]
-                  ring-1 ring-white/80
-                "
-              >
+            <div className="animate-fade-up mb-6 flex items-center gap-3 [animation-delay:120ms]">
+              <span className="grid size-8 place-items-center rounded-lg bg-white/70 text-[oklch(0.40_0.12_185)] ring-1 ring-white/80">
                 <ShieldCheck className="size-4" />
               </span>
 
-              <p
-                className="
-                  text-[10px] font-semibold uppercase
-                  tracking-[0.25em]
-                  text-[oklch(0.40_0.075_220)]
-                "
-              >
+              <p className="text-[10px] font-semibold tracking-[0.25em] text-[oklch(0.40_0.075_220)] uppercase">
                 Trusted care. Connected teams.
               </p>
             </div>
 
-            <h1
-              className="
-                max-w-lg text-balance
-                text-5xl font-semibold
-                leading-[1.02]
-                tracking-[-0.055em]
-                text-[oklch(0.20_0.035_250)]
-                sm:text-6xl lg:text-7xl
-                animate-fade-up [animation-delay:220ms]
-              "
-            >
+            <h1 className="animate-fade-up max-w-lg text-5xl leading-[1.02] font-semibold tracking-[-0.055em] text-balance text-[oklch(0.20_0.035_250)] [animation-delay:220ms] sm:text-6xl lg:text-7xl">
               Better care starts with{" "}
               <span className="text-[oklch(0.40_0.12_200)]">
                 better connection.
               </span>
             </h1>
 
-            <p
-              className="
-                mt-7 max-w-md
-                text-sm leading-6
-                text-[oklch(0.40_0.035_250)]
-                sm:text-base
-                animate-fade-up [animation-delay:320ms]
-              "
-            >
+            <p className="animate-fade-up mt-7 max-w-md text-sm leading-6 text-[oklch(0.40_0.035_250)] [animation-delay:320ms] sm:text-base">
               One secure place for clinicians, healthcare teams, and
               administrators to coordinate care, manage information, and keep
               patients at the center of every decision.
             </p>
 
-            <div
-              className="
-                mt-9 flex flex-wrap gap-3
-                animate-fade-up [animation-delay:380ms]
-              "
-            >
+            <div className="animate-fade-up mt-9 flex flex-wrap gap-3 [animation-delay:380ms]">
               <div className="flex items-center gap-2 rounded-full border border-white/70 bg-white/55 px-3.5 py-2 text-xs font-medium text-[oklch(0.34_0.04_250)] shadow-sm backdrop-blur-sm">
                 <LockKeyhole className="size-3.5 text-[oklch(0.40_0.12_200)]" />
                 Secure
@@ -290,9 +186,9 @@ export default function LoginPage() {
           </div>
 
           {/* Footer */}
-          <footer className="relative z-10 flex items-end justify-between gap-6 animate-fade-up [animation-delay:460ms]">
+          <footer className="animate-fade-up relative z-10 flex items-end justify-between gap-6 [animation-delay:460ms]">
             <div>
-              <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-[oklch(0.48_0.035_250)]">
+              <p className="text-[9px] font-semibold tracking-[0.22em] text-[oklch(0.48_0.035_250)] uppercase">
                 Designed for healthcare professionals
               </p>
 
@@ -323,52 +219,22 @@ export default function LoginPage() {
         {/* =====================================================
             RIGHT SIDE
            ===================================================== */}
-        <section
-          className="
-            relative flex flex-1 items-center justify-center
-            overflow-hidden
-            bg-[oklch(0.97_0.012_250)]
-            px-6 py-12
-            sm:px-10
-            lg:px-16
-          "
-        >
+        <section className="relative flex flex-1 items-center justify-center overflow-hidden bg-[oklch(0.97_0.012_250)] px-6 py-12 sm:px-10 lg:px-16">
           {/* Decorative background */}
-          <div
-            className="
-              pointer-events-none absolute -right-40 -top-40
-              size-96 rounded-full
-              bg-[oklch(0.82_0.055_190_/_0.10)]
-              blur-3xl
-            "
-          />
+          <div className="pointer-events-none absolute -top-40 -right-40 size-96 rounded-full bg-[oklch(0.82_0.055_190_/_0.10)] blur-3xl" />
 
-          <div
-            className="
-              pointer-events-none absolute -bottom-40 -left-40
-              size-96 rounded-full
-              bg-[oklch(0.80_0.055_220_/_0.08)]
-              blur-3xl
-            "
-          />
+          <div className="pointer-events-none absolute -bottom-40 -left-40 size-96 rounded-full bg-[oklch(0.80_0.055_220_/_0.08)] blur-3xl" />
 
           <div className="relative z-10 w-full max-w-md">
             {/* Heading */}
-            <div className="mb-8 animate-fade-up">
+            <div className="animate-fade-up mb-8">
               <div className="mb-5 flex items-center gap-3">
-                <div
-                  className="
-                    grid size-10 place-items-center rounded-xl
-                    bg-[oklch(0.92_0.025_200)]
-                    text-[oklch(0.40_0.12_200)]
-                    ring-1 ring-[oklch(0.87_0.025_200)]
-                  "
-                >
+                <div className="grid size-10 place-items-center rounded-xl bg-[oklch(0.92_0.025_200)] text-[oklch(0.40_0.12_200)] ring-1 ring-[oklch(0.87_0.025_200)]">
                   <HeartPulse className="size-5" />
                 </div>
 
                 <div>
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-[oklch(0.48_0.035_250)]">
+                  <p className="text-[9px] font-semibold tracking-[0.2em] text-[oklch(0.48_0.035_250)] uppercase">
                     Healthcare Portal
                   </p>
 
@@ -378,7 +244,7 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-[oklch(0.46_0.06_200)]">
+              <p className="mb-3 text-[10px] font-semibold tracking-[0.24em] text-[oklch(0.46_0.06_200)] uppercase">
                 Welcome back
               </p>
 
@@ -396,15 +262,7 @@ export default function LoginPage() {
             <div
               onPointerMove={handlePointerMove}
               onPointerLeave={resetTilt}
-              className="
-                rounded-2xl
-                border border-[oklch(0.88_0.018_250)]
-                bg-[linear-gradient(145deg,oklch(1_0_0_/_0.98),oklch(0.985_0.012_250_/_0.98))]
-                p-6 sm:p-7
-                shadow-[0_30px_80px_oklch(0.28_0.04_250_/_0.10),0_0_0_1px_oklch(0.55_0.08_250_/_0.04)]
-                transition-transform duration-200
-                will-change-transform
-              "
+              className="rounded-2xl border border-[oklch(0.88_0.018_250)] bg-[linear-gradient(145deg,oklch(1_0_0_/_0.98),oklch(0.985_0.012_250_/_0.98))] p-6 shadow-[0_30px_80px_oklch(0.28_0.04_250_/_0.10),0_0_0_1px_oklch(0.55_0.08_250_/_0.04)] transition-transform duration-200 will-change-transform sm:p-7"
             >
               <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 {/* Email */}
@@ -415,16 +273,11 @@ export default function LoginPage() {
                   Email address
                   <span className="relative">
                     <Mail
-                      className={`
-                        pointer-events-none absolute left-4 top-1/2
-                        size-4 -translate-y-1/2
-                        transition-colors
-                        ${
-                          focused === "email"
-                            ? "text-[oklch(0.45_0.12_200)]"
-                            : "text-[oklch(0.52_0.035_250)]"
-                        }
-                      `}
+                      className={`pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 transition-colors ${
+                        focused === "email"
+                          ? "text-[oklch(0.45_0.12_200)]"
+                          : "text-[oklch(0.52_0.035_250)]"
+                      } `}
                     />
 
                     <input
@@ -437,21 +290,7 @@ export default function LoginPage() {
                       onBlur={() => setFocused(null)}
                       autoComplete="email"
                       placeholder="you@hospital.org"
-                      className="
-                        h-12 w-full rounded-xl
-                        border border-[oklch(0.87_0.018_250)]
-                        bg-white
-                        pl-11 pr-4
-                        text-sm
-                        text-[oklch(0.25_0.035_250)]
-                        outline-none
-                        transition-all duration-200
-                        placeholder:text-[oklch(0.62_0.025_250)]
-                        hover:border-[oklch(0.80_0.025_250)]
-                        focus:border-[oklch(0.55_0.12_200)]
-                        focus:ring-4
-                        focus:ring-[oklch(0.55_0.12_200_/_0.10)]
-                      "
+                      className="h-12 w-full rounded-xl border border-[oklch(0.87_0.018_250)] bg-white pr-4 pl-11 text-sm text-[oklch(0.25_0.035_250)] transition-all duration-200 outline-none placeholder:text-[oklch(0.62_0.025_250)] hover:border-[oklch(0.80_0.025_250)] focus:border-[oklch(0.55_0.12_200)] focus:ring-4 focus:ring-[oklch(0.55_0.12_200_/_0.10)]"
                       required
                     />
                   </span>
@@ -465,16 +304,11 @@ export default function LoginPage() {
                   Password
                   <span className="relative">
                     <LockKeyhole
-                      className={`
-                        pointer-events-none absolute left-4 top-1/2
-                        size-4 -translate-y-1/2
-                        transition-colors
-                        ${
-                          focused === "password"
-                            ? "text-[oklch(0.45_0.12_200)]"
-                            : "text-[oklch(0.52_0.035_250)]"
-                        }
-                      `}
+                      className={`pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 transition-colors ${
+                        focused === "password"
+                          ? "text-[oklch(0.45_0.12_200)]"
+                          : "text-[oklch(0.52_0.035_250)]"
+                      } `}
                     />
 
                     <input
@@ -487,36 +321,14 @@ export default function LoginPage() {
                       onBlur={() => setFocused(null)}
                       autoComplete="current-password"
                       placeholder="Enter your password"
-                      className="
-                        h-12 w-full rounded-xl
-                        border border-[oklch(0.87_0.018_250)]
-                        bg-white
-                        px-11
-                        text-sm
-                        text-[oklch(0.25_0.035_250)]
-                        outline-none
-                        transition-all duration-200
-                        placeholder:text-[oklch(0.62_0.025_250)]
-                        hover:border-[oklch(0.80_0.025_250)]
-                        focus:border-[oklch(0.55_0.12_200)]
-                        focus:ring-4
-                        focus:ring-[oklch(0.55_0.12_200_/_0.10)]
-                      "
+                      className="h-12 w-full rounded-xl border border-[oklch(0.87_0.018_250)] bg-white px-11 text-sm text-[oklch(0.25_0.035_250)] transition-all duration-200 outline-none placeholder:text-[oklch(0.62_0.025_250)] hover:border-[oklch(0.80_0.025_250)] focus:border-[oklch(0.55_0.12_200)] focus:ring-4 focus:ring-[oklch(0.55_0.12_200_/_0.10)]"
                       required
                     />
 
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="
-                        absolute right-3 top-1/2
-                        grid size-8 -translate-y-1/2
-                        place-items-center rounded-lg
-                        text-[oklch(0.52_0.035_250)]
-                        transition
-                        hover:bg-[oklch(0.94_0.012_250)]
-                        hover:text-[oklch(0.32_0.06_250)]
-                      "
+                      className="absolute top-1/2 right-3 grid size-8 -translate-y-1/2 place-items-center rounded-lg text-[oklch(0.52_0.035_250)] transition hover:bg-[oklch(0.94_0.012_250)] hover:text-[oklch(0.32_0.06_250)]"
                       aria-label={
                         showPassword ? "Hide password" : "Show password"
                       }
@@ -534,14 +346,7 @@ export default function LoginPage() {
                 {error && (
                   <div
                     role="alert"
-                    className="
-                      rounded-xl
-                      border border-[oklch(0.86_0.08_25)]
-                      bg-[oklch(0.97_0.025_25)]
-                      px-4 py-3
-                      text-xs font-medium
-                      text-[oklch(0.48_0.16_25)]
-                    "
+                    className="rounded-xl border border-[oklch(0.86_0.08_25)] bg-[oklch(0.97_0.025_25)] px-4 py-3 text-xs font-medium text-[oklch(0.48_0.16_25)]"
                   >
                     {error}
                   </div>
@@ -558,23 +363,14 @@ export default function LoginPage() {
                       type="checkbox"
                       checked={remember}
                       onChange={(event) => setRemember(event.target.checked)}
-                      className="
-                        size-4 rounded
-                        border-[oklch(0.80_0.02_250)]
-                        accent-[oklch(0.50_0.12_200)]
-                      "
+                      className="size-4 rounded border-[oklch(0.80_0.02_250)] accent-[oklch(0.50_0.12_200)]"
                     />
                     Remember me
                   </label>
 
                   <a
                     href="#forgot"
-                    className="
-                      font-semibold
-                      text-[oklch(0.43_0.11_200)]
-                      transition
-                      hover:text-[oklch(0.36_0.13_190)]
-                    "
+                    className="font-semibold text-[oklch(0.43_0.11_200)] transition hover:text-[oklch(0.36_0.13_190)]"
                   >
                     Forgot password?
                   </a>
@@ -584,19 +380,7 @@ export default function LoginPage() {
                 <Button
                   type="submit"
                   disabled={loading || signedIn}
-                  className="
-                    group mt-2 h-12 rounded-xl
-                    bg-[oklch(0.43_0.12_205)]
-                    text-white
-                    shadow-[0_10px_25px_oklch(0.43_0.12_205_/_0.22)]
-                    transition-all duration-200
-                    hover:-translate-y-0.5
-                    hover:bg-[oklch(0.39_0.13_205)]
-                    hover:shadow-[0_14px_30px_oklch(0.43_0.12_205_/_0.28)]
-                    active:translate-y-0
-                    disabled:pointer-events-none
-                    disabled:opacity-70
-                  "
+                  className="group mt-2 h-12 rounded-xl bg-[oklch(0.43_0.12_205)] text-white shadow-[0_10px_25px_oklch(0.43_0.12_205_/_0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[oklch(0.39_0.13_205)] hover:shadow-[0_14px_30px_oklch(0.43_0.12_205_/_0.28)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-70"
                 >
                   {loading ? (
                     <>
@@ -620,14 +404,7 @@ export default function LoginPage() {
                 </Button>
               </form>
               {/* Divider */}
-              <div
-                className="
-                  my-7 flex items-center gap-4
-                  text-[9px] font-semibold uppercase
-                  tracking-[0.18em]
-                  text-[oklch(0.60_0.025_250)]
-                "
-              >
+              <div className="my-7 flex items-center gap-4 text-[9px] font-semibold tracking-[0.18em] text-[oklch(0.60_0.025_250)] uppercase">
                 <span className="h-px flex-1 bg-[oklch(0.90_0.015_250)]" />
                 or
                 <span className="h-px flex-1 bg-[oklch(0.90_0.015_250)]" />
@@ -636,41 +413,24 @@ export default function LoginPage() {
               <Button
                 type="button"
                 variant="outline"
-                className="
-                  h-12 w-full rounded-xl
-                  border-[oklch(0.87_0.018_250)]
-                  bg-white
-                  text-[oklch(0.30_0.035_250)]
-                  transition-all duration-200
-                  hover:border-[oklch(0.80_0.025_250)]
-                  hover:bg-[oklch(0.985_0.008_250)]
-                  hover:shadow-sm
-                "
+                className="h-12 w-full rounded-xl border-[oklch(0.87_0.018_250)] bg-white text-[oklch(0.30_0.035_250)] transition-all duration-200 hover:border-[oklch(0.80_0.025_250)] hover:bg-[oklch(0.985_0.008_250)] hover:shadow-sm"
               >
-                <span
-                  className="
-                    grid size-5 place-items-center rounded-full
-                    border border-[oklch(0.86_0.015_250)]
-                    bg-white
-                    text-[10px] font-bold
-                    text-[oklch(0.35_0.04_250)]
-                  "
-                >
+                <span className="grid size-5 place-items-center rounded-full border border-[oklch(0.86_0.015_250)] bg-white text-[10px] font-bold text-[oklch(0.35_0.04_250)]">
                   G
                 </span>
                 Continue with Google
               </Button>
               {/* Demo Accounts */}{" "}
-              <div className=" mt-5 rounded-2xl border border-dashed border-[oklch(0.78_0.04_95)] bg-[oklch(0.96_0.02_95_/_0.8)] p-4 ">
+              <div className="mt-5 rounded-2xl border border-dashed border-[oklch(0.78_0.04_95)] bg-[oklch(0.96_0.02_95_/_0.8)] p-4">
                 {" "}
                 <div className="mb-3 flex items-center gap-2">
                   {" "}
-                  <span className="h-px flex-1 bg-border/50" />{" "}
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="bg-border/50 h-px flex-1" />{" "}
+                  <p className="text-muted-foreground font-mono text-[9px] tracking-[0.18em] uppercase">
                     {" "}
                     Quick access{" "}
                   </p>{" "}
-                  <span className="h-px flex-1 bg-border/50" />{" "}
+                  <span className="bg-border/50 h-px flex-1" />{" "}
                 </div>{" "}
                 <div className="grid grid-cols-2 gap-2">
                   {" "}
@@ -685,14 +445,14 @@ export default function LoginPage() {
                         setSignedIn(false);
                         setError("");
                       }}
-                      className=" flex min-w-0 flex-col gap-0.5 rounded-xl border border-[oklch(0.84_0.03_95)] bg-card/70 p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/55 hover:bg-[oklch(0.98_0.04_95)] disabled:pointer-events-none disabled:opacity-50 "
+                      className="bg-card/70 hover:border-primary/55 flex min-w-0 flex-col gap-0.5 rounded-xl border border-[oklch(0.84_0.03_95)] p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:bg-[oklch(0.98_0.04_95)] disabled:pointer-events-none disabled:opacity-50"
                     >
                       {" "}
-                      <span className="text-[11px] font-bold text-primary">
+                      <span className="text-primary text-[11px] font-bold">
                         {" "}
                         {account.role}{" "}
                       </span>{" "}
-                      <small className="truncate text-[10px] text-muted-foreground">
+                      <small className="text-muted-foreground truncate text-[10px]">
                         {" "}
                         {account.email}{" "}
                       </small>{" "}
@@ -707,25 +467,14 @@ export default function LoginPage() {
               New to the healthcare portal?{" "}
               <a
                 href="#signup"
-                className="
-                  font-semibold
-                  text-[oklch(0.43_0.11_200)]
-                  transition
-                  hover:text-[oklch(0.36_0.13_190)]
-                "
+                className="font-semibold text-[oklch(0.43_0.11_200)] transition hover:text-[oklch(0.36_0.13_190)]"
               >
                 Create an account
               </a>
             </p>
 
             {/* Security */}
-            <div
-              className="
-                mt-8 flex items-center justify-center gap-2
-                text-[10px] leading-5
-                text-[oklch(0.58_0.025_250)]
-              "
-            >
+            <div className="mt-8 flex items-center justify-center gap-2 text-[10px] leading-5 text-[oklch(0.58_0.025_250)]">
               <ShieldCheck className="size-3.5" />
 
               <span>
@@ -734,12 +483,7 @@ export default function LoginPage() {
             </div>
 
             {/* Legal */}
-            <p
-              className="
-                mt-4 text-center text-[10px] leading-5
-                text-[oklch(0.63_0.02_250)]
-              "
-            >
+            <p className="mt-4 text-center text-[10px] leading-5 text-[oklch(0.63_0.02_250)]">
               By continuing, you agree to our{" "}
               <a
                 href="#terms"

@@ -77,14 +77,14 @@ export default function PermissionsPage() {
   }, [data]);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       {/* ── Page header + command bar ───────────────────────────────────── */}
       <div className="space-y-3">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          <h1 className="text-foreground text-xl font-semibold tracking-tight">
             Permissions
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-muted-foreground mt-1 text-sm">
             View system permissions organized by module
           </p>
         </div>
@@ -124,7 +124,7 @@ export default function PermissionsPage() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="rounded-lg border bg-card p-4 flex items-center gap-4"
+            className="bg-card flex items-center gap-4 rounded-lg border p-4"
           >
             <div
               className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${stat.iconBg}`}
@@ -132,8 +132,8 @@ export default function PermissionsPage() {
               <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-              <p className="text-xs text-muted-foreground">{stat.label}</p>
+              <p className="text-foreground text-2xl font-bold">{stat.value}</p>
+              <p className="text-muted-foreground text-xs">{stat.label}</p>
             </div>
           </div>
         ))}
@@ -168,7 +168,7 @@ export default function PermissionsPage() {
           className="w-72"
         />
 
-        <span className="ml-auto text-xs text-muted-foreground">
+        <span className="text-muted-foreground ml-auto text-xs">
           {filtered.length} permission{filtered.length !== 1 ? "s" : ""} across{" "}
           {Object.keys(grouped).length} module
           {Object.keys(grouped).length !== 1 ? "s" : ""}
@@ -195,7 +195,7 @@ export default function PermissionsPage() {
                 <Card key={module} className="card-lift">
                   <CardHeader className="pb-3">
                     <CardTitle className="flex items-center justify-between text-sm">
-                      <span className="uppercase tracking-wider text-foreground">
+                      <span className="text-foreground tracking-wider uppercase">
                         {module}
                       </span>
                       <Badge
@@ -216,7 +216,7 @@ export default function PermissionsPage() {
                         >
                           {perm.action}
                           {!perm.isActive && (
-                            <span className="ml-1 text-muted-foreground">
+                            <span className="text-muted-foreground ml-1">
                               (inactive)
                             </span>
                           )}
@@ -229,24 +229,24 @@ export default function PermissionsPage() {
           </div>
         </div>
       ) : (
-        <div className="rounded-md border bg-card overflow-hidden">
+        <div className="bg-card overflow-hidden rounded-md border">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Name
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Module
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Action
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Description
                   </TableHead>
-                  <TableHead className="h-10 text-xs font-medium text-muted-foreground">
+                  <TableHead className="text-muted-foreground h-10 text-xs font-medium">
                     Status
                   </TableHead>
                 </TableRow>
@@ -254,26 +254,26 @@ export default function PermissionsPage() {
               <TableBody>
                 {filtered.map((perm) => (
                   <TableRow key={perm.id} className="group hover:bg-muted/50">
-                    <TableCell className="text-sm font-medium text-foreground">
+                    <TableCell className="text-foreground text-sm font-medium">
                       {perm.name}
                     </TableCell>
                     <TableCell>
                       <Badge
                         variant="outline"
-                        className="text-[11px] uppercase font-normal"
+                        className="text-[11px] font-normal uppercase"
                       >
                         {perm.module}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-sm text-foreground">
+                    <TableCell className="text-foreground text-sm">
                       {perm.action}
                     </TableCell>
-                    <TableCell className="text-sm text-muted-foreground max-w-[300px] truncate">
+                    <TableCell className="text-muted-foreground max-w-[300px] truncate text-sm">
                       {perm.description || "—"}
                     </TableCell>
                     <TableCell>
                       {perm.isActive ? (
-                        <Badge className="bg-emerald-50 text-emerald-700 hover:bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400 text-[11px] border border-emerald-200 dark:border-emerald-800">
+                        <Badge className="border border-emerald-200 bg-emerald-50 text-[11px] text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">
                           Active
                         </Badge>
                       ) : (

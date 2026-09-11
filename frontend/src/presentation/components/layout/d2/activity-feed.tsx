@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   AlertTriangle,
@@ -7,46 +7,46 @@ import {
   LogOut,
   CalendarPlus,
   type LucideIcon,
-} from 'lucide-react'
+} from "lucide-react";
 
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/presentation/components/ui/card'
-import { activity, type ActivityItem } from '@/lib/sample.data'
-import { cn } from '@/lib/utils'
+} from "@/presentation/components/ui/card";
+import { activity, type ActivityItem } from "@/lib/sample.data";
+import { cn } from "@/lib/utils";
 
 const config: Record<
-  ActivityItem['type'],
+  ActivityItem["type"],
   { icon: LucideIcon; className: string }
 > = {
   alert: {
     icon: AlertTriangle,
-    className: 'bg-destructive/12 text-destructive',
+    className: "bg-destructive/12 text-destructive",
   },
   admission: {
     icon: UserPlus,
-    className: 'bg-[var(--chart-1)]/14 text-[var(--chart-1)]',
+    className: "bg-[var(--chart-1)]/14 text-[var(--chart-1)]",
   },
   lab: {
     icon: FlaskConical,
-    className: 'bg-[var(--chart-4)]/14 text-[var(--chart-4)]',
+    className: "bg-[var(--chart-4)]/14 text-[var(--chart-4)]",
   },
   discharge: {
     icon: LogOut,
-    className: 'bg-[var(--success)]/12 text-[var(--success)]',
+    className: "bg-[var(--success)]/12 text-[var(--success)]",
   },
   appointment: {
     icon: CalendarPlus,
-    className: 'bg-[var(--chart-3)]/14 text-[var(--chart-3)]',
+    className: "bg-[var(--chart-3)]/14 text-[var(--chart-3)]",
   },
-}
+};
 
 export function ActivityFeed() {
   return (
-    <Card className="animate-fade-up" style={{ animationDelay: '260ms' }}>
+    <Card className="animate-fade-up" style={{ animationDelay: "260ms" }}>
       <CardHeader>
         <div className="flex items-center gap-2">
           <CardTitle className="text-base">Live Activity</CardTitle>
@@ -59,39 +59,39 @@ export function ActivityFeed() {
       <CardContent className="pt-0">
         <ol className="relative flex flex-col">
           {activity.map((item, i) => {
-            const { icon: Icon, className } = config[item.type]
-            const last = i === activity.length - 1
+            const { icon: Icon, className } = config[item.type];
+            const last = i === activity.length - 1;
             return (
               <li key={item.id} className="flex gap-3 pb-4 last:pb-0">
                 <div className="flex flex-col items-center">
                   <span
                     className={cn(
-                      'grid size-8 shrink-0 place-items-center rounded-lg',
+                      "grid size-8 shrink-0 place-items-center rounded-lg",
                       className,
                     )}
                   >
                     <Icon className="size-4" />
                   </span>
                   {!last && (
-                    <span className="mt-1 w-px flex-1 bg-border" aria-hidden />
+                    <span className="bg-border mt-1 w-px flex-1" aria-hidden />
                   )}
                 </div>
                 <div className="min-w-0 flex-1 pb-1">
-                  <p className="text-sm font-semibold text-foreground">
+                  <p className="text-foreground text-sm font-semibold">
                     {item.text}
                   </p>
-                  <p className="text-xs leading-5 text-muted-foreground">
+                  <p className="text-muted-foreground text-xs leading-5">
                     {item.detail}
                   </p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground/70">
+                  <p className="text-muted-foreground/70 mt-0.5 text-[11px]">
                     {item.time}
                   </p>
                 </div>
               </li>
-            )
+            );
           })}
         </ol>
       </CardContent>
     </Card>
-  )
+  );
 }

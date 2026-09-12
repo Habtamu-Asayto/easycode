@@ -5,7 +5,6 @@ import {
   Check,
   ChevronRight,
   Database,
-  Download,
   Eye,
   FileKey2,
   Filter,
@@ -26,6 +25,7 @@ import {
 import {
   SearchInput,
   PageLoader,
+  CompleteLoader,
   EmptyState,
 } from "@/presentation/components/shared";
 
@@ -61,6 +61,8 @@ import { RoleFormDialog } from "@/presentation/components/shared/rbac/role-form-
 // import { RoleFormDialog } from "./role-form-dialog";
 import { PermissionDialog } from "@/presentation/components/shared/rbac/permision-dialog-form";
 // import { PermissionDialog } from "./permision-dialog-form";
+
+import { buildPermissionDisplayName } from "@/presentation/components/shared/rbac/permission-catalog";
 
 const ROLE_COLORS = [
   "blue",
@@ -205,9 +207,10 @@ export default function RolesPage() {
   const [permissionForm, setPermissionForm] = useState<CreatePermissionRequest>(
     {
       name: "",
-      description: "",
+      displayName: "",
       module: "",
       action: "",
+      description: "",
     },
   );
 
@@ -233,16 +236,6 @@ export default function RolesPage() {
   const roles = rolesQuery.data?.items ?? [];
   const permissions = permissionsQuery.data?.items ?? [];
   const auditLogs = auditQuery.data?.items ?? [];
-
-  console.log(
-    "ALL PERMISSIONS:",
-    permissions.map((permission) => ({
-      name: permission.name,
-      module: permission.module,
-      action: permission.action,
-    })),
-  );
-
   /*
    * Select the first role automatically.
    */
@@ -254,34 +247,23 @@ export default function RolesPage() {
    * When the selected role changes, the matrix is initialized
    * from the actual permissions returned by the backend.
    */
-  const selectRole = (nextRoleId: string) => {
-    const nextRole = roles.find((item) => item.id === nextRoleId);
+  const selectRole = (roleId: string) => {
+    const selectedRole = roles.find((item) => item.id === roleId);
 
-    if (!nextRole) return;
+    if (!selectedRole) {
+      return;
+    }
 
-    const ids = nextRole.permissions.map((permission) => permission.id);
+    const ids = selectedRole.permissions.map((permission) => permission.id);
 
-    setSelectedRoleId(nextRoleId);
+    setSelectedRoleId(roleId);
     setPendingPermissionIds(ids);
     setSavedPermissionIds(ids);
-    setCompareRoleId(null);
   };
 
   /*
    * Initialize the first role.
    */
-  useEffect(() => {
-    if (!selectedRoleId && roles.length > 0) {
-      const firstRole = roles[0];
-
-      setSelectedRoleId(firstRole.id);
-
-      const ids = firstRole.permissions.map((permission) => permission.id);
-
-      setPendingPermissionIds(ids);
-      setSavedPermissionIds(ids);
-    }
-  }, [roles, selectedRoleId]);
 
   const modules = useMemo(() => {
     const map = new Map<
@@ -389,11 +371,11 @@ export default function RolesPage() {
 
       setPermissionForm({
         name: "",
+        displayName: "",
         description: "",
         module: "",
         action: "",
       });
-
       setNotice("Permission added to the permission catalog.");
 
       window.setTimeout(() => {
@@ -429,11 +411,11 @@ export default function RolesPage() {
   };
 
   const toggleModule = (moduleId: string) => {
-    const module = modules.find((item) => item.id === moduleId);
+    const targetModule = modules.find((item) => item.id === moduleId);
 
-    if (!module) return;
+    if (!targetModule) return;
 
-    const modulePermissionIds = module.permissions.map(
+    const modulePermissionIds = targetModule.permissions.map(
       (permission) => permission.id,
     );
 
@@ -449,25 +431,42 @@ export default function RolesPage() {
       return Array.from(new Set([...current, ...modulePermissionIds]));
     });
   };
-
   const discardChanges = () => {
     setPendingPermissionIds([...savedPermissionIds]);
   };
 
   const addPermission = () => {
-    if (
-      !permissionForm.name.trim() ||
-      !permissionForm.module.trim() ||
-      !permissionForm.action.trim()
-    ) {
-      setNotice("Permission name, module, and action are required.");
+    const moduleName = permissionForm.module.trim().toLowerCase();
+    const action = permissionForm.action.trim().toLowerCase();
+
+    if (!moduleName || !action) {
+      setNotice("Module and action are required.");
+      return;
+    }
+
+    const name = `${moduleName}:${action}`;
+
+    const displayName = buildPermissionDisplayName(moduleName, action);
+
+    if (!displayName) {
+      setNotice("Unable to generate permission display name.");
+      return;
+    }
+
+    const duplicate = permissions.some(
+      (permission) => permission.name.toLowerCase() === name.toLowerCase(),
+    );
+
+    if (duplicate) {
+      setNotice(`Permission "${name}" already exists.`);
       return;
     }
 
     createPermissionMutation.mutate({
-      name: permissionForm.name.trim(),
-      module: permissionForm.module.trim(),
-      action: permissionForm.action.trim(),
+      name,
+      displayName,
+      module: moduleName,
+      action,
       description: permissionForm.description?.trim() || undefined,
     });
   };
@@ -488,7 +487,7 @@ export default function RolesPage() {
       : Math.round((activePermissionCount / totalPermissionCount) * 100);
 
   if (rolesQuery.isLoading || permissionsQuery.isLoading) {
-    return <PageLoader />;
+    return <CompleteLoader />;
   }
 
   if (!roles.length) {
@@ -512,9 +511,11 @@ export default function RolesPage() {
           setForm={setPermissionForm}
           onSubmit={addPermission}
           loading={createPermissionMutation.isPending}
+          permissions={permissions}
         />
 
         <RoleFormDialog
+          key={editingRole?.id ?? "create-role"}
           open={roleDialogOpen}
           onOpenChange={setRoleDialogOpen}
           role={editingRole}

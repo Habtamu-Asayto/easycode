@@ -78,6 +78,7 @@ export interface ResetPasswordRequest {
 export interface RoleResponse {
   id: string;
   name: string;
+  displayName: string;
   description: string | null;
   isActive: boolean;
   isSystem: boolean;
@@ -89,12 +90,14 @@ export interface RoleResponse {
 
 export interface CreateRoleRequest {
   name: string;
+  displayName: string;
   description?: string;
   permissionIds: string[];
 }
 
 export interface UpdateRoleRequest {
   name?: string;
+  displayName?: string;
   description?: string;
   isActive?: boolean;
   permissionIds?: string[];
@@ -114,6 +117,7 @@ export interface PermissionResponse {
 
 export interface CreatePermissionRequest {
   name: string;
+  displayName:string,
   description?: string;
   module: string;
   action: string;

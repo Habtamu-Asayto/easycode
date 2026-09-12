@@ -9,8 +9,19 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 const SALT_ROUNDS = 12;
+ 
 
-const MODULES = ['users', 'roles', 'permissions', 'audit'];
+const MODULES = [
+  'users',
+  'roles',
+  'permissions',
+  'audit',
+  'region',
+  'zone',
+  'woreda',
+  'kebele',
+];
+
 const ACTIONS = ['create', 'read', 'update', 'delete', 'manage', 'export'];
 
 async function main() {

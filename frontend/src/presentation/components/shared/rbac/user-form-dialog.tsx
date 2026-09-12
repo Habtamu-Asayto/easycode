@@ -138,11 +138,9 @@ export function UserFormDialog({
   // ---------------------------------------------------------------------------
   // Initialize / reset form
   // ---------------------------------------------------------------------------
-  console.log("EDIT USER OBJECT FULL:", JSON.stringify(user, null, 2));
 
   useEffect(() => {
     if (!open) return;
-
     setPosition({ x: 0, y: 0 });
     setShowPassword(false);
 

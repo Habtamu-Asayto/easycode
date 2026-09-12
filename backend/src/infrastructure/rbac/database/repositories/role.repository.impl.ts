@@ -110,29 +110,33 @@ export class PrismaRoleRepository implements IRoleRepository {
     ]);
   }
 
+ 
   async assignPermissions(
-    roleId: string,
-    permissionIds: string[],
-    currentUserId?: string,
-  ) {
-    // Soft-delete existing permissions
-    await this.prisma.rolePermission.updateMany({
-      where: { roleId, deletedAt: null },
-      data: {
-        ...this.prisma.softDelete(),
-        ...this.prisma.auditUpdate(currentUserId),
+  roleId: string,
+  permissionIds: string[],
+): Promise<void> {
+  const uniquePermissionIds = Array.from(
+    new Set(permissionIds),
+  );
+
+  await this.prisma.$transaction(async (tx) => {
+    await tx.rolePermission.deleteMany({
+      where: {
+        roleId,
       },
     });
 
-    // Create new permission assignments
-    if (permissionIds.length > 0) {
-      await this.prisma.rolePermission.createMany({
-        data: permissionIds.map((permissionId) => ({
-          roleId,
-          permissionId,
-          ...this.prisma.auditCreate(currentUserId),
-        })),
-      });
+    if (uniquePermissionIds.length === 0) {
+      return;
     }
-  }
+
+    await tx.rolePermission.createMany({
+      data: uniquePermissionIds.map((permissionId) => ({
+        roleId,
+        permissionId,
+      })),
+    });
+  });
+}
+  
 }

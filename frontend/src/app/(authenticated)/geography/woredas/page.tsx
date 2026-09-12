@@ -9,8 +9,7 @@ import { woredasApi } from "@/infrastructure/geography/api";
 import {
   CrudPage,
   StatusBadge,
-  MasterDataFormDialog,
-  SearchableRelationSelector,
+  MasterDataFormDialog, 
 } from "@/presentation/components/shared";
 
 import type { ColumnDef, StatDef } from "@/presentation/components/shared";

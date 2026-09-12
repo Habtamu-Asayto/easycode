@@ -27,7 +27,10 @@ export function DataPagination({
   onPageChange,
   onLimitChange,
 }: DataPaginationProps) {
-  const { page, totalPages, total, limit, hasNextPage, hasPrevPage } = meta;
+  const { page, totalPages, total, limit } = meta;
+
+  const hasNextPage = page < totalPages;
+  const hasPrevPage = page > 1;
 
   return (
     <div className="border-border flex items-center justify-between border-t px-4 py-2.5">
@@ -46,7 +49,7 @@ export function DataPagination({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {[10, 20, 50, 100].map((size) => (
+                {[3, 20, 50, 100].map((size) => (
                   <SelectItem key={size} value={String(size)}>
                     {size}
                   </SelectItem>
@@ -62,7 +65,9 @@ export function DataPagination({
         <span className="text-muted-foreground mr-2 text-sm">
           Page {page} of {totalPages}
         </span>
+
         <Button
+          type="button"
           variant="outline"
           size="icon"
           className="h-7 w-7"
@@ -71,7 +76,9 @@ export function DataPagination({
         >
           <ChevronsLeft className="h-3.5 w-3.5" />
         </Button>
+
         <Button
+          type="button"
           variant="outline"
           size="icon"
           className="h-7 w-7"
@@ -80,7 +87,9 @@ export function DataPagination({
         >
           <ChevronLeft className="h-3.5 w-3.5" />
         </Button>
+
         <Button
+          type="button"
           variant="outline"
           size="icon"
           className="h-7 w-7"
@@ -89,7 +98,9 @@ export function DataPagination({
         >
           <ChevronRight className="h-3.5 w-3.5" />
         </Button>
+
         <Button
+          type="button"
           variant="outline"
           size="icon"
           className="h-7 w-7"

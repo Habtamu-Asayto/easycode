@@ -11,23 +11,8 @@ import {
 } from "@/presentation/components/shared";
 import type { ColumnDef, StatDef } from "@/presentation/components/shared";
 import type { ZoneResponse } from "@/domain/geography/entities";
-import { Badge } from "@/presentation/components/ui/badge";
-import { Label } from "@/presentation/components/ui/label";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/presentation/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/presentation/components/ui/popover";
-import { Check, MapPin, Search, X, Database } from "lucide-react";
-import { Input } from "@/presentation/components/ui/input";
+import { Badge } from "@/presentation/components/ui/badge";  
+import { Check, MapPin, X, Database } from "lucide-react"; 
 
 const columns: ColumnDef<ZoneResponse>[] = [
   {

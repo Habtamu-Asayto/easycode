@@ -48,6 +48,7 @@ export function AppSidebar({
   onMobileClose,
 }: AppSidebarProps) {
   const { user, isSuperAdmin, hasPermission } = useAuth();
+
   const handleLogout = async () => {
     await signOut({ callbackUrl: "/login" });
   };
@@ -317,33 +318,34 @@ export function AppSidebar({
           )}
         >
           {[
-            { label: "Help & Support", icon: LifeBuoy },
-            { label: "Settings", icon: Settings },
-          ].map(({ label, icon: Icon }) =>
+            { label: "Help & Support", icon: LifeBuoy, href: "/help" },
+            { label: "Settings", icon: Settings, href: "/settings" },
+          ].map(({ label, icon: Icon, href }) =>
             collapsed ? (
               <Tooltip key={label}>
                 <TooltipTrigger render={<span className="inline-flex" />}>
-                  <button
-                    type="button"
+                  <Link
+                    href={href}
                     aria-label={label}
                     className="text-sidebar-foreground/65 hover:bg-sidebar-accent hover:text-sidebar-foreground grid size-11 place-items-center rounded-xl transition-colors"
                   >
                     <Icon className="size-[18px]" />
-                  </button>
+                  </Link>
                 </TooltipTrigger>
+
                 <TooltipContent side="right" sideOffset={10}>
                   {label}
                 </TooltipContent>
               </Tooltip>
             ) : (
-              <button
+              <Link
                 key={label}
-                type="button"
+                href={href}
                 className="text-sidebar-foreground/65 hover:bg-sidebar-accent hover:text-sidebar-foreground flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors"
               >
                 <Icon className="size-[18px] shrink-0" />
                 <span>{label}</span>
-              </button>
+              </Link>
             ),
           )}
         </div>

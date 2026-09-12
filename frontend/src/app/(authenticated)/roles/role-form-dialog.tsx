@@ -38,6 +38,7 @@ export function RoleFormDialog({
   const isEdit = !!role;
 
   const [name, setName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [description, setDescription] = useState("");
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
 
@@ -62,10 +63,12 @@ export function RoleFormDialog({
     if (open) {
       if (role) {
         setName(role.name);
+        setDisplayName(role.displayName);
         setDescription(role.description || "");
         setSelectedPermissions(role.permissions?.map((p) => p.id) || []);
       } else {
         setName("");
+        setDisplayName("");
         setDescription("");
         setSelectedPermissions([]);
       }
@@ -75,6 +78,7 @@ export function RoleFormDialog({
   const createMutation = useMutation({
     mutationFn: (data: {
       name: string;
+      displayName: string;
       description: string;
       permissionIds: string[];
     }) => rolesApi.create(data),
@@ -89,6 +93,7 @@ export function RoleFormDialog({
   const updateMutation = useMutation({
     mutationFn: (data: {
       name?: string;
+      displayName: string;
       description?: string;
       permissionIds?: string[];
     }) => rolesApi.update(role!.id, data),
@@ -104,7 +109,12 @@ export function RoleFormDialog({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { name, description, permissionIds: selectedPermissions };
+    const payload = {
+      name,
+      displayName,
+      description,
+      permissionIds: selectedPermissions,
+    };
     if (isEdit) {
       updateMutation.mutate(payload);
     } else {
@@ -173,14 +183,26 @@ export function RoleFormDialog({
                 disabled={isLoading}
               />
             </div>
+
             <div className="space-y-2">
-              <Label>Selected</Label>
-              <div className="flex h-9 items-center">
-                <Badge variant="secondary">
-                  {selectedPermissions.length} permissions
-                </Badge>
-              </div>
+              <Label htmlFor="displayName">Display Name</Label>
+              <Input
+                id="displayName"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="e.g., Editor"
+                required
+                disabled={isLoading}
+              />
             </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <Label>Permissions</Label>
+
+            <Badge variant="secondary">
+              {selectedPermissions.length} permissions
+            </Badge>
           </div>
 
           <div className="space-y-2">
@@ -208,7 +230,7 @@ export function RoleFormDialog({
                       <label className="bg-muted/50 hover:bg-muted flex cursor-pointer items-center gap-2 rounded px-2 py-1.5">
                         <Checkbox
                           checked={isModuleAllSelected(module)}
-                          // @ts-ignore
+
                           indeterminate={isModulePartialSelected(module)}
                           onCheckedChange={() => toggleModule(module)}
                           disabled={isLoading}

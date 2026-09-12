@@ -56,7 +56,7 @@ export function PermissionDialog({
   onSubmit,
   loading,
   permissions = [],
-}: PermissionDialogProps) { 
+}: PermissionDialogProps) {
   const modules = useMemo(() => {
     return Array.from(
       new Set(
@@ -89,7 +89,9 @@ export function PermissionDialog({
     onSubmit();
   };
 
-  const updateModule = (module: string) => {
+  const updateModule = (module: string | null) => {
+    if (!module) return;
+
     const normalized = normalizePermissionModule(module);
 
     setForm((current) => ({
@@ -100,7 +102,9 @@ export function PermissionDialog({
     }));
   };
 
-  const updateAction = (action: string) => {
+  const updateAction = (action: string | null) => {
+    if (!action) return;
+
     setForm((current) => ({
       ...current,
       action,

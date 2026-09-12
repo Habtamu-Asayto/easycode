@@ -42,6 +42,7 @@ export function RoleFormDialog({
   const isEditing = Boolean(role);
 
   const [name, setName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
 
@@ -49,6 +50,7 @@ export function RoleFormDialog({
     if (!open) return;
 
     setName(role?.name ?? "");
+    setDisplayName(role?.displayName ?? "");
     setDescription(role?.description ?? "");
     setError("");
   }, [open, role]);
@@ -56,6 +58,7 @@ export function RoleFormDialog({
   const mutation = useMutation({
     mutationFn: async () => {
       const trimmedName = name.trim();
+      const trimmedDisplayName = displayName.trim();
 
       if (!trimmedName) {
         throw new Error("Role name is required.");
@@ -72,6 +75,7 @@ export function RoleFormDialog({
 
       const payload: CreateRoleRequest = {
         name: trimmedName,
+        displayName:trimmedDisplayName,
         description: description.trim() || undefined,
         permissionIds: [],
       };

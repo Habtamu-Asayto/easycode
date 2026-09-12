@@ -520,7 +520,11 @@ export default function RolesPage() {
           onOpenChange={setRoleDialogOpen}
           role={editingRole}
           onSuccess={() => {
-            setRoleActionSuccess("Role created successfully.");
+            setRoleActionSuccess(
+              editingRole
+                ? "Role updated successfully."
+                : "Role created successfully.",
+            );
             setRoleActionError("");
           }}
         />
@@ -552,6 +556,7 @@ export default function RolesPage() {
         />
 
         <RoleFormDialog
+          key={editingRole?.id ?? "create-role"}
           open={roleDialogOpen}
           onOpenChange={setRoleDialogOpen}
           role={editingRole}
@@ -561,6 +566,7 @@ export default function RolesPage() {
                 ? "Role updated successfully."
                 : "Role created successfully.",
             );
+
             setRoleActionError("");
           }}
         />
@@ -765,6 +771,7 @@ export default function RolesPage() {
         loading={createPermissionMutation.isPending}
       />
       <RoleFormDialog
+        key={editingRole?.id ?? "create-role"}
         open={roleDialogOpen}
         onOpenChange={setRoleDialogOpen}
         role={editingRole}
@@ -1005,7 +1012,22 @@ function RoleDirectory({
                 </button>
 
                 {/* Role actions */}
-                <details className="relative shrink-0">
+                <details
+                  className="relative shrink-0"
+                  onToggle={(e) => {
+                    const details = e.currentTarget;
+
+                    if (details.open) {
+                      document.addEventListener(
+                        "click",
+                        () => {
+                          details.open = false;
+                        },
+                        { once: true },
+                      );
+                    }
+                  }}
+                >
                   <summary
                     className="hover:bg-muted flex h-8 w-8 cursor-pointer list-none items-center justify-center rounded-md"
                     aria-label={`Actions for ${role.name}`}
@@ -1255,7 +1277,7 @@ function PermissionMatrix({
         </Button>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-scroll">
         <div className="min-w-[720px]">
           <div className="bg-muted/40 grid grid-cols-[minmax(280px,1fr)_100px] border-b px-4 py-2.5 text-xs font-medium sm:grid-cols-[minmax(280px,1fr)_repeat(6,80px)]">
             <span>Module / permission</span>

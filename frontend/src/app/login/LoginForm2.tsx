@@ -71,7 +71,7 @@ export default function LoginPage() {
             ? "Invalid email or password"
             : result.error;
 
-        toast.error(message);
+        toast.error(message + "Check your backend");
 
         return;
       }

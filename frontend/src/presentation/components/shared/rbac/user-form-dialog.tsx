@@ -37,6 +37,7 @@ import type {
   CreateUserRequest,
   UpdateUserRequest,
 } from "@/domain/rbac/entities";
+import { FormDialogSection, FormDialogShell } from "../form-dialog";
 
 interface UserFormDialogProps {
   open: boolean;
@@ -317,416 +318,329 @@ export function UserFormDialog({
   const availableRoleCount = rolesData?.items?.length ?? 0;
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent
-        style={{
-          marginLeft: position.x,
-          marginTop: position.y,
-        }}
-        className="border-border max-h-[calc(100vh-30px)] bg-card !w-[92vw] !max-w-5xl overflow-hidden rounded-3xl p-0 shadow-2xl shadow-black/30 sm:!w-[760px] lg:!w-[820px]"
-      >
-        {/* Top accent */}
-        <div className="bg-primary absolute inset-x-0 top-0 h-1" />
+    <FormDialogShell
+      open={open}
+      onOpenChange={onOpenChange}
+      eyebrow={isEdit ? "USER MANAGEMENT" : "USER DIRECTORY"}
+      title={isEdit ? "Update User Account" : "Create User Account"}
+      description={
+        isEdit
+          ? "Update account information, access roles, and geographic assignment."
+          : "Create a new system user and configure their access and geographic assignment."
+      }
+      icon={<UserRound className="size-5" />}
+      onSubmit={handleSubmit}
+      loading={isLoading}
+      submitLabel={isEdit ? "Save changes" : "Create User"}
+      loadingLabel={isEdit ? "Saving..." : "Creating..."}
+    >
+      {/* Top accent */}
+      <div className="bg-primary absolute inset-x-0 top-0 h-1" />
+ 
+      {/* ----------------------------------------------------------------- */}
+      {/* Form */}
+      {/* ----------------------------------------------------------------- */}
 
-        {/* ----------------------------------------------------------------- */}
-        {/* Header */}
-        {/* ----------------------------------------------------------------- */}
+      <div className="space-y-6 px-5 py-6 sm:px-7">
 
-        <DialogHeader
-          onPointerDown={handleDragStart}
-          onPointerMove={handleDragMove}
-          onPointerUp={handleDragEnd}
-          onPointerCancel={handleDragEnd}
-          className="cursor-move flex-row items-start gap-3 border-b px-5 pt-7 pb-5 select-none sm:px-7"
-        >
-          <div className="bg-primary/15 text-primary flex size-11 shrink-0 items-center justify-center rounded-2xl">
-            <UserRound className="size-5" />
+          {/* ------------------------------------------------------------- */}
+          {/* Information banner */}
+          {/* ------------------------------------------------------------- */}
+
+          <div className="border-primary/20 bg-primary/[0.06] flex gap-3 rounded-2xl border p-4">
+            <Info className="text-primary mt-0.5 size-5 shrink-0" />
+
+            <div>
+              <p className="text-sm font-medium">
+                {isEdit ? "Update user information" : "Add a new system user"}
+              </p>
+
+              <p className="text-muted-foreground mt-1 text-sm leading-6">
+                {isEdit
+                  ? "Changes to roles and geographic assignment will take effect after saving."
+                  : "Complete the account information, assign roles, and optionally associate the user with a geographic area."}
+              </p>
+            </div>
           </div>
 
-          <div className="min-w-0 flex-1">
-            <p className="text-primary text-xs font-semibold tracking-[0.16em] uppercase">
-              {isEdit ? "Edit User" : "New User"}
-            </p>
+          {/* ------------------------------------------------------------- */}
+          {/* Personal information */}
+          {/* ------------------------------------------------------------- */}
 
-            <DialogTitle className="mt-1 text-xl font-semibold tracking-tight">
-              {isEdit ? "Update User Account" : "Create User Account"}
-            </DialogTitle>
+          <FormDialogSection
+            icon={<UserRound className="text-muted-foreground size-4" />}
+            title="Personal Information"
+            description="Basic account and contact details"
+          >
+            <div className="grid gap-4 sm:grid-cols-2">
+              {/* First name */}
+              <div className="space-y-2">
+                <Label htmlFor="user-first-name">First Name</Label>
 
-            <DialogDescription className="mt-1">
-              {isEdit
-                ? "Update account information, access roles, and geographic assignment."
-                : "Create a new system user and configure their access and geographic assignment."}
-            </DialogDescription>
-          </div>
-        </DialogHeader>
+                <Input
+                  id="user-first-name"
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                  placeholder="Enter first name"
+                  required
+                  disabled={isLoading}
+                  className="bg-background h-11 rounded-xl"
+                />
+              </div>
 
-        {/* ----------------------------------------------------------------- */}
-        {/* Form */}
-        {/* ----------------------------------------------------------------- */}
+              {/* Last name */}
+              <div className="space-y-2">
+                <Label htmlFor="user-last-name">Last Name</Label>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex max-h-[calc(100vh-120px)] min-h-0 flex-col"
-        >
-          <div className="min-h-0 flex-1 space-y-6 overflow-y-auto px-5 py-6 sm:px-7">
-            {/* ------------------------------------------------------------- */}
-            {/* Information banner */}
-            {/* ------------------------------------------------------------- */}
-
-            <div className="border-primary/20 bg-primary/[0.06] flex gap-3 rounded-2xl border p-4">
-              <Info className="text-primary mt-0.5 size-5 shrink-0" />
-
-              <div>
-                <p className="text-sm font-medium">
-                  {isEdit ? "Update user information" : "Add a new system user"}
-                </p>
-
-                <p className="text-muted-foreground mt-1 text-sm leading-6">
-                  {isEdit
-                    ? "Changes to roles and geographic assignment will take effect after saving."
-                    : "Complete the account information, assign roles, and optionally associate the user with a geographic area."}
-                </p>
+                <Input
+                  id="user-last-name"
+                  value={lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                  placeholder="Enter last name"
+                  required
+                  disabled={isLoading}
+                  className="bg-background h-11 rounded-xl"
+                />
               </div>
             </div>
 
-            {/* ------------------------------------------------------------- */}
-            {/* Personal information */}
-            {/* ------------------------------------------------------------- */}
-
-            <section className="space-y-4">
-              <div className="flex items-center gap-2">
-                <div className="bg-muted flex size-8 items-center justify-center rounded-xl">
-                  <UserRound className="text-muted-foreground size-4" />
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-semibold">
-                    Personal Information
-                  </h3>
-
-                  <p className="text-muted-foreground text-xs">
-                    Basic identity and contact details
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                {/* First name */}
-                <div className="space-y-2">
-                  <Label htmlFor="user-first-name">First Name</Label>
-
-                  <Input
-                    id="user-first-name"
-                    value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
-                    placeholder="Enter first name"
-                    required
-                    disabled={isLoading}
-                    className="bg-background h-11 rounded-xl"
-                  />
-                </div>
-
-                {/* Last name */}
-                <div className="space-y-2">
-                  <Label htmlFor="user-last-name">Last Name</Label>
-
-                  <Input
-                    id="user-last-name"
-                    value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                    placeholder="Enter last name"
-                    required
-                    disabled={isLoading}
-                    className="bg-background h-11 rounded-xl"
-                  />
-                </div>
-              </div>
-
-              {/* Username only during creation */}
-              {!isEdit && (
-                <div className="space-y-2">
-                  <Label htmlFor="user-username">Username</Label>
-
-                  <Input
-                    id="user-username"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    placeholder="Enter username"
-                    required
-                    disabled={isLoading}
-                    className="bg-background h-11 rounded-xl"
-                  />
-                </div>
-              )}
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                {/* Email */}
-                <div className="space-y-2">
-                  <Label htmlFor="user-email">Email</Label>
-
-                  <Input
-                    id="user-email"
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder="user@example.com"
-                    required
-                    disabled={isLoading}
-                    className="bg-background h-11 rounded-xl"
-                  />
-                </div>
-
-                {/* Mobile */}
-                <div className="space-y-2">
-                  <Label htmlFor="user-mobile">Mobile Number</Label>
-
-                  <Input
-                    id="user-mobile"
-                    value={mobileNumber}
-                    onChange={(event) => setMobileNumber(event.target.value)}
-                    placeholder="+251 9..."
-                    disabled={isLoading}
-                    className="bg-background h-11 rounded-xl"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* ------------------------------------------------------------- */}
-            {/* Password */}
-            {/* ------------------------------------------------------------- */}
-
+            {/* Username only during creation */}
             {!isEdit && (
-              <section className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <div className="bg-muted flex size-8 items-center justify-center rounded-xl">
-                    <ShieldCheck className="text-muted-foreground size-4" />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="user-username">Username</Label>
 
-                  <div>
-                    <h3 className="text-sm font-semibold">Account Security</h3>
-
-                    <p className="text-muted-foreground text-xs">
-                      Initial authentication credentials
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="user-password">Password</Label>
-
-                  <div className="relative">
-                    <Input
-                      id="user-password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      placeholder="Minimum 8 characters"
-                      required
-                      disabled={isLoading}
-                      className="bg-background h-11 rounded-xl pr-11"
-                    />
-
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      tabIndex={-1}
-                      disabled={isLoading}
-                      onClick={() => setShowPassword((current) => !current)}
-                      className="text-muted-foreground hover:text-foreground absolute top-1/2 right-1 size-9 -translate-y-1/2 rounded-lg"
-                    >
-                      {showPassword ? (
-                        <EyeOff className="size-4" />
-                      ) : (
-                        <Eye className="size-4" />
-                      )}
-                    </Button>
-                  </div>
-
-                  <p className="text-muted-foreground text-xs">
-                    Use at least 8 characters with uppercase, lowercase, number,
-                    and special character.
-                  </p>
-                </div>
-              </section>
+                <Input
+                  id="user-username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  placeholder="Enter username"
+                  required
+                  disabled={isLoading}
+                  className="bg-background h-11 rounded-xl"
+                />
+              </div>
             )}
 
-            {/* ------------------------------------------------------------- */}
-            {/* Geography */}
-            {/* ------------------------------------------------------------- */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {/* Email */}
+              <div className="space-y-2">
+                <Label htmlFor="user-email">Email</Label>
 
+                <Input
+                  id="user-email"
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="user@example.com"
+                  required
+                  disabled={isLoading}
+                  className="bg-background h-11 rounded-xl"
+                />
+              </div>
+
+              {/* Mobile */}
+              <div className="space-y-2">
+                <Label htmlFor="user-mobile">Mobile Number</Label>
+
+                <Input
+                  id="user-mobile"
+                  value={mobileNumber}
+                  onChange={(event) => setMobileNumber(event.target.value)}
+                  placeholder="+251 9..."
+                  disabled={isLoading}
+                  className="bg-background h-11 rounded-xl"
+                />
+              </div>
+            </div>
+          </FormDialogSection>
+
+          {/* ------------------------------------------------------------- */}
+          {/* Password */}
+          {/* ------------------------------------------------------------- */}
+
+          {!isEdit && (
             <section className="space-y-4">
               <div className="flex items-center gap-2">
                 <div className="bg-muted flex size-8 items-center justify-center rounded-xl">
-                  <MapPinHouse className="text-muted-foreground size-4" />
+                  <ShieldCheck className="text-muted-foreground size-4" />
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold">
-                    Geography Assignment
-                  </h3>
+                  <h3 className="text-sm font-semibold">Account Security</h3>
 
                   <p className="text-muted-foreground text-xs">
-                    Associate the user with their administrative area
+                    Initial authentication credentials
                   </p>
                 </div>
               </div>
 
-              <div className="bg-muted/20 rounded-2xl border p-4">
-                <GeographyHierarchySelector
-                  fields={geography}
-                  setField={setGeographyField}
-                  isLoading={isLoading}
-                  level={4}
-                />
+              <div className="space-y-2">
+                <Label htmlFor="user-password">Password</Label>
 
-                <div className="bg-background/60 mt-4 flex items-start gap-2 rounded-xl border border-dashed p-3">
-                  <Info className="text-muted-foreground mt-0.5 size-4 shrink-0" />
+                <div className="relative">
+                  <Input
+                    id="user-password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    placeholder="Minimum 8 characters"
+                    required
+                    disabled={isLoading}
+                    className="bg-background h-11 rounded-xl pr-11"
+                  />
 
-                  <p className="text-muted-foreground text-xs leading-5">
-                    Geography selections are hierarchical. Select a region
-                    before choosing a zone, then a woreda and kebele.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* ------------------------------------------------------------- */}
-            {/* Roles */}
-            {/* ------------------------------------------------------------- */}
-
-            <section className="space-y-4">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="bg-muted flex size-8 items-center justify-center rounded-xl">
-                    <ShieldCheck className="text-muted-foreground size-4" />
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-semibold">Role Assignment</h3>
-
-                    <p className="text-muted-foreground text-xs">
-                      Configure system access
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-muted/50 text-muted-foreground rounded-full border px-2.5 py-1 text-xs font-medium">
-                  {selectedRoleCount} / {availableRoleCount} selected
-                </div>
-              </div>
-
-              <div className="bg-muted/20 overflow-hidden rounded-2xl border">
-                <ScrollArea className="h-44">
-                  <div className="space-y-1 p-2">
-                    {rolesLoading ? (
-                      <div className="text-muted-foreground flex h-32 items-center justify-center text-sm">
-                        <Loader2 className="mr-2 size-4 animate-spin" />
-                        Loading roles...
-                      </div>
-                    ) : rolesData?.items?.length ? (
-                      rolesData.items.map((role) => {
-                        const selected = selectedRoles.includes(role.id);
-
-                        return (
-                          <label
-                            key={role.id}
-                            className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 transition-all ${
-                              selected
-                                ? "border-primary/30 bg-primary/[0.07]"
-                                : "hover:border-border hover:bg-background border-transparent"
-                            } `}
-                          >
-                            <Checkbox
-                              checked={selected}
-                              onCheckedChange={() => toggleRole(role.id)}
-                              disabled={isLoading}
-                              className="mt-0.5"
-                            />
-
-                            <div className="min-w-0 flex-1">
-                              <div className="flex items-center justify-between gap-2">
-                                <span className="text-sm font-medium">
-                                  {role.name.replace(/_/g, " ")}
-                                </span>
-
-                                {selected && (
-                                  <Check className="text-primary size-4 shrink-0" />
-                                )}
-                              </div>
-
-                              {role.description && (
-                                <p className="text-muted-foreground mt-0.5 text-xs leading-5">
-                                  {role.description}
-                                </p>
-                              )}
-                            </div>
-                          </label>
-                        );
-                      })
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    tabIndex={-1}
+                    disabled={isLoading}
+                    onClick={() => setShowPassword((current) => !current)}
+                    className="text-muted-foreground hover:text-foreground absolute top-1/2 right-1 size-9 -translate-y-1/2 rounded-lg"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="size-4" />
                     ) : (
-                      <div className="text-muted-foreground flex h-32 items-center justify-center text-sm">
-                        No roles available.
-                      </div>
+                      <Eye className="size-4" />
                     )}
-                  </div>
-                </ScrollArea>
+                  </Button>
+                </div>
+
+                <p className="text-muted-foreground text-xs">
+                  Use at least 8 characters with uppercase, lowercase, number,
+                  and special character.
+                </p>
               </div>
             </section>
+          )}
 
-            {/* Bottom information */}
-            <div className="bg-muted/20 flex items-start gap-3 rounded-2xl border p-4">
-              <PackageCheck className="text-muted-foreground mt-0.5 size-5 shrink-0" />
+          {/* ------------------------------------------------------------- */}
+          {/* Geography */}
+          {/* ------------------------------------------------------------- */}
 
-              <div>
-                <p className="text-sm font-medium">
-                  Ready to {isEdit ? "save changes" : "create the user"}?
-                </p>
+          <FormDialogSection
+            icon={<MapPinHouse className="text-muted-foreground size-4" />}
+            title="Geography Assignment"
+            description="Associate the user with their administrative area"
+          >
+            <div className="bg-muted/20 rounded-2xl border p-4">
+              <GeographyHierarchySelector
+                fields={geography}
+                setField={setGeographyField}
+                isLoading={isLoading}
+                level={4}
+              />
 
-                <p className="text-muted-foreground mt-1 text-xs leading-5">
-                  Review the account details, role assignments, and geographic
-                  access before continuing.
+              <div className="bg-background/60 mt-4 flex items-start gap-2 rounded-xl border border-dashed p-3">
+                <Info className="text-muted-foreground mt-0.5 size-4 shrink-0" />
+
+                <p className="text-muted-foreground text-xs leading-5">
+                  Geography selections are hierarchical. Select a region before
+                  choosing a zone, then a woreda and kebele.
                 </p>
               </div>
             </div>
+          </FormDialogSection>
+
+          {/* ------------------------------------------------------------- */}
+          {/* Roles */}
+          {/* ------------------------------------------------------------- */}
+
+          <section className="space-y-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <div className="bg-muted flex size-8 items-center justify-center rounded-xl">
+                  <ShieldCheck className="text-muted-foreground size-4" />
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-semibold">Role Assignment</h3>
+
+                  <p className="text-muted-foreground text-xs">
+                    Configure system access
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-muted/50 text-muted-foreground rounded-full border px-2.5 py-1 text-xs font-medium">
+                {selectedRoleCount} / {availableRoleCount} selected
+              </div>
+            </div>
+
+            <div className="bg-muted/20 overflow-hidden rounded-2xl border">
+              <ScrollArea className="h-44">
+                <div className="space-y-1 p-2">
+                  {rolesLoading ? (
+                    <div className="text-muted-foreground flex h-32 items-center justify-center text-sm">
+                      <Loader2 className="mr-2 size-4 animate-spin" />
+                      Loading roles...
+                    </div>
+                  ) : rolesData?.items?.length ? (
+                    rolesData.items.map((role) => {
+                      const selected = selectedRoles.includes(role.id);
+
+                      return (
+                        <label
+                          key={role.id}
+                          className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 transition-all ${
+                            selected
+                              ? "border-primary/30 bg-primary/[0.07]"
+                              : "hover:border-border hover:bg-background border-transparent"
+                          } `}
+                        >
+                          <Checkbox
+                            checked={selected}
+                            onCheckedChange={() => toggleRole(role.id)}
+                            disabled={isLoading}
+                            className="mt-0.5"
+                          />
+
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="text-sm font-medium">
+                                {role.name.replace(/_/g, " ")}
+                              </span>
+
+                              {selected && (
+                                <Check className="text-primary size-4 shrink-0" />
+                              )}
+                            </div>
+
+                            {role.description && (
+                              <p className="text-muted-foreground mt-0.5 text-xs leading-5">
+                                {role.description}
+                              </p>
+                            )}
+                          </div>
+                        </label>
+                      );
+                    })
+                  ) : (
+                    <div className="text-muted-foreground flex h-32 items-center justify-center text-sm">
+                      No roles available.
+                    </div>
+                  )}
+                </div>
+              </ScrollArea>
+            </div>
+          </section>
+
+          {/* Bottom information */}
+          <div className="bg-muted/20 flex items-start gap-3 rounded-2xl border p-4">
+            <PackageCheck className="text-muted-foreground mt-0.5 size-5 shrink-0" />
+
+            <div>
+              <p className="text-sm font-medium">
+                Ready to {isEdit ? "save changes" : "create the user"}?
+              </p>
+
+              <p className="text-muted-foreground mt-1 text-xs leading-5">
+                Review the account details, role assignments, and geographic
+                access before continuing.
+              </p>
+            </div>
           </div>
-
-          {/* ---------------------------------------------------------------- */}
-          {/* Footer */}
-          {/* ---------------------------------------------------------------- */}
-
-          <DialogFooter className="border-border/60 bg-muted/20 m-1 flex-col gap-3 border-t px-5 py-4 sm:flex-row sm:items-center sm:justify-end sm:px-7">
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={handleClose}
-              disabled={isLoading}
-              className="text-muted-foreground hover:bg-muted hover:text-foreground w-full rounded-xl transition-all sm:w-auto"
-            >
-              Cancel
-            </Button>
-
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="shadow-primary/20 w-full min-w-[155px] cursor-pointer rounded-xl font-semibold shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 sm:w-auto"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" />
-                  {isEdit ? "Saving..." : "Creating..."}
-                </>
-              ) : (
-                <>
-                  {isEdit ? "Save changes" : "Create User"}
-                  <Check className="size-4" />
-                </>
-              )}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+        </div> 
+    </FormDialogShell>
   );
 }

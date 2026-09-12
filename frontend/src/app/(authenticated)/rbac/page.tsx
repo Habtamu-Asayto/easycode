@@ -57,8 +57,10 @@ import type {
 } from "@/domain/rbac/entities";
 
 import { Button } from "@/presentation/components/ui/button";
-import { RoleFormDialog } from "./role-form-dialog";
-import { PermissionDialog } from "./permision-dialog-form";
+import { RoleFormDialog } from "@/presentation/components/shared/rbac/role-form-dialog";
+// import { RoleFormDialog } from "./role-form-dialog";
+import { PermissionDialog } from "@/presentation/components/shared/rbac/permision-dialog-form";
+// import { PermissionDialog } from "./permision-dialog-form";
 
 const ROLE_COLORS = [
   "blue",
@@ -231,6 +233,15 @@ export default function RolesPage() {
   const roles = rolesQuery.data?.items ?? [];
   const permissions = permissionsQuery.data?.items ?? [];
   const auditLogs = auditQuery.data?.items ?? [];
+
+  console.log(
+    "ALL PERMISSIONS:",
+    permissions.map((permission) => ({
+      name: permission.name,
+      module: permission.module,
+      action: permission.action,
+    })),
+  );
 
   /*
    * Select the first role automatically.
@@ -471,10 +482,6 @@ export default function RolesPage() {
 
   const inactivePermissionCount = totalPermissionCount - activePermissionCount;
 
-  const customPermissionCount = permissions.filter(
-    (permission) => !permission.isActive,
-  ).length;
-
   const policyHealth =
     totalPermissionCount === 0
       ? 0
@@ -599,7 +606,7 @@ export default function RolesPage() {
         <StatCard
           label="Permission catalog"
           value={String(totalPermissionCount)}
-          detail={`${customPermissionCount} inactive definitions`}
+          detail={`${inactivePermissionCount} inactive definitions`}
           icon={FileKey2}
         />
 
@@ -802,17 +809,12 @@ function PageHeader({
 
         <p className="text-muted-foreground mt-1 max-w-2xl text-sm">
           Govern identity, delegated access, and permission boundaries across
-          the FMS platform.
+          the enterprise platform.
         </p>
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <Button variant="outline">
-          <Download className="mr-2 h-4 w-4" />
-          Export audit
-        </Button>
-
-        <Button variant="outline" onClick={onAddRole}>
+        <Button onClick={onAddRole}>
           <ShieldCheck className="mr-2 h-4 w-4" />
           Add role
         </Button>
@@ -883,6 +885,21 @@ function RoleDirectory({
   onToggleRole: (role: RoleResponse) => void;
   onDeleteRole: (role: RoleResponse) => void;
 }) {
+  const [search, setSearch] = useState("");
+
+  const filteredRoles = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    if (!query) return roles;
+
+    return roles.filter((role) => {
+      return (
+        role.name.toLowerCase().includes(query) ||
+        role.description?.toLowerCase().includes(query)
+      );
+    });
+  }, [roles, search]);
+
   return (
     <Card className="h-fit">
       <CardHeader className="border-b">
@@ -899,11 +916,24 @@ function RoleDirectory({
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </div>
+
+        {/* Role search */}
+        <div className="relative mt-3">
+          <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search roles..."
+            className="border-input bg-background placeholder:text-muted-foreground focus-visible:ring-ring h-9 w-full rounded-lg border py-2 pr-3 pl-9 text-sm outline-none focus-visible:ring-2"
+          />
+        </div>
       </CardHeader>
 
       <CardContent className="p-2">
         <div className="space-y-1">
-          {roles.map((role, index) => {
+          {filteredRoles.map((role, index) => {
             const selected = role.id === selectedRoleId;
             const color = getRoleColor(index);
 
@@ -1020,7 +1050,21 @@ function RoleDirectory({
               </div>
             );
           })}
+
+          {/* No results */}
+          {filteredRoles.length === 0 && (
+            <div className="text-muted-foreground flex flex-col items-center justify-center py-8 text-center">
+              <Search className="mb-2 h-5 w-5 opacity-50" />
+
+              <p className="text-sm font-medium">No roles found</p>
+
+              <p className="mt-1 text-xs">
+                Try a different role name or description.
+              </p>
+            </div>
+          )}
         </div>
+
         <Button variant="outline" className="mt-3 w-full" onClick={onAddRole}>
           <Plus className="mr-2 h-4 w-4" />
           Add new role

@@ -33,11 +33,15 @@ import { usersApi } from "@/infrastructure/rbac/api";
 
 import {
   DataPagination,
-  SearchInput,
-  ConfirmDialog,
-  PageLoader2,
   EmptyState,
+  SearchInput,
+  PageLoader2,
+  ConfirmDialog,
 } from "@/presentation/components/shared";
+import {
+  ManagementPageHeader,
+  StatsCard,
+} from "@/presentation/components/shared/form-dialog";
 
 import { useAuth } from "@/presentation/hooks";
 import { PermissionGate } from "@/presentation/guards";
@@ -64,8 +68,7 @@ import {
 
 import type { UserResponse } from "@/domain/rbac/entities";
 
-// import { UserFormDialog } from "./user-form-dialog";
-import { UserFormDialog } from "../../../presentation/components/shared/rbac/user-form-dialog";
+import { UserFormDialog } from "@/presentation/components/shared/rbac/user-form-dialog";
 import { ResetPasswordDialog } from "./reset-password-dialog";
 
 /* -------------------------------------------------------------------------- */
@@ -102,21 +105,21 @@ function getErrorMessage(error: unknown, fallback: string): string {
   return fallback;
 }
 
-function getFullName(user: UserResponse) {
+function getFullName(user: UserResponse): string {
   return `${user.firstName} ${user.lastName}`.trim();
 }
 
-function getInitials(user: UserResponse) {
+function getInitials(user: UserResponse): string {
   return `${user.firstName?.charAt(0) ?? ""}${
     user.lastName?.charAt(0) ?? ""
   }`.toUpperCase();
 }
 
-function formatRoleName(role: string) {
+function formatRoleName(role: string): string {
   return role.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
-function getGeography(user: UserResponse) {
+function getGeography(user: UserResponse): string | null {
   const parts = [
     user.kebele?.name,
     user.woreda?.name,
@@ -147,7 +150,6 @@ export default function UsersPage() {
   const [editUser, setEditUser] = useState<UserResponse | null>(null);
 
   const [deleteUser, setDeleteUser] = useState<UserResponse | null>(null);
-
   const [resetPwUser, setResetPwUser] = useState<UserResponse | null>(null);
 
   /* ------------------------------------------------------------------------ */
@@ -159,7 +161,7 @@ export default function UsersPage() {
   const canDelete = hasPermission("users:delete");
 
   /* ------------------------------------------------------------------------ */
-  /* Users query                                                              */
+  /* Query                                                                    */
   /* ------------------------------------------------------------------------ */
 
   const { data, isLoading, isFetching, isError, error, refetch } = useQuery({
@@ -176,7 +178,6 @@ export default function UsersPage() {
   });
 
   const users = data?.items ?? [];
-
   const totalUsers = data?.meta?.total ?? users.length;
 
   /* ------------------------------------------------------------------------ */
@@ -192,14 +193,11 @@ export default function UsersPage() {
 
     const locked = users.filter((user) => user.isLocked).length;
 
-    const withRoles = users.filter((user) => user.roles?.length).length;
-
     return {
       total: totalUsers,
       active,
       inactive,
       locked,
-      withRoles,
     };
   }, [users, totalUsers]);
 
@@ -315,78 +313,29 @@ export default function UsersPage() {
         {/* Header                                                             */}
         {/* ================================================================== */}
 
-        <section className="border-border/70 bg-card relative overflow-hidden rounded-2xl border shadow-sm">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 overflow-hidden"
-          >
-            <div className="bg-primary/5 absolute -top-28 -right-24 size-72 rounded-full blur-3xl" />
-
-            <div className="bg-primary/5 absolute -bottom-28 -left-24 size-72 rounded-full blur-3xl" />
-
-            <div className="bg-primary/[0.025] absolute top-1/2 right-1/3 size-32 rounded-full blur-2xl" />
-          </div>
-
-          <div className="relative flex flex-col gap-6 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between lg:p-7">
-            <div className="flex min-w-0 items-start gap-4">
-              <div className="border-primary/15 bg-primary/10 text-primary flex size-12 shrink-0 items-center justify-center rounded-2xl border shadow-sm">
-                <Users className="size-6" />
-              </div>
-
-              <div className="min-w-0">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="text-primary text-[10px] font-bold tracking-[0.2em] uppercase">
-                    Management
-                  </span>
-
-                  <ChevronRight className="text-muted-foreground size-3.5" />
-
-                  <span className="text-muted-foreground text-xs">Users</span>
-                </div>
-
-                <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  User Management
-                </h1>
-
-                <p className="text-muted-foreground mt-1.5 max-w-2xl text-sm leading-6">
-                  Manage users, roles, account status, security, and
-                  geographical assignments from one place.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex shrink-0 items-center gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={handleRefresh}
-                disabled={isFetching}
-                className="h-9 gap-2 rounded-lg"
-              >
-                <RefreshCw
-                  className={`size-3.5 ${isFetching ? "animate-spin" : ""}`}
-                />
-
-                <span className="hidden sm:inline">Refresh</span>
-              </Button>
-
-              {canCreate && (
-                <PermissionGate permission="users:create">
-                  <Button
-                    type="button"
-                    size="sm"
-                    onClick={handleCreate}
-                    className="h-9 gap-2 rounded-lg shadow-sm"
-                  >
-                    <Plus className="size-4" />
-                    New User
-                  </Button>
-                </PermissionGate>
-              )}
-            </div>
-          </div>
-        </section>
+        <ManagementPageHeader
+          eyebrow="Management"
+          title="User Management"
+          description="Manage users, roles, account status, security, and geographical assignments from one place."
+          icon={Users}
+          onRefresh={handleRefresh}
+          refreshing={isFetching}
+          action={
+            canCreate ? (
+              <PermissionGate permission="users:create">
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={handleCreate}
+                  className="h-9 gap-2 rounded-lg shadow-sm"
+                >
+                  <Plus className="size-4" />
+                  New User
+                </Button>
+              </PermissionGate>
+            ) : undefined
+          }
+        />
 
         {/* ================================================================== */}
         {/* Statistics                                                         */}
@@ -396,109 +345,37 @@ export default function UsersPage() {
           aria-label="User statistics"
           className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
-          {/* Total */}
-          <div className="group border-border/70 bg-card relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-            <div className="bg-primary/5 absolute -top-8 -right-8 size-24 rounded-full blur-2xl transition-transform duration-500 group-hover:scale-150" />
+          <StatsCard
+            label="Total Users"
+            value={stats.total}
+            description="Registered accounts"
+            icon={Users}
+            tone="primary"
+          />
 
-            <div className="relative flex items-start justify-between">
-              <div>
-                <p className="text-muted-foreground text-xs font-medium">
-                  Total Users
-                </p>
+          <StatsCard
+            label="Active Users"
+            value={stats.active}
+            description="Ready to access"
+            icon={UserCheck}
+            tone="success"
+          />
 
-                <p className="mt-2 text-3xl font-semibold tracking-tight">
-                  {stats.total.toLocaleString()}
-                </p>
+          <StatsCard
+            label="Inactive Users"
+            value={stats.inactive}
+            description="Access disabled"
+            icon={UserX}
+            tone="warning"
+          />
 
-                <div className="text-muted-foreground mt-3 flex items-center gap-1.5 text-[11px]">
-                  <Users className="text-primary size-3.5" />
-                  <span>Registered accounts</span>
-                </div>
-              </div>
-
-              <div className="bg-primary/10 text-primary flex size-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105">
-                <Users className="size-5" />
-              </div>
-            </div>
-          </div>
-
-          {/* Active */}
-          <div className="group border-border/70 bg-card relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-            <div className="absolute -top-8 -right-8 size-24 rounded-full bg-emerald-500/5 blur-2xl transition-transform duration-500 group-hover:scale-150" />
-
-            <div className="relative flex items-start justify-between">
-              <div>
-                <p className="text-muted-foreground text-xs font-medium">
-                  Active Users
-                </p>
-
-                <p className="mt-2 text-3xl font-semibold tracking-tight">
-                  {stats.active.toLocaleString()}
-                </p>
-
-                <div className="text-muted-foreground mt-3 flex items-center gap-1.5 text-[11px]">
-                  <CheckCircle2 className="size-3.5 text-emerald-500" />
-                  <span>Ready to access</span>
-                </div>
-              </div>
-
-              <div className="flex size-11 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 transition-transform duration-300 group-hover:scale-105 dark:text-emerald-400">
-                <UserCheck className="size-5" />
-              </div>
-            </div>
-          </div>
-
-          {/* Inactive */}
-          <div className="group border-border/70 bg-card relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-            <div className="absolute -top-8 -right-8 size-24 rounded-full bg-amber-500/5 blur-2xl transition-transform duration-500 group-hover:scale-150" />
-
-            <div className="relative flex items-start justify-between">
-              <div>
-                <p className="text-muted-foreground text-xs font-medium">
-                  Inactive Users
-                </p>
-
-                <p className="mt-2 text-3xl font-semibold tracking-tight">
-                  {stats.inactive.toLocaleString()}
-                </p>
-
-                <div className="text-muted-foreground mt-3 flex items-center gap-1.5 text-[11px]">
-                  <UserX className="size-3.5 text-amber-500" />
-                  <span>Access disabled</span>
-                </div>
-              </div>
-
-              <div className="flex size-11 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 transition-transform duration-300 group-hover:scale-105 dark:text-amber-400">
-                <UserX className="size-5" />
-              </div>
-            </div>
-          </div>
-
-          {/* Locked */}
-          <div className="group border-border/70 bg-card relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-            <div className="bg-destructive/5 absolute -top-8 -right-8 size-24 rounded-full blur-2xl transition-transform duration-500 group-hover:scale-150" />
-
-            <div className="relative flex items-start justify-between">
-              <div>
-                <p className="text-muted-foreground text-xs font-medium">
-                  Locked Accounts
-                </p>
-
-                <p className="mt-2 text-3xl font-semibold tracking-tight">
-                  {stats.locked.toLocaleString()}
-                </p>
-
-                <div className="text-muted-foreground mt-3 flex items-center gap-1.5 text-[11px]">
-                  <Lock className="text-destructive size-3.5" />
-                  <span>Security attention</span>
-                </div>
-              </div>
-
-              <div className="bg-destructive/10 text-destructive flex size-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105">
-                <Lock className="size-5" />
-              </div>
-            </div>
-          </div>
+          <StatsCard
+            label="Locked Accounts"
+            value={stats.locked}
+            description="Security attention"
+            icon={Lock}
+            tone="danger"
+          />
         </section>
 
         {/* ================================================================== */}
@@ -541,7 +418,10 @@ export default function UsersPage() {
             </div>
           </div>
 
-          {/* Toolbar */}
+          {/* ================================================================= */}
+          {/* Toolbar                                                           */}
+          {/* ================================================================= */}
+
           <div className="border-border/70 bg-muted/20 border-b px-4 py-4 sm:px-5">
             <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div className="w-full lg:max-w-md">
@@ -689,10 +569,7 @@ export default function UsersPage() {
                             animationDelay: `${index * 35}ms`,
                           }}
                         >
-                          {/* ------------------------------------------------- */}
-                          {/* User                                              */}
-                          {/* ------------------------------------------------- */}
-
+                          {/* User */}
                           <TableCell className="px-5 py-4">
                             <div className="flex items-center gap-3">
                               <div className="relative shrink-0">
@@ -706,15 +583,17 @@ export default function UsersPage() {
                               </div>
 
                               <div className="min-w-0">
-                                <div
+                                <button
+                                  type="button"
                                   onClick={() => handleEdit(user)}
-                                  className="group text-foreground hover:text-primary w-fit max-w-full cursor-pointer truncate text-sm font-semibold transition-colors duration-200"
+                                  className="group/name text-foreground hover:text-primary w-fit max-w-full cursor-pointer truncate text-left text-sm font-semibold transition-colors duration-200"
                                 >
                                   <span className="relative">
                                     {getFullName(user)}
-                                    <span className="bg-primary absolute -bottom-0.5 left-0 h-px w-0 transition-all duration-200 group-hover:w-full" />
+
+                                    <span className="bg-primary absolute -bottom-0.5 left-0 h-px w-0 transition-all duration-200 group-hover/name:w-full" />
                                   </span>
-                                </div>
+                                </button>
 
                                 <div className="text-muted-foreground mt-0.5 flex items-center gap-1.5 text-xs">
                                   <UserCog className="size-3" />
@@ -727,10 +606,7 @@ export default function UsersPage() {
                             </div>
                           </TableCell>
 
-                          {/* ------------------------------------------------- */}
-                          {/* Contact                                           */}
-                          {/* ------------------------------------------------- */}
-
+                          {/* Contact */}
                           <TableCell className="px-5 py-4">
                             <div className="space-y-1.5">
                               <div className="flex items-center gap-2 text-xs">
@@ -753,10 +629,7 @@ export default function UsersPage() {
                             </div>
                           </TableCell>
 
-                          {/* ------------------------------------------------- */}
-                          {/* Roles                                             */}
-                          {/* ------------------------------------------------- */}
-
+                          {/* Roles */}
                           <TableCell className="px-5 py-4">
                             {user.roles?.length ? (
                               <div className="flex max-w-[240px] flex-wrap gap-1.5">
@@ -788,10 +661,7 @@ export default function UsersPage() {
                             )}
                           </TableCell>
 
-                          {/* ------------------------------------------------- */}
-                          {/* Geography                                         */}
-                          {/* ------------------------------------------------- */}
-
+                          {/* Geography */}
                           <TableCell className="px-5 py-4">
                             <div className="flex max-w-[260px] items-start gap-2">
                               <MapPin className="text-muted-foreground mt-0.5 size-3.5 shrink-0" />
@@ -811,10 +681,7 @@ export default function UsersPage() {
                             </div>
                           </TableCell>
 
-                          {/* ------------------------------------------------- */}
-                          {/* Status                                            */}
-                          {/* ------------------------------------------------- */}
-
+                          {/* Status */}
                           <TableCell className="px-5 py-4">
                             {user.isLocked ? (
                               <Badge
@@ -840,10 +707,7 @@ export default function UsersPage() {
                             )}
                           </TableCell>
 
-                          {/* ------------------------------------------------- */}
-                          {/* Last Login                                        */}
-                          {/* ------------------------------------------------- */}
-
+                          {/* Last Login */}
                           <TableCell className="px-5 py-4">
                             {user.lastLoginAt ? (
                               <div className="space-y-0.5">
@@ -867,10 +731,7 @@ export default function UsersPage() {
                             )}
                           </TableCell>
 
-                          {/* ------------------------------------------------- */}
-                          {/* Actions                                           */}
-                          {/* ------------------------------------------------- */}
-
+                          {/* Actions */}
                           <TableCell className="px-3 py-4">
                             <DropdownMenu>
                               <DropdownMenuTrigger
@@ -903,7 +764,7 @@ export default function UsersPage() {
                                   </PermissionGate>
                                 )}
 
-                                {/* Reset password */}
+                                {/* Reset Password */}
                                 {canUpdate && (
                                   <PermissionGate permission="users:update">
                                     <DropdownMenuItem
@@ -918,7 +779,7 @@ export default function UsersPage() {
 
                                 {canUpdate && <DropdownMenuSeparator />}
 
-                                {/* Activate / deactivate */}
+                                {/* Activate / Deactivate */}
                                 {canUpdate && (
                                   <PermissionGate permission="users:update">
                                     <DropdownMenuItem
@@ -986,7 +847,7 @@ export default function UsersPage() {
               </div>
 
               {/* ============================================================= */}
-              {/* Footer                                                         */}
+              {/* Footer                                                        */}
               {/* ============================================================= */}
 
               <div className="border-border/70 bg-muted/[0.12] border-t">
